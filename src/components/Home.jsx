@@ -22,7 +22,7 @@ const Home = () => {
       }
     }    
     `);
-      console.log("queryMovies", queryMovies.allTmdbMovieTopRated.nodes)
+      // console.log("queryMovies", queryMovies.allTmdbMovieTopRated.nodes)
     return (
       <div className="mx-12 mt-10">
         <div className="flex space-x-5 mb-10">
