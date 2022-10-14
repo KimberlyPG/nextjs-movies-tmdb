@@ -1,5 +1,6 @@
 import * as React from "react"
 import {  graphql,useStaticQuery } from "gatsby";
+import MovieCard from "./Movie-card";
 
 const Home = () => {
     
@@ -33,13 +34,7 @@ const Home = () => {
         <div className="grid grid-cols-8 gap-4">
              {queryMovies?.allTmdbMovieTopRated?.nodes.slice(0, 16).map((item) => (
               <div>
-                <div className="relative hover:opacity-70 h-full">
-                  <p className="text-xs text-green-600 absolute m-3 bg-gray-200 bg-opacity-300 p-2 rounded-full">{item.vote_average}</p>
-                  <img 
-                    className="h-full rounded-xl"
-                    src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path.original}`} 
-                  />
-                </div>
+                <MovieCard data={item}/>
                   {/* <p className="text-sm truncate">{item.title}</p> */}
               </div>
               ))}
