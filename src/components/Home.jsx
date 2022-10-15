@@ -1,6 +1,7 @@
 import * as React from "react"
 import {  graphql,useStaticQuery } from "gatsby";
 import MovieCard from "./Movie-card";
+import Shows from "./Shows";
 
 const Home = () => {
     
@@ -34,7 +35,8 @@ const Home = () => {
         <div className="grid grid-cols-8 gap-4">
              {queryMovies?.allTmdbMovieTopRated?.nodes.slice(0, 16).map((item) => (
               <div>
-                <MovieCard data={item}/>                
+                <MovieCard data={item}/>           
+                <Shows />     
               </div>
               ))}
         </div>
