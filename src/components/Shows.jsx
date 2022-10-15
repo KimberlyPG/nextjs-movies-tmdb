@@ -25,7 +25,7 @@ const Shows = () => {
     
     return (
         <div>
-            shows component
+            {/* shows component */}
         </div>
     )
 }
