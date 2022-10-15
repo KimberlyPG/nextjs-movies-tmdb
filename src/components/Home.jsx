@@ -34,8 +34,7 @@ const Home = () => {
         <div className="grid grid-cols-8 gap-4">
              {queryMovies?.allTmdbMovieTopRated?.nodes.slice(0, 16).map((item) => (
               <div>
-                <MovieCard data={item}/>
-                  {/* <p className="text-sm truncate">{item.title}</p> */}
+                <MovieCard data={item}/>                
               </div>
               ))}
         </div>
