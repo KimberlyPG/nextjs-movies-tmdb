@@ -4,6 +4,8 @@ import {  graphql,useStaticQuery } from "gatsby";
 
 import MovieCard from "./Movie-card";
 import TVshowCard from "./Tvshow-card";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 const Home = () => {
     const [moviesView, setMoviesView] = useState(true);
@@ -45,6 +47,29 @@ const Home = () => {
     }    
     `);
 
+    const responsive = {
+      superLargeDesktop: {
+        breakpoint: { max: 4000, min: 3000 },
+        items: 10,
+        slidesToSlide:10
+      },
+      desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 8,
+        slidesToSlide:10
+      },
+      tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 5,
+        slidesToSlide:10
+      },
+      mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 3,
+        slidesToSlide:10
+      }
+    };
+
     return (
       <div className="mx-12 mt-10">
         <div className="flex space-x-5 mb-10">
@@ -57,21 +82,25 @@ const Home = () => {
           <h2 className="text-lg font-bold">Top rated movies</h2>
           <div className="grid grid-cols-8 gap-4">
               {queryMoviesAndTv?.movies.nodes.slice(0, 16).map((item) => (
-                <div>
+                <div className="space-x-5">
                   <MovieCard data={item} />           
                 </div>
                 ))}
           </div>
         </div>
         ):(
-          <div>
-            <h2 className="text-lg font-bold">Top rated tv shows</h2>
-            <div className="grid grid-cols-8 gap-4">
-                {queryMoviesAndTv?.tv.nodes.slice(0, 16).map((item) => (
+          <>
+            <h2 className="text-lg font-bold px-3">Top rated tv shows</h2>
+            <Carousel responsive={responsive} >
+                {queryMoviesAndTv?.tv.nodes.map((item) => (
+                  <div className="p-3">
                     <TVshowCard data={item} />
-                  ))}
-            </div>
-          </div>
+                    <p className="text-sm truncate">{item.title}</p>
+                  </div>
+                ))}
+            </Carousel>
+            <h2 className="text-lg font-bold px-3">Popular shows</h2>
+          </>
         )
         }
       </div>
