@@ -2,7 +2,6 @@ import * as React from "react"
 import { useState } from "react";
 import {  graphql,useStaticQuery } from "gatsby";
 import MovieCard from "./Movie-card";
-import Shows from "./Shows";
 
 const Home = () => {
     const [moviesView, setMoviesView] = useState(true);
@@ -10,9 +9,9 @@ const Home = () => {
     const toggle = () => setMoviesView(prewState => !prewState);
     console.log("moviesView", moviesView)
 
-    const queryMovies =  useStaticQuery(graphql`
+    const queryMoviesAndTv =  useStaticQuery(graphql`
     query MyQuery {
-      allTmdbMovieTopRated(sort: {fields: release_date, order: DESC}) {
+      movies: allTmdbMovieTopRated(sort: {fields: release_date, order: DESC}) {
         nodes {
           id
           title
@@ -27,10 +26,23 @@ const Home = () => {
           genre_ids
         }
       }
+      tv: allTmdbTvTopRated {
+        nodes {
+            tmdbId
+            name  
+            first_air_date
+            poster_path {
+            original
+            }
+            popularity
+            overview
+            vote_average     
+            genre_ids
+        }
+        }
     }    
     `);
-      console.log("queryMovies", queryMovies.allTmdbMovieTopRated.nodes)
-  
+
     return (
       <div className="mx-12 mt-10">
         <div className="flex space-x-5 mb-10">
@@ -42,17 +54,28 @@ const Home = () => {
         <div>
           <h2 className="text-lg font-bold">Top rated movies</h2>
           <div className="grid grid-cols-8 gap-4">
-              {queryMovies?.allTmdbMovieTopRated?.nodes.slice(0, 16).map((item) => (
+              {queryMoviesAndTv?.movies.nodes.slice(0, 16).map((item) => (
                 <div>
                   <MovieCard data={item}/>           
-                  <Shows />     
                 </div>
                 ))}
           </div>
         </div>
         ):(
           <div>
-            <h1>Tv shows</h1>
+            <h2 className="text-lg font-bold">Top rated tv shows</h2>
+            <div className="grid grid-cols-8 gap-4">
+                {queryMoviesAndTv?.tv.nodes.slice(0, 16).map((item) => (
+                    <div className="relative hover:opacity-70 h-full">
+                      <p className="text-xs text-green-600 absolute m-3 bg-gray-200 bg-opacity-300 p-2 rounded-full">{item.vote_average}</p>
+                      <img 
+                          className="h-full rounded-xl"
+                          src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path.original}`} 
+                      />
+                      {/* <p className="text-sm truncate">{data.title}</p> */}
+                  </div>    
+                  ))}
+            </div>
           </div>
         )
         }
