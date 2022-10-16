@@ -1,12 +1,14 @@
 import * as React from "react"
 import { useState } from "react";
 import {  graphql,useStaticQuery } from "gatsby";
+
 import MovieCard from "./Movie-card";
+import TVshowCard from "./Tvshow-card";
 
 const Home = () => {
     const [moviesView, setMoviesView] = useState(true);
 
-    const toggle = () => setMoviesView(prewState => !prewState);
+    const toggle = (value) => setMoviesView(value);
     console.log("moviesView", moviesView)
 
     const queryMoviesAndTv =  useStaticQuery(graphql`
@@ -46,8 +48,8 @@ const Home = () => {
     return (
       <div className="mx-12 mt-10">
         <div className="flex space-x-5 mb-10">
-          <button className="text-gray-500" onClick={toggle}>Movies</button>
-          <button className="text-gray-500" onClick={toggle}>Tv Shows</button>
+          <button className="text-gray-500" onClick={() => toggle(true)}>Movies</button>
+          <button className="text-gray-500" onClick={() => toggle(false)}>Tv Shows</button>
         </div>
         {moviesView === true ? 
         (
@@ -56,7 +58,7 @@ const Home = () => {
           <div className="grid grid-cols-8 gap-4">
               {queryMoviesAndTv?.movies.nodes.slice(0, 16).map((item) => (
                 <div>
-                  <MovieCard data={item}/>           
+                  <MovieCard data={item} />           
                 </div>
                 ))}
           </div>
@@ -66,14 +68,7 @@ const Home = () => {
             <h2 className="text-lg font-bold">Top rated tv shows</h2>
             <div className="grid grid-cols-8 gap-4">
                 {queryMoviesAndTv?.tv.nodes.slice(0, 16).map((item) => (
-                    <div className="relative hover:opacity-70 h-full">
-                      <p className="text-xs text-green-600 absolute m-3 bg-gray-200 bg-opacity-300 p-2 rounded-full">{item.vote_average}</p>
-                      <img 
-                          className="h-full rounded-xl"
-                          src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path.original}`} 
-                      />
-                      {/* <p className="text-sm truncate">{data.title}</p> */}
-                  </div>    
+                    <TVshowCard data={item} />
                   ))}
             </div>
           </div>
