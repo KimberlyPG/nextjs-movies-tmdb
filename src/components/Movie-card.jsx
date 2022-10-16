@@ -8,8 +8,7 @@ const MovieCard = ({ data }) => {
                 className="h-full rounded-xl"
                 src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.poster_path.original}`} 
             />
-            {/* <p className="text-sm truncate">{data.title}</p> */}
-        </div>
+        </div>         
     )
 }
 
