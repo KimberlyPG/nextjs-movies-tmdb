@@ -5,7 +5,7 @@ import {  graphql,useStaticQuery } from "gatsby";
 import 'react-multi-carousel/lib/styles.css';
 
 import MovieCard from "./Movie-card";
-import TVshowCard from "./Tvshow-card";
+import TVshowCard from "./TVshow-card";
 
 import { responsive } from "../utils/carousel_responsive";
 
