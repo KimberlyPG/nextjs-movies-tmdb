@@ -1,6 +1,7 @@
 import * as React from "react"
 import { useState } from "react";
 import Carousel from 'react-multi-carousel';
+import { BsSearch } from "react-icons/bs";
 import {  graphql,useStaticQuery } from "gatsby";
 import 'react-multi-carousel/lib/styles.css';
 
@@ -15,6 +16,7 @@ const Home = () => {
     const [showsButtonBg, setShowsButtonBg] = useState('transparent');
     const [moviesButtonColor, setMoviesButtonColor] = useState('#FFFFFF');
     const [showsButtonColor, setShowsButtonColor] = useState('#C2C8CD');
+    const [movieName, setMovieName] = useState('batman');
 
     const toggle = (value) => {
       setMoviesView(value);
@@ -65,8 +67,38 @@ const Home = () => {
     }    
     `);
 
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const searchMovie = async () => {
+        await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.GATSBY_API_KEY}&query=${movieName}&page=1`)
+        .then(res => res.json())
+        .then(data => console.log("searchMovie",data))
+      }
+      searchMovie(); 
+    }
+         
+    const handleChange = (event) => {
+        event.preventDefault();
+        setMovieName(event.target.value);
+    }
+
     return (
       <div className="mx-12 mt-10">
+        <div className="flex justify-center">
+            <form onSubmit={handleSubmit}>
+                <input 
+                    className="bg-gray-100 rounded text-gray-500 pl-3 w-96"
+                    type="search"
+                    onChange={handleChange} 
+                    placeholder="Search a movie..."
+                />
+                <button type="submit">
+                  <BsSearch 
+                    className="text-gray-400 ml-2 align-middle cursor-pointer hover:opacity-80"
+                  />
+                </button>
+            </form>   
+        </div>
         <div className="flex space-x-5 mb-10">
           <button className="text-gray-500 rounded-xl px-4" onClick={() => toggle(true)} style={{backgroundColor: `${moviesButtonBg}`, color: `${moviesButtonColor}`}}>Movies</button>
           <button className="text-gray-500 rounded-xl px-4" onClick={() => toggle(false)} style={{backgroundColor: `${showsButtonBg}`, color: `${showsButtonColor}`}}>Tv Shows</button>
@@ -78,7 +110,7 @@ const Home = () => {
           <Carousel responsive={responsive} centerMode={true} >
               {queryMoviesAndTv?.movies.nodes.map((item) => (
                 <div className="h-full p-3">
-                  <MovieCard data={item} />
+                  <MovieCard key={item.id} data={item} />
                 </div>
               ))}
           </Carousel>
@@ -90,7 +122,7 @@ const Home = () => {
           <Carousel responsive={responsive} centerMode={true} >
               {queryMoviesAndTv?.tv.nodes.map((item) => (
                 <div className="h-full p-3">
-                  <TVshowCard data={item} />
+                  <TVshowCard key={item.tmdbId} data={item} />
                 </div>
               ))}
           </Carousel>
