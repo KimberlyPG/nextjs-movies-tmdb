@@ -82,6 +82,7 @@ const Home = () => {
                 </div>
               ))}
           </Carousel>
+          <h2 className="text-lg font-bold px-3">Popular movies</h2>
         </>
         ):(
         <>

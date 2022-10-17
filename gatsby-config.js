@@ -8,8 +8,8 @@ module.exports = {
     {
       resolve: "gatsby-source-tmdb",
       options: {
-        apiKey: process.env.API_KEY,
-        sessionID: process.env.SESSION_ID,
+        apiKey: process.env.GATSBY_API_KEY,
+        sessionID: process.env.GATSBY_SESSION_ID,
       }
     }
   ],
