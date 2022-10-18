@@ -16,11 +16,11 @@ const Home = () => {
     const [showsButtonBg, setShowsButtonBg] = useState('transparent');
     const [moviesButtonColor, setMoviesButtonColor] = useState('#FFFFFF');
     const [showsButtonColor, setShowsButtonColor] = useState('#C2C8CD');
-    const [movieName, setMovieName] = useState('batman');
+    const [movieName, setMovieName] = useState('');
 
     const toggle = (value) => {
       setMoviesView(value);
-      if(value === true) {
+      if(value) {
         setMoviesButtonBg('#1B5BA9');
         setMoviesButtonColor('#FFFFFF');
         setShowsButtonBg('transparent');
@@ -63,7 +63,7 @@ const Home = () => {
             vote_average     
             genre_ids
         }
-        }
+      }
     }    
     `);
 
@@ -92,7 +92,7 @@ const Home = () => {
                     onChange={handleChange} 
                     placeholder="Search a movie..."
                 />
-                <button type="submit">
+                <button type="submit" >
                   <BsSearch 
                     className="text-gray-400 ml-2 align-middle cursor-pointer hover:opacity-80"
                   />
@@ -110,7 +110,7 @@ const Home = () => {
           <Carousel responsive={responsive} centerMode={true} >
               {queryMoviesAndTv?.movies.nodes.map((item) => (
                 <div className="h-full p-3">
-                  <MovieCard key={item.id} data={item} />
+                  <MovieCard key={item} data={item} />
                 </div>
               ))}
           </Carousel>
@@ -122,7 +122,7 @@ const Home = () => {
           <Carousel responsive={responsive} centerMode={true} >
               {queryMoviesAndTv?.tv.nodes.map((item) => (
                 <div className="h-full p-3">
-                  <TVshowCard key={item.tmdbId} data={item} />
+                  <TVshowCard key={item} data={item} />
                 </div>
               ))}
           </Carousel>
