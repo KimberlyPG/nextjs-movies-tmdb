@@ -1,7 +1,6 @@
 import * as React from "react"
 import { useState } from "react";
 import Carousel from 'react-multi-carousel';
-import { BsSearch } from "react-icons/bs";
 import {  graphql,useStaticQuery } from "gatsby";
 import 'react-multi-carousel/lib/styles.css';
 
@@ -9,6 +8,7 @@ import MovieCard from "./Movie-card";
 import TVshowCard from "./TVshow-card";
 
 import { responsive } from "../utils/carousel_responsive";
+import SearchBar from "./SearchBar";
 
 const Home = () => {
     const [moviesView, setMoviesView] = useState(true);
@@ -16,8 +16,7 @@ const Home = () => {
     const [showsButtonBg, setShowsButtonBg] = useState('transparent');
     const [moviesButtonColor, setMoviesButtonColor] = useState('#FFFFFF');
     const [showsButtonColor, setShowsButtonColor] = useState('#C2C8CD');
-    const [movieName, setMovieName] = useState('');
-
+    
     const toggle = (value) => {
       setMoviesView(value);
       if(value) {
@@ -67,38 +66,9 @@ const Home = () => {
     }    
     `);
 
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      const searchMovie = async () => {
-        await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.GATSBY_API_KEY}&query=${movieName}&page=1`)
-        .then(res => res.json())
-        .then(data => console.log("searchMovie",data))
-      }
-      searchMovie(); 
-    }
-         
-    const handleChange = (event) => {
-        event.preventDefault();
-        setMovieName(event.target.value);
-    }
-
     return (
       <div className="mx-12 mt-10">
-        <div className="flex justify-center">
-            <form onSubmit={handleSubmit}>
-                <input 
-                    className="bg-gray-100 rounded text-gray-500 pl-3 w-96"
-                    type="search"
-                    onChange={handleChange} 
-                    placeholder="Search a movie..."
-                />
-                <button type="submit" >
-                  <BsSearch 
-                    className="text-gray-400 ml-2 align-middle cursor-pointer hover:opacity-80"
-                  />
-                </button>
-            </form>   
-        </div>
+        <SearchBar />
         <div className="flex space-x-5 mb-10">
           <button className="text-gray-500 rounded-xl px-4" onClick={() => toggle(true)} style={{backgroundColor: `${moviesButtonBg}`, color: `${moviesButtonColor}`}}>Movies</button>
           <button className="text-gray-500 rounded-xl px-4" onClick={() => toggle(false)} style={{backgroundColor: `${showsButtonBg}`, color: `${showsButtonColor}`}}>Tv Shows</button>
