@@ -32,9 +32,11 @@ const Search = ({ params }) => {
   return (
     <div>
         {status === true ? (
-            data && data?.results?.map((item) => (
-                <SearchList key={item.id} item={item} />
-            ))
+            <div className="grid p-10 place-items-center">
+                {data && data?.results?.map((item) => (
+                    <SearchList key={item.id} item={item} />
+                ))}
+            </div>
         ):(
             <div>Search failed</div>
         )
