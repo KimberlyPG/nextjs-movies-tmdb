@@ -5,8 +5,7 @@ import { navigate } from "gatsby";
 
 const SearchBar = () => {
     const [movieName, setMovieName] = useState('');
-    // const [data, setData] = useState(null);
-       
+      
     const handleChange = (event) => {
         event.preventDefault();
         setMovieName(event.target.value);

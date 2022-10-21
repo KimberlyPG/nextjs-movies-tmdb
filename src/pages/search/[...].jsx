@@ -31,12 +31,15 @@ const Search = ({ params }) => {
     console.log("data", data)
 
   return (
-    <div className="grid justify-items-center">
+    <div>
         {status === true ? (
-            <div className="grid grid-cols-5 p-10 w-4/5">
-                {data && data?.results?.map((item) => (
-                    <SearchList key={item.id} item={item} />
-                ))}
+            <div className="grid justify-items-center">
+                <h2 className="pt-5 flex text-2xl font-bold text-gray-600">Search result for {`${param}`}</h2>
+                <div className="grid grid-cols-5 p-10 w-4/5">
+                    {data && data?.results?.map((item) => (
+                        <SearchList key={item.id} item={item} />
+                    ))}
+                </div>
             </div>
         ):(
             <div>Search failed</div>
