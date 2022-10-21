@@ -29,10 +29,11 @@ const Search = ({ params }) => {
         searchMovie(); 
     }, [])
     console.log("data", data)
+
   return (
-    <div>
+    <div className="grid justify-items-center">
         {status === true ? (
-            <div className="grid p-10 place-items-center">
+            <div className="grid grid-cols-5 p-10 w-4/5">
                 {data && data?.results?.map((item) => (
                     <SearchList key={item.id} item={item} />
                 ))}
