@@ -4,11 +4,11 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import {  graphql, useStaticQuery } from "gatsby";
 
-import MovieCard from "./Movie-card";
 import TVshowCard from "./TVshow-card";
 import Topbar from "./Topbar";
 
 import { responsive } from "../utils/carousel_responsive";
+import Movies from "./Movies";
 
 const Home = () => {
     const [moviesView, setMoviesView] = useState(true);
@@ -55,13 +55,7 @@ const Home = () => {
           (
           <>
             <h2 className="text-lg font-bold px-3">Top rated movies</h2>
-            <Carousel responsive={responsive} centerMode={true} >
-                {queryMoviesAndTv?.movies.nodes.map((item) => (
-                  <div className="h-full p-3">
-                    <MovieCard key={item.id} data={item} />
-                  </div>
-                ))}
-            </Carousel>
+            <Movies movie={queryMoviesAndTv.movies.nodes}/>
             <h2 className="text-lg font-bold px-3">Popular movies</h2>
           </>
           ):(
