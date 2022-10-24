@@ -49,7 +49,7 @@ const Search = ({ params }) => {
             </div>
             </>
         ):(
-            <div>Search failed</div>
+            <div>Loading</div>
         )
         }
     </div>
