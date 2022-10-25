@@ -1,7 +1,7 @@
 import React from 'react'
 import Carousel from 'react-multi-carousel';
 
-import MovieCard from './Movie-card';
+import MovieAndTvCard from './MovieAndTv-card';
 
 import 'react-multi-carousel/lib/styles.css';
 import { responsive } from '../utils/carousel_responsive';
@@ -11,7 +11,7 @@ const Movies = ({ movie }) => {
     <Carousel responsive={responsive} centerMode={true} >
         {movie && movie.map((item) => (
             <div className="h-full p-3">
-            <MovieCard key={item.tmdbId} data={item} />
+              <MovieAndTvCard key={item.tmdbId} data={item} />
             </div>
         ))}
     </Carousel>

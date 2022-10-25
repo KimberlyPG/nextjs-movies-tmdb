@@ -1,6 +1,6 @@
 import * as React from "react"
 
-const MovieCard = ({ data }) => {
+const MovieAndTvCard = ({ data }) => {
     return (
         <div className="relative hover:opacity-70 h-full cursor-pointer">
             <p className="text-xs text-green-600 absolute m-3 bg-gray-200 bg-opacity-300 p-2 rounded-full">{data.vote_average}</p>
@@ -12,4 +12,4 @@ const MovieCard = ({ data }) => {
     )
 }
 
-export default MovieCard;
+export default MovieAndTvCard;

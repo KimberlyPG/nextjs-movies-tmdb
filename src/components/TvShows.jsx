@@ -1,7 +1,7 @@
 import React from 'react'
 import Carousel from 'react-multi-carousel';
 
-import TVshowCard from './TVshow-card';
+import MovieAndTvCard from './MovieAndTv-card';
 
 import 'react-multi-carousel/lib/styles.css';
 import { responsive } from '../utils/carousel_responsive';
@@ -11,7 +11,7 @@ const TvShows = ({ tv }) => {
     <Carousel responsive={responsive} centerMode={true} >
         {tv && tv.map((item) => (
             <div className="h-full p-3">
-            <TVshowCard key={item.tmdbId} data={item} />
+              <MovieAndTvCard key={item.tmdbId} data={item} />
             </div>
         ))}
     </Carousel>
