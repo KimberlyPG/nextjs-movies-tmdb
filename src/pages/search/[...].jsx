@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import SearchList from "../../components/Search-list";
 import Topbar from "../../components/Topbar";
 
+import { searchContent } from "../../api/search";
+
 const Search = ({ params }) => {
     const param = params[`*`]
     const [moviesView, setMoviesView] = useState(true);
@@ -18,40 +20,9 @@ const Search = ({ params }) => {
 
     useEffect(() => {
         setStatus('Loading');
-        const searchMovie = async () => {
-            await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.GATSBY_API_KEY}&query=${param}&page=1`)
-            .then((response) => {
-                if(!response.ok) {
-                    setStatus(response.ok)  
-                    throw new Error(response.status);
-                } 
-                else {
-                    setStatus(response.ok)
-                    return response.json();
-                }
-            })
-            .then(data => {
-                setmoviesData(data)
-            })
-        }
-        searchMovie(); 
-        const searchTv = async () => {
-            await fetch(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.GATSBY_API_KEY}&query=${param}&page=1`)
-            .then((response) => {
-                if(!response.ok) {
-                    setStatus(response.ok)  
-                    throw new Error(response.status);
-                } 
-                else {
-                    setStatus(response.ok)
-                    return response.json();
-                }
-            })
-            .then(data => {
-                setTvData(data)
-            })
-        }
-        searchTv(); 
+
+        searchContent(param, 'movie', setmoviesData, setStatus);   
+        searchContent(param, 'tv', setTvData, setStatus);   
     }, [param])
 
   return (
