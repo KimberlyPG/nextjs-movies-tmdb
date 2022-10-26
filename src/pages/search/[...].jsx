@@ -6,10 +6,16 @@ import Topbar from "../../components/Topbar";
 
 const Search = ({ params }) => {
     const param = params[`*`]
-    const [data, setData] = useState('');
-    const [status, setStatus] = useState('');
     const [moviesView, setMoviesView] = useState(true);
-   
+    const [moviesData, setmoviesData] = useState(null);
+    const [tvData, setTvData] = useState(null);
+    const [status, setStatus] = useState('');
+    const [content, setContent] = useState('');
+
+    useEffect(() => {
+        moviesView === true ? setContent(moviesData) : setContent(tvData) 
+    }, [moviesData, tvData, moviesView])
+
     useEffect(() => {
         setStatus('Loading');
         const searchMovie = async () => {
@@ -25,12 +31,28 @@ const Search = ({ params }) => {
                 }
             })
             .then(data => {
-                setData(data)
+                setmoviesData(data)
             })
         }
         searchMovie(); 
+        const searchTv = async () => {
+            await fetch(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.GATSBY_API_KEY}&query=${param}&page=1`)
+            .then((response) => {
+                if(!response.ok) {
+                    setStatus(response.ok)  
+                    throw new Error(response.status);
+                } 
+                else {
+                    setStatus(response.ok)
+                    return response.json();
+                }
+            })
+            .then(data => {
+                setTvData(data)
+            })
+        }
+        searchTv(); 
     }, [param])
-    console.log("data", data)
 
   return (
     <div>
@@ -42,7 +64,7 @@ const Search = ({ params }) => {
                 </div>
                 <h2 className="pt-5 flex text-2xl font-bold text-gray-600">Search result for {`${param}`}</h2>
                 <div className="grid grid-cols-5 p-10 w-4/5">
-                    {data && data?.results?.map((item) => (
+                    {content && content?.results?.map((item) => (
                         <SearchList key={item.id} item={item} />
                     ))}
                 </div>
@@ -50,7 +72,7 @@ const Search = ({ params }) => {
             </>
         ):(
             <div>Loading</div>
-        )
+        ) 
         }
     </div>
   )
