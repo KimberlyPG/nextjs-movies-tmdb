@@ -2,12 +2,14 @@ import React from 'react'
 import { AiFillStar } from "react-icons/ai";
 
 const SearchList = ({ item }) => {
-    if(item.poster_path === null) return 
+  if(item.poster_path === null) return 
   return (
     <div className='p-5'>
         <div className='relative'>
             <span className='flex absolute bottom-0 p-1 text-white space-x-5 text-xs font-bold'>
-                <p className='bg-gray-600 bg-opacity-60 rounded-lg px-2 py-1'>{item?.release_date?.split("-")[0]}</p>
+                {item.release_date &&
+                  <p className='bg-gray-600 bg-opacity-60 rounded-lg px-2 py-1'>{item?.release_date?.split("-")[0]}</p>
+                }
                 <div className='bg-gray-600 bg-opacity-60 rounded-lg px-2 py-1 border border-green-400'>{item.adult === true ? <p>18+</p> : <p>ALL</p> }</div>    
             </span>
             <img 

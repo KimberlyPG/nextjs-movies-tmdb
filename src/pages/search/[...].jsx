@@ -29,17 +29,17 @@ const Search = ({ params }) => {
     <div>
         {status === true ? (
             <>
-            <div className="grid justify-items-center">
-                <div className="pt-10 w-4/5">
-                    <Topbar setMoviesView={setMoviesView}/>
+                <div className="grid justify-items-center">
+                    <div className="pt-10 w-4/5">
+                        <Topbar setMoviesView={setMoviesView}/>
+                    </div>
+                    <h2 className="pt-5 flex text-2xl font-bold text-gray-600">Search result for {`${param}`}</h2>
+                    <div className="grid grid-cols-5 p-10 w-4/5">
+                        {content && content?.results?.map((item) => (
+                            <SearchList key={item.id} item={item} />
+                        ))}
+                    </div>
                 </div>
-                <h2 className="pt-5 flex text-2xl font-bold text-gray-600">Search result for {`${param}`}</h2>
-                <div className="grid grid-cols-5 p-10 w-4/5">
-                    {content && content?.results?.map((item) => (
-                        <SearchList key={item.id} item={item} />
-                    ))}
-                </div>
-            </div>
             </>
         ):(
             <div>Loading</div>
