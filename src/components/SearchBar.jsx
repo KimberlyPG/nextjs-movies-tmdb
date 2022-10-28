@@ -15,10 +15,10 @@ const SearchBar = () => {
         <div className="flex justify-center">
             <form onSubmit={handleChange}>
                 <input 
-                    className="bg-gray-100 rounded text-gray-500 pl-3 w-96"
+                    className="bg-gray-100 rounded-xl text-gray-500 pl-3 w-96 h-8"
                     type="search"
                     onChange={handleChange} 
-                    placeholder="Search a movie..."
+                    placeholder="Search for a movie or tv show..."
                 />
                 <button 
                     onClick={() => navigate(`/search/${movieName}`)}>

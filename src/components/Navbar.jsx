@@ -25,7 +25,7 @@ const Navbar = ({ setMoviesView }) => {
         }
       }
   return (
-    <div>   
+    <div className='mx-12 mt-10'>   
         <div className="flex space-x-5 mb-10">
           <button className="text-gray-500 rounded-xl px-4" onClick={() => toggle(true)} style={{backgroundColor: `${moviesButtonBg}`, color: `${moviesButtonColor}`}}>Movies</button>
           <button className="text-gray-500 rounded-xl px-4" onClick={() => toggle(false)} style={{backgroundColor: `${showsButtonBg}`, color: `${showsButtonColor}`}}>Tv Shows</button>

@@ -2,7 +2,6 @@ import * as React from "react"
 import { useState } from "react";
 import {  graphql, useStaticQuery } from "gatsby";
 
-import Topbar from "./Topbar";
 import Navbar from "./Navbar";
 import Movies from "./Movies";
 import TvShows from "./TvShows";
@@ -46,7 +45,6 @@ const Home = () => {
 
     return (
       <>   
-        <Topbar />
         <div className="mx-12 mt-10">
           <Navbar setMoviesView={setMoviesView}/>
           {moviesView === true ? 
