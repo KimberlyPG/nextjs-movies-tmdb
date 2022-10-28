@@ -25,7 +25,7 @@ const Topbar = ({ setMoviesView }) => {
         }
       }
   return (
-    <div>
+    <div>   
         <SearchBar />
         <div className="flex space-x-5 mb-10">
           <button className="text-gray-500 rounded-xl px-4" onClick={() => toggle(true)} style={{backgroundColor: `${moviesButtonBg}`, color: `${moviesButtonColor}`}}>Movies</button>

@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 
 import SearchList from "../../components/Search-list";
-import Topbar from "../../components/Topbar";
+import Topbar from "../../components/NavigationBar";
 
 import { searchContent } from "../../api/search";
 

@@ -2,7 +2,7 @@ import * as React from "react"
 import { useState } from "react";
 import {  graphql, useStaticQuery } from "gatsby";
 
-import Topbar from "./Topbar";
+import Topbar from "./NavigationBar";
 import Movies from "./Movies";
 import TvShows from "./TvShows";
 
