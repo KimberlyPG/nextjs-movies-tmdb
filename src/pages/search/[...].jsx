@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 import SearchList from "../../components/Search-list";
 import Navbar from "../../components/Navbar";
+import Layout from "../../components/Layout";
 
 import { searchContent } from "../../api/search";
 
@@ -26,7 +27,7 @@ const Search = ({ params }) => {
     }, [param])
 
   return (
-    <div>
+    <Layout>
         {status === true ? (
             <>
                 <div className="grid justify-items-center">
@@ -45,7 +46,7 @@ const Search = ({ params }) => {
             <div>Loading</div>
         ) 
         }
-    </div>
+    </Layout>
   )
 }
 

@@ -1,12 +1,11 @@
 import React from 'react'
-import Topbar from '../components/Topbar'
-import Navbar from '../components/Navbar'
+import Topbar from './Topbar'
 
 const Layout = ({ children }) => {
 return (
     <div>
         <Topbar />
-        <main>{children}</main>
+        {children}
     </div>
   )
 }

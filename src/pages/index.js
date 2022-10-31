@@ -8,11 +8,9 @@ import '../assets/global.css'
 const IndexPage = () => {
 
   return (
-    <div>
-      <Layout>
-        <Home />
-      </Layout>
-    </div>
+    <Layout>
+      <Home />
+    </Layout>
   )
 }
 

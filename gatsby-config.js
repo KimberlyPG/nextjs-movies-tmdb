@@ -11,6 +11,12 @@ module.exports = {
         apiKey: process.env.GATSBY_API_KEY,
         sessionID: process.env.GATSBY_SESSION_ID,
       }
-    }
+    },
+    // {
+    //   resolve: `gatsby-plugin-layout`,
+    //   options: {
+    //     component: require.resolve(`./src/components/Layout`),
+    //   },
+    // },
   ],
 }
