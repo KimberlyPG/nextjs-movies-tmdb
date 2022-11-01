@@ -28,10 +28,32 @@ query{
 } 
 `;
 
+const POPULAR_SHOWS = gql`
+query{
+  popularShows{
+      ok
+    error
+    shows {
+      homepage
+      name
+      type
+      original_name
+      number_of_seasons
+      number_of_episodes
+      poster_path
+      first_air_date
+      original_language
+      vote_count
+    }
+  }
+}  
+`
+
 const Home = () => {
     const [moviesView, setMoviesView] = useState(true);
 
     const { loading: popularMoviesLoading, error: popularMoviesError, data: popularMoviesData } = useQuery(POPULAR_MOVIES);
+    const { loading: popularShowsLoading, error: popularShowsError, data: popularShowsData } = useQuery(POPULAR_SHOWS);
    
     const queryMoviesAndTv =  useStaticQuery(graphql`
     query MyQuery {
@@ -67,8 +89,8 @@ const Home = () => {
     }    
     `);
 
-    if (popularMoviesLoading) return <div>Loading...</div>;
-    if (popularMoviesError) return <div>Error...</div>;
+    if (popularMoviesLoading || popularShowsLoading) return <div>Loading...</div>;
+    if (popularMoviesError || popularShowsError) return <div>Error...</div>;
     return (
       <>   
         <div className="mx-12 mt-10">
@@ -85,6 +107,8 @@ const Home = () => {
           <>
             <h2 className="text-lg font-bold px-3">Top rated tv shows</h2>
             <TvShows tv={queryMoviesAndTv.tv.nodes} />
+            <h2 className="text-lg font-bold px-3">Popular shows</h2>
+            <TvShows tv={popularShowsData.popularShows.shows}/>
           </>
           )
           }
