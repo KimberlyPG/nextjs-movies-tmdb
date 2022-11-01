@@ -1,13 +1,37 @@
 import * as React from "react"
 import { useState } from "react";
 import {  graphql, useStaticQuery } from "gatsby";
+import { useQuery, gql } from "@apollo/client";
 
 import Navbar from "./Navbar";
 import Movies from "./Movies";
 import TvShows from "./TvShows";
 
+const POPULAR_MOVIES = gql`
+query{
+  popularMovies{
+      ok
+    error
+    movies {
+      imdb_id
+      adult
+      homepage
+      original_title
+      overview
+      poster_path
+      release_date
+      tagline
+      vote_average
+      vote_count
+    }
+  }
+} 
+`;
+
 const Home = () => {
     const [moviesView, setMoviesView] = useState(true);
+
+    const { loading: popularMoviesLoading, error: popularMoviesError, data: popularMoviesData } = useQuery(POPULAR_MOVIES);
    
     const queryMoviesAndTv =  useStaticQuery(graphql`
     query MyQuery {
@@ -43,6 +67,8 @@ const Home = () => {
     }    
     `);
 
+    if (popularMoviesLoading) return <div>Loading...</div>;
+    if (popularMoviesError) return <div>Error...</div>;
     return (
       <>   
         <div className="mx-12 mt-10">
@@ -51,8 +77,9 @@ const Home = () => {
           (
           <>
             <h2 className="text-lg font-bold px-3">Top rated movies</h2>
-            <Movies movie={queryMoviesAndTv.movies.nodes}/>
+            <Movies movie={queryMoviesAndTv.movies.nodes} />
             <h2 className="text-lg font-bold px-3">Popular movies</h2>
+            <Movies movie={popularMoviesData.popularMovies.movies} />
           </>
           ):(
           <>
