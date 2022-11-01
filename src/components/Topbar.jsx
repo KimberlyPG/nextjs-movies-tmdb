@@ -7,7 +7,7 @@ import logo from '../assets/logo.svg'
 
 const Topbar = () => {
 return (
-    <div className='flex bg-[#FFFFFF] h-14 items-center px-8'>
+    <div className='flex bg-[#FFFFFF] h-14 items-center px-8 shadow-md shadow-inner'>
         <img
             className='w-36 cursor-pointer' 
             src={logo} 

@@ -1,7 +1,7 @@
 import * as React from "react"
 
 const MovieAndTvCard = ({ data }) => {
-    console.log("poster path", data.poster_path)
+
     return (
         <div className="relative hover:opacity-70 h-full cursor-pointer">
             {data.vote_average && 
