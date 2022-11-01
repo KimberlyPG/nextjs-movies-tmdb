@@ -1,8 +1,8 @@
 import React from 'react'
 import { AiFillStar } from "react-icons/ai";
 
-const SearchList = ({ item }) => {
-    if(item.poster_path === null) return 
+const SearchList = ({ item }:any) => {
+    if(item.poster_path === null) return null
   return (
     <div className='p-5'>
         <div className='relative'>

@@ -6,11 +6,13 @@ import Topbar from "./Topbar";
 import Movies from "./Movies";
 import TvShows from "./TvShows";
 
+
+
 const Home = () => {
     const [moviesView, setMoviesView] = useState(true);
-   
+
     const queryMoviesAndTv =  useStaticQuery(graphql`
-    query MyQuery {
+    query HomePage {
       movies: allTmdbMovieTopRated(sort: {fields: release_date, order: DESC}) {
         nodes {
           id
@@ -51,13 +53,13 @@ const Home = () => {
           (
           <>
             <h2 className="text-lg font-bold px-3">Top rated movies</h2>
-            <Movies movie={queryMoviesAndTv.movies.nodes}/>
+            <Movies nodes = {queryMoviesAndTv.movies.nodes}/>
             <h2 className="text-lg font-bold px-3">Popular movies</h2>
           </>
           ):(
           <>
             <h2 className="text-lg font-bold px-3">Top rated tv shows</h2>
-            <TvShows tv={queryMoviesAndTv.tv.nodes} />
+            <TvShows nodes={queryMoviesAndTv.tv.nodes} />
           </>
           )
           }

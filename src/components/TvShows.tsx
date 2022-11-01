@@ -6,10 +6,10 @@ import MovieAndTvCard from './MovieAndTv-card';
 import 'react-multi-carousel/lib/styles.css';
 import { responsive } from '../utils/carousel_responsive';
 
-const TvShows = ({ tv }) => {
+const TvShows = ({ nodes }:Queries.HomePageQuery["tv"]) => {
   return (
     <Carousel responsive={responsive} centerMode={true} >
-        {tv && tv.map((item) => (
+        {nodes && nodes.map((item:any) => (
             <div className="h-full p-3">
               <MovieAndTvCard key={item.tmdbId} data={item} />
             </div>
