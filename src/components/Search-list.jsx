@@ -5,7 +5,7 @@ const SearchList = ({ item }) => {
   if(item.poster_path === null) return 
   return (
     <div className='p-5'>
-        <div className='relative hover:bg-80'>
+        <div className='relative cursor-pointer'>
             <span className='flex absolute bottom-0 p-1 text-white space-x-5 text-xs font-bold'>
                 {item.release_date &&
                   <p className='bg-gray-600 bg-opacity-60 rounded-lg px-2 py-1'>{item?.release_date?.split("-")[0]}</p>
@@ -13,7 +13,7 @@ const SearchList = ({ item }) => {
                 <div className='bg-gray-600 bg-opacity-60 rounded-lg px-2 py-1 border border-green-400'>{item.adult === true ? <p>18+</p> : <p>ALL</p> }</div>    
             </span>
             <img 
-                className="rounded-xl"
+                className="rounded-xl hover:opacity-80"
                 src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path}`} 
                 alt={`${item.title} poster`}
                 />
