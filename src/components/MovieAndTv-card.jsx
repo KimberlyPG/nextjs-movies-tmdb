@@ -4,7 +4,9 @@ const MovieAndTvCard = ({ data }) => {
     console.log("poster path", data.poster_path)
     return (
         <div className="relative hover:opacity-70 h-full cursor-pointer">
-            <p className="text-xs text-green-600 absolute m-3 bg-gray-200 bg-opacity-300 p-2 rounded-full">{data.vote_average}</p>
+            {data.vote_average && 
+                <p className="text-xs text-green-600 absolute m-3 bg-gray-200 bg-opacity-300 p-2 rounded-full">{data.vote_average}</p>
+            }
             {data.poster_path.original !== undefined ? (
                 <img 
                     className="h-full rounded-xl"

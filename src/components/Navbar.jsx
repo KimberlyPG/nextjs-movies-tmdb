@@ -1,8 +1,6 @@
 import React from 'react'
 import { useState } from "react";
 
-import SearchBar from './SearchBar';
-
 const Navbar = ({ setMoviesView }) => {
     const [moviesButtonBg, setMoviesButtonBg] = useState('#1B5BA9');
     const [showsButtonBg, setShowsButtonBg] = useState('transparent');
