@@ -13,6 +13,7 @@ query{
       ok
     error
     movies {
+      id
       imdb_id
       adult
       homepage
@@ -34,6 +35,7 @@ query{
       ok
     error
     shows {
+      id
       homepage
       name
       type
