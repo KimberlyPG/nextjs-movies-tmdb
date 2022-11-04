@@ -25,11 +25,11 @@ const Details = ({ params, location }) => {
             <div className="flex p-10 mx-20 justify-center">
                 <img 
                     className="rounded-xl w-1/4"
-                    src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${state?.movieData?.poster_path}`} 
+                    src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data?.poster_path}`} 
                 />
-                <span className="flex flex-rows">
-                    <h2 className="text-2xl ml-10 text-gray-500">{data?.title}</h2>
-                    {/* <p>{data?.overview}</p> */}
+                <span className="flex flex-col mx-10 w-1/3">
+                    <h2 className="text-2xl text-gray-500">{data?.title}</h2>
+                    <p>{data?.overview}</p>
                 </span>
             </div>
         </Layout>

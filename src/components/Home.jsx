@@ -61,7 +61,7 @@ const Home = () => {
     query MyQuery {
       movies: allTmdbMovieTopRated(sort: {fields: release_date, order: DESC}) {
         nodes {
-          id
+          id: tmdbId
           title
           release_date
           poster_path {
@@ -76,7 +76,7 @@ const Home = () => {
       }
       tv: allTmdbTvTopRated {
         nodes {
-            tmdbId
+            id: tmdbId
             name  
             first_air_date
             poster_path {
