@@ -19,18 +19,20 @@ const Details = ({ params, location }) => {
         movieInformation();
     }, [])
     
-
     return (
         <Layout>
-            <div className="flex p-10 mx-20 justify-center">
-                <img 
-                    className="rounded-xl w-1/4"
-                    src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data?.poster_path}`} 
-                />
-                <span className="flex flex-col mx-10 w-1/3">
-                    <h2 className="text-2xl text-gray-500">{data?.title}</h2>
-                    <p>{data?.overview}</p>
-                </span>
+            <div className="w-full" style={{background: `linear-gradient(0deg, rgba(2,173,231,0.5), rgba(2,173,231,0.5)), url(https://image.tmdb.org/t/p/w1280/${data?.backdrop_path}) no-repeat, auto`,  backgroundSize: 'cover', width: '100%'}}>
+                <div className="flex p-10 mx-20 justify-center" >
+                    <img 
+                        className="rounded-xl w-96"
+                        src={`https://image.tmdb.org/t/p/w1280/${data?.poster_path}`} 
+                    />
+                    <span className="flex flex-col w-2/5 ml-20">
+                        <h2 className="text-2xl text-gray-500">{data?.title}</h2>
+                        <h3>Overview</h3>
+                        <p>{data?.overview}</p>
+                    </span>
+                </div>
             </div>
         </Layout>
     )
