@@ -21,7 +21,12 @@ const Details = ({ params, location }) => {
     
     return (
         <Layout>
-            <div className="w-full" style={{background: `linear-gradient(0deg, rgba(2,173,231,0.5), rgba(2,173,231,0.5)), url(https://image.tmdb.org/t/p/w1280/${data?.backdrop_path}) no-repeat, auto`,  backgroundSize: 'cover', width: '100%'}}>
+            <div className="w-full">
+            <div className="w-full" 
+                style={{
+                    backgroundSize: 'cover', 
+                    backgroundImage:`linear-gradient(0deg, rgba(2,173,231,0.5), rgba(2,173,231,0.5)), url(https://image.tmdb.org/t/p/w1280/${data?.backdrop_path})`,
+                }}>
                 <div className="flex p-10 mx-20 justify-center" >
                     <img 
                         className="rounded-xl w-96"
@@ -33,6 +38,7 @@ const Details = ({ params, location }) => {
                         <p>{data?.overview}</p>
                     </span>
                 </div>
+            </div>
             </div>
         </Layout>
     )
