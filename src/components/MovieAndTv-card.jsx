@@ -3,7 +3,7 @@ import { navigate } from "gatsby";
 
 const MovieAndTvCard = ({ data }) => {
     return (
-        <div className="relative hover:opacity-70 h-full cursor-pointer" onClick={() => navigate(`/movie/${data.title}`, {state: {movieData: data}})}>
+        <div className="relative hover:opacity-70 h-full cursor-pointer" onClick={() => navigate(`/details/${data.title}`, {state: {movieData: data}})}>
             {data.vote_average && 
                 <p className="text-xs text-green-600 absolute m-3 bg-gray-200 bg-opacity-300 p-2 rounded-full">{data.vote_average}</p>
             }
