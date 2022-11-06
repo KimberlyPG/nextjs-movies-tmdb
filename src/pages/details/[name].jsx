@@ -93,8 +93,8 @@ const Details = ({ params, location }) => {
                                             <div className="flex space-x-5">
                                                 {providers?.US?.flatrate?.map((provider) => (
                                                     <img 
-                                                        className="w-10"
-                                                        src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${provider.logo_path}`} 
+                                                        className="w-16 rounded-sm"
+                                                        src={`https://image.tmdb.org/t/p/w500${provider.logo_path}`} 
                                                         alt={`${provider.provider_name} image`} 
                                                     />
                                                 ))}
