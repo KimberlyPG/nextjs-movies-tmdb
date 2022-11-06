@@ -21,24 +21,28 @@ const Details = ({ params, location }) => {
     
     return (
         <Layout>
-            <div className="w-full">
             <div className="w-full" 
                 style={{
                     backgroundSize: 'cover', 
                     backgroundImage:`linear-gradient(0deg, rgba(1, 124, 128,0.8), rgba(1, 124, 128,0.8)), url(https://image.tmdb.org/t/p/w1280/${data?.backdrop_path})`,
                 }}>
                 <div className="flex p-10 mx-20 justify-center" >
-                    <img 
-                        className="rounded-xl w-96"
-                        src={`https://image.tmdb.org/t/p/w1280/${data?.poster_path}`} 
-                    />
+                    <div>
+                        <img 
+                            className="rounded-xl w-96"
+                            src={`https://image.tmdb.org/t/p/w1280/${data?.poster_path}`} 
+                        />
+                        <span className="flex text-white space-x-5">
+                            <p>{data?.release_date.split('-')[0]}</p>
+                            <p>{data?.runtime}</p>
+                        </span>
+                    </div>
                     <span className="flex flex-col w-2/5 ml-20">
                         <h2 className="text-2xl text-white font-bold text-3xl">{data?.title}</h2>
                         <h3 className="text-white font-bold text-lg">Overview</h3>
-                        <p className="text-gray-100 text-lg">{data?.overview}</p>
+                        <p className="text-gray-100 text-lg font-semibold">{data?.overview}</p>
                     </span>
                 </div>
-            </div>
             </div>
         </Layout>
     )
