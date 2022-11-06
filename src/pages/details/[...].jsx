@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 
 import Layout from "../../components/Layout";
 
+import { minutesToHours } from "../../utils/minutesToHours";
+
 const Details = ({ params, location }) => {
     const param = params[`*`]
     const [data, setData] = useState(null);
@@ -32,9 +34,9 @@ const Details = ({ params, location }) => {
                             className="rounded-xl w-96"
                             src={`https://image.tmdb.org/t/p/w1280/${data?.poster_path}`} 
                         />
-                        <span className="flex text-white space-x-5">
+                        <span className="flex text-white space-x-5 font-semibold">
                             <p>{data?.release_date.split('-')[0]}</p>
-                            <p>{data?.runtime}</p>
+                            <p>{minutesToHours(data?.runtime)}</p>
                         </span>
                     </div>
                     <span className="flex flex-col w-2/5 ml-20">
