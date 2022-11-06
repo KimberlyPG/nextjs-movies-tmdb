@@ -1,10 +1,12 @@
 import React from 'react'
+import { navigate } from 'gatsby';
+
 import { AiFillStar } from "react-icons/ai";
 
-const SearchList = ({ item }) => {
+const SearchList = ({ item, type }) => {
   if(item.poster_path === null) return 
   return (
-    <div className='p-5'>
+    <div className='p-5' onClick={() => navigate(`/details/${item.title}`, {state: {contentId: item.id, type: type }})}>
         <div className='relative cursor-pointer'>
             <span className='flex absolute bottom-0 p-1 text-white space-x-5 text-xs font-bold'>
                 {item.release_date &&
@@ -16,7 +18,7 @@ const SearchList = ({ item }) => {
                 className="rounded-xl hover:opacity-80"
                 src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path}`} 
                 alt={`${item.title} poster`}
-                />
+            />
         </div>
         <h3 className='font-bold text-sm'>{item.title}</h3>
         <span className='flex items-center space-x-2 text-sm'>
