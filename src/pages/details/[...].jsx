@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
+import Ratings from 'react-ratings-declarative';
+
 import Layout from "../../components/Layout";
 
 import { minutesToHours } from "../../utils/minutesToHours";
@@ -9,7 +11,6 @@ const Details = ({ params, location }) => {
     const param = params[`*`]
     const [data, setData] = useState(null);
     const { state = {} } = location
-    console.log(state)
     console.log("data", data)
 
     useEffect(() => {
@@ -52,13 +53,25 @@ const Details = ({ params, location }) => {
                                         <h3 className="text-white font-bold text-lg">Overview</h3>
                                         <p className="text-gray-100 text-lg font-semibold">{data?.overview}</p>
                                         <div>
+                                            <div>
+                                                 <Ratings
+                                                    rating={data?.vote_average}
+                                                    widgetDimensions="20px"
+                                                    widgetSpacings="5px"
+                                                >
+                                                    {Array.from({ length: 10 }, (_, i) => 
+                                                        <Ratings.Widget widgetRatedColor="yellow" />
+                                                    )}
+                                                </Ratings>
+                                            </div>
                                             <p>{data?.vote_average}</p>
+                                            <p>{data?.vote_count}</p>
                                         </div>
                                     </span>
                                     <div className="flex flex-col">
                                         <p className="font-bold">Genres</p>
                                         {data?.genres.map((genre) => (
-                                            <p className="border border-green-300 rounded-sm mb-2 text-center px-2">{genre.name}</p>
+                                            <p className="border border-green-300 rounded-lg mb-2 text-center px-2">{genre.name}</p>
                                             ))
                                         }
                                     </div>
