@@ -34,7 +34,7 @@ const Details = ({ params, location }) => {
                     <div className="flex p-10 mx-20 justify-center" >
                         <div>
                             <img 
-                                className="rounded-xl w-96"
+                                className="rounded-xl w-80"
                                 src={`https://image.tmdb.org/t/p/w1280/${data?.poster_path}`} 
                             />
                             <span className="flex text-white space-x-5 font-semibold text-lg ml-3">
@@ -49,25 +49,24 @@ const Details = ({ params, location }) => {
                                     <p className="text-gray-100">{data?.tagline}</p>
                                 </div>
                                 <div className="flex text-white space-x-7">
-                                    <span className="flex flex-col">
-                                        <h3 className="text-white font-bold text-lg">Overview</h3>
-                                        <p className="text-gray-100 text-lg font-semibold">{data?.overview}</p>
-                                        <div>
-                                            <div>
-                                                 <Ratings
-                                                    rating={data?.vote_average}
-                                                    widgetDimensions="20px"
-                                                    widgetSpacings="5px"
-                                                >
-                                                    {Array.from({ length: 10 }, (_, i) => 
-                                                        <Ratings.Widget widgetRatedColor="yellow" />
-                                                    )}
-                                                </Ratings>
-                                            </div>
-                                            <p>{data?.vote_average}</p>
-                                            <p>{data?.vote_count}</p>
+                                    <div className="flex flex-col">
+                                        <span>
+                                            <h3 className="text-white font-bold text-lg">Overview</h3>
+                                            <p className="text-gray-100 text-lg font-semibold">{data?.overview}</p>
+                                        </span>
+                                        <div className="flex space-x-2 mt-5">
+                                            <Ratings
+                                                rating={data?.vote_average}
+                                                widgetDimensions="19px"
+                                                widgetSpacings="5px"
+                                            >
+                                                {Array.from({ length: 10 }, (_, i) => 
+                                                    <Ratings.Widget widgetRatedColor="yellow" />
+                                                )}
+                                            </Ratings>
+                                            <p className="text-semibold mt-1">{data?.vote_average}/10</p>
                                         </div>
-                                    </span>
+                                    </div>
                                     <div className="flex flex-col">
                                         <p className="font-bold">Genres</p>
                                         {data?.genres.map((genre) => (
