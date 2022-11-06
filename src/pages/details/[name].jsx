@@ -12,6 +12,7 @@ const Details = ({ location }) => {
     const { state = {} } = location
     const [data, setData] = useState(null);
     const [providers, setProviders] = useState(null);
+    const [providersRegions, setProvidersRegions] = useState(null);
     const [countrySelected, setCountrySelected] = useState('US');
     console.log("data", data)
     console.log("providers", providers)
@@ -26,13 +27,20 @@ const Details = ({ location }) => {
     }, [])
 
     useEffect(() => {
-        const movieInformation = async() => {
+        const providersInformation = async() => {
             await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}/watch/providers?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
             .then(res => res.json())
             .then(data => setProviders(data.results))
         } 
-        movieInformation();
+        providersInformation();
+        const providersRegions = async() => {
+            await fetch(`https://api.themoviedb.org/3/watch/providers/regions?api_key=${process.env.GATSBY_API_KEY}&language=en-US`)
+            .then(res => res.json())
+            .then(data => setProvidersRegions(data.results))
+        }
+        providersRegions();
     }, [])
+    console.log("region", providersRegions)
 
     const options = [
         'one', 'two', 'three'
@@ -98,13 +106,13 @@ const Details = ({ location }) => {
                                             <div className="flex space-x-5">
                                                 {providers?.US?.flatrate?.map((provider) => (
                                                     <img 
-                                                    className="w-16 rounded-sm"
-                                                    src={`https://image.tmdb.org/t/p/w500${provider.logo_path}`} 
-                                                    alt={`${provider.provider_name} image`} 
+                                                        className="w-16 rounded-sm"
+                                                        src={`https://image.tmdb.org/t/p/w500${provider.logo_path}`} 
+                                                        alt={`${provider.provider_name} image`} 
                                                     />
                                                 ))}
                                                 <Dropdown 
-                                                    className="text-xs"
+                                                    className="text-xs text-green-500"
                                                     options={options} 
                                                     // onChange={this._onSelect} 
                                                     value={countrySelected} 
