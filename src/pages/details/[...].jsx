@@ -29,7 +29,7 @@ const Details = ({ params, location }) => {
         const movieInformation = async() => {
             await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}/watch/providers?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
             .then(res => res.json())
-            .then(data => setProviders(data))
+            .then(data => setProviders(data.results))
         } 
         movieInformation();
     }, [])
@@ -88,6 +88,16 @@ const Details = ({ params, location }) => {
                                                 )}
                                             </Ratings>
                                             <p className="text-semibold mt-1">{data?.vote_average}/10</p>
+                                        </div>
+                                        <div className="mt-5">
+                                            <p className="font-bold">Stream</p>
+                                            {providers?.US?.flatrate?.map((provider) => (
+                                                <img 
+                                                    className="w-10"
+                                                    src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${provider.logo_path}`} 
+                                                    alt={`${provider.provider_name} image`} 
+                                                />
+                                            ))}
                                         </div>
                                     </div>
                                     <div className="flex flex-col">
