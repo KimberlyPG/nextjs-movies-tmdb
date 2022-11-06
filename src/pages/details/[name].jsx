@@ -8,13 +8,12 @@ import Layout from "../../components/Layout";
 import { minutesToHours } from "../../utils/minutesToHours";
 
 const Details = ({ params, location }) => {
-    const param = params[`*`]
+    // const param = params[`*`]
     const [data, setData] = useState(null);
     const [providers, setProviders] = useState(null);
     const { state = {} } = location
     console.log("data", data)
     console.log("providers", providers)
-    console.log("type", state.type)
 
     useEffect(() => {
         const movieInformation = async() => {
@@ -91,13 +90,15 @@ const Details = ({ params, location }) => {
                                         </div>
                                         <div className="mt-5">
                                             <p className="font-bold">Stream</p>
-                                            {providers?.US?.flatrate?.map((provider) => (
-                                                <img 
-                                                    className="w-10"
-                                                    src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${provider.logo_path}`} 
-                                                    alt={`${provider.provider_name} image`} 
-                                                />
-                                            ))}
+                                            <div className="flex space-x-5">
+                                                {providers?.US?.flatrate?.map((provider) => (
+                                                    <img 
+                                                        className="w-10"
+                                                        src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${provider.logo_path}`} 
+                                                        alt={`${provider.provider_name} image`} 
+                                                    />
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="flex flex-col">

@@ -7,11 +7,12 @@ import 'react-multi-carousel/lib/styles.css';
 import { responsive } from '../utils/carousel_responsive';
 
 const TvShows = ({ tv }) => {
+  
   return (
     <Carousel responsive={responsive} centerMode={true} >
         {tv && tv.map((item) => (
             <div className="h-full p-3">
-              <MovieAndTvCard key={item.tmdbId} data={item} type='tv' />
+              <MovieAndTvCard key={item.tmdbId} data={item} name={item.name} type='tv' />
             </div>
         ))}
     </Carousel>

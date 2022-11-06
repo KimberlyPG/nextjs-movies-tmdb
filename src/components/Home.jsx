@@ -17,7 +17,7 @@ query{
       imdb_id
       adult
       homepage
-      original_title
+      name: original_title
       overview
       poster_path
       release_date
@@ -62,7 +62,7 @@ const Home = () => {
       movies: allTmdbMovieTopRated(sort: {fields: release_date, order: DESC}) {
         nodes {
           id: tmdbId
-          title
+          name: title
           release_date
           poster_path {
             original
@@ -101,16 +101,16 @@ const Home = () => {
           (
           <>
             <h2 className="text-lg font-bold px-3">Top rated movies</h2>
-            <Movies movie={queryMoviesAndTv.movies.nodes} />
+            <Movies movie={queryMoviesAndTv.movies.nodes} name={queryMoviesAndTv.movies.nodes.name} />
             <h2 className="text-lg font-bold px-3">Popular movies</h2>
-            <Movies movie={popularMoviesData.popularMovies.movies} />
+            <Movies movie={popularMoviesData.popularMovies.movies} name={popularMoviesData.popularMovies.movies.original_title} />
           </>
           ):(
           <>
             <h2 className="text-lg font-bold px-3">Top rated tv shows</h2>
             <TvShows tv={queryMoviesAndTv.tv.nodes} />
             <h2 className="text-lg font-bold px-3">Popular shows</h2>
-            <TvShows tv={popularShowsData.popularShows.shows}/>
+            <TvShows tv={popularShowsData.popularShows.shows} />
           </>
           )
           }
