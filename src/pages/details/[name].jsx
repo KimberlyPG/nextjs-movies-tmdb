@@ -1,17 +1,18 @@
 import React from "react";
 import { useState, useEffect } from "react";
-
+import Dropdown from 'react-dropdown';
 import Ratings from 'react-ratings-declarative';
 
 import Layout from "../../components/Layout";
 
+import 'react-dropdown/style.css';
 import { minutesToHours } from "../../utils/minutesToHours";
 
-const Details = ({ params, location }) => {
-    // const param = params[`*`]
+const Details = ({ location }) => {
+    const { state = {} } = location
     const [data, setData] = useState(null);
     const [providers, setProviders] = useState(null);
-    const { state = {} } = location
+    const [countrySelected, setCountrySelected] = useState('US');
     console.log("data", data)
     console.log("providers", providers)
 
@@ -32,6 +33,10 @@ const Details = ({ params, location }) => {
         } 
         movieInformation();
     }, [])
+
+    const options = [
+        'one', 'two', 'three'
+      ];
        
     return (
         <Layout>
@@ -93,11 +98,18 @@ const Details = ({ params, location }) => {
                                             <div className="flex space-x-5">
                                                 {providers?.US?.flatrate?.map((provider) => (
                                                     <img 
-                                                        className="w-16 rounded-sm"
-                                                        src={`https://image.tmdb.org/t/p/w500${provider.logo_path}`} 
-                                                        alt={`${provider.provider_name} image`} 
+                                                    className="w-16 rounded-sm"
+                                                    src={`https://image.tmdb.org/t/p/w500${provider.logo_path}`} 
+                                                    alt={`${provider.provider_name} image`} 
                                                     />
                                                 ))}
+                                                <Dropdown 
+                                                    className="text-xs"
+                                                    options={options} 
+                                                    // onChange={this._onSelect} 
+                                                    value={countrySelected} 
+                                                    placeholder="Select an option" 
+                                                />
                                             </div>
                                         </div>
                                     </div>
