@@ -11,7 +11,7 @@ const TvShows = ({ tv }) => {
     <Carousel responsive={responsive} centerMode={true} >
         {tv && tv.map((item) => (
             <div className="h-full p-3">
-              <MovieAndTvCard key={item.tmdbId} data={item} />
+              <MovieAndTvCard key={item.tmdbId} data={item} type='tv' />
             </div>
         ))}
     </Carousel>
