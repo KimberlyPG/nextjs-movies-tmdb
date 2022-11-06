@@ -39,11 +39,24 @@ const Details = ({ params, location }) => {
                             <p>{minutesToHours(data?.runtime)}</p>
                         </span>
                     </div>
-                    <span className="flex flex-col w-2/5 ml-20">
-                        <h2 className="text-2xl text-white font-bold text-3xl">{data?.title}</h2>
-                        <h3 className="text-white font-bold text-lg">Overview</h3>
-                        <p className="text-gray-100 text-lg font-semibold">{data?.overview}</p>
-                    </span>
+                    <div className="flex w-3/5">
+                        <div className="mx-20">
+                            <h2 className="text-2xl text-white font-bold text-3xl">{data?.title}</h2>
+                            <div className="flex text-white space-x-7">
+                                <span className="flex flex-col">
+                                    <h3 className="text-white font-bold text-lg">Overview</h3>
+                                    <p className="text-gray-100 text-lg font-semibold">{data?.overview}</p>
+                                </span>
+                                <div className="flex flex-col">
+                                    <p className="font-bold">Genres</p>
+                                    {data?.genres.map((genre) => (
+                                        <p className="border border-green-300 rounded-sm mb-2 text-center px-2">{genre.name}</p>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                        </div>          
+                    </div>
                 </div>
             </div>
         </Layout>
