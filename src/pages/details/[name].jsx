@@ -4,6 +4,7 @@ import Dropdown from 'react-dropdown';
 import Ratings from 'react-ratings-declarative';
 
 import Layout from "../../components/Layout";
+import Providers from "../../components/providers";
 
 import 'react-dropdown/style.css';
 import { minutesToHours } from "../../utils/minutesToHours";
@@ -43,14 +44,28 @@ const Details = ({ location }) => {
 
     useEffect(() => {
         let value = countrySelected.value;
-                let idx = options.findIndex((name) => name === value);
-                setCountrySelected({value, idx});
-    }, [options])
+        let idx = options.findIndex((name) => name === value);
+        setCountrySelected({value, idx});
 
+        methodValidation();
+    }, [options])
+    
     const handleChange = (option) => {
         let value = option.value;
         let idx = options.findIndex((name) => name === value);
         setCountrySelected({value, idx});
+    }
+    const methodValidation = () => {
+        if(Object.values(providers)[countrySelected.idx]?.flatrate?.length > 0) {
+            console.log("?", Object.values(providers)[countrySelected.idx]?.flatrate?.length > 0)
+            return setShowMethod('flatrate')
+        } else if(Object.values(providers)[countrySelected.idx]?.buy?.length > 0) {
+            return setShowMethod('buy')
+        } else if(Object.values(providers)[countrySelected.idx]?.rent?.length > 0) {
+            return setShowMethod('rent')
+        } else {
+            setShowMethod('flatrate')             
+        }
     }
     
     return (
@@ -108,50 +123,9 @@ const Details = ({ location }) => {
                                             </Ratings>
                                             <p className="text-semibold mt-1">{data?.vote_average}/10</p>
                                         </div>
-                                        <div className="mt-5">
-                                            <p className="font-bold">Stream</p>
-                                            <div className="flex space-x-5">
-                                                <button className="my-1" onClick={() => setShowMethod('flatrate')}>Flatrate</button>
-                                                <button className="my-1" onClick={() => setShowMethod('buy')}>Buy</button>
-                                                <button className="my-1" onClick={() => setShowMethod('rent')}>Rent</button>
-                                                <Dropdown 
-                                                    className="text-xs mt-5 ml-10 h-12"
-                                                    options={options} 
-                                                    onChange={handleChange} 
-                                                    value={countrySelected.value} 
-                                                    placeholder="Select an option" 
-                                                />
-                                            </div>
-                                            <div className="flex space-x-5">
-                                                {showMethod === 'flatrate' &&
-                                                    Object.values(providers)[countrySelected.idx]?.flatrate?.map((item) => (
-                                                    <img 
-                                                            className="w-16 rounded-sm"
-                                                            src={`https://image.tmdb.org/t/p/w500${item.logo_path}`} 
-                                                            alt={`${item.provider_name} image`} 
-                                                        /> 
-                                                    ))
-                                                }
-                                                {showMethod === 'buy' &&
-                                                    Object.values(providers)[countrySelected.idx]?.buy?.map((item) => (
-                                                    <img 
-                                                            className="w-16 rounded-sm"
-                                                            src={`https://image.tmdb.org/t/p/w500${item.logo_path}`} 
-                                                            alt={`${item.provider_name} image`} 
-                                                        /> 
-                                                    ))
-                                                }
-                                                {showMethod == 'rent' &&
-                                                    Object.values(providers)[countrySelected.idx]?.rent?.map((item) => (
-                                                    <img 
-                                                            className="w-16 rounded-sm"
-                                                            src={`https://image.tmdb.org/t/p/w500${item.logo_path}`} 
-                                                            alt={`${item.provider_name} image`} 
-                                                        /> 
-                                                    ))
-                                                }
-                                            </div>
-                                        </div>
+
+                                        <Providers setShowMethod={setShowMethod} handleChange={handleChange} countrySelected={countrySelected} showMethod={showMethod} providers={providers} options={options}/>
+
                                     </div>
                                     <div className="flex flex-col">
                                         <p className="font-bold">Genres</p>
