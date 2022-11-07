@@ -40,7 +40,7 @@ const Details = ({ location }) => {
             .then(data => setSimilar(data.results))
         } 
         similarData();
-    }, [])
+    }, [state.contentId])
     console.log("similar", similar)
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
@@ -131,7 +131,7 @@ const Details = ({ location }) => {
                 <div className="grid grid-cols-5 px-10 w-4/5">
                     {similar && 
                         similar.map((element) => (
-                            <SearchList item={element}/>
+                            <SearchList key={element.id} item={element} type={state.type}/>
                         ))
                     }
                 </div>
