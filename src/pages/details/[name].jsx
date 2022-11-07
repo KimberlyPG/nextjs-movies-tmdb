@@ -122,9 +122,13 @@ const Details = ({ location }) => {
                 </div>
             </div>
             
-            <div className="grid justify-items-center">
-                {state.type === 'movie' ? <h2>Similar movies</h2> : <h2>Similar series</h2> }
-                <div className="grid grid-cols-5 p-10 w-4/5">
+            <div className="grid justify-items-center mt-10">
+                {state.type === 'movie' ? (
+                    <h2 className="text-gray-500 text-2xl">Similar movies</h2> 
+                    ):( 
+                    <h2 className="text-gray-500 text-2xl">Similar series</h2>
+                )}
+                <div className="grid grid-cols-5 px-10 w-4/5">
                     {similar && 
                         similar.map((element) => (
                             <SearchList item={element}/>
