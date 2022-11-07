@@ -5,7 +5,7 @@ import StreamingImg from './Streaming-img';
 
 const StreamingServices = ({ setShowMethod, handleChange, countrySelected, showMethod, providers, options }) => {
   return (
-    <div className="mt-5">
+    <div className="mt-5 text-white">
         <p className="font-bold">Stream</p>
         <div className="flex space-x-5 h-10 mb-3">
             <button className="mb-3" onClick={() => setShowMethod('flatrate')}>Flatrate</button>
