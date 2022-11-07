@@ -13,16 +13,16 @@ const Details = ({ location }) => {
     const [data, setData] = useState(null);
     const [providers, setProviders] = useState([]);
     const [options, setOptions] = useState([]);
-    const [countrySelected, setCountrySelected] = useState('US');
-    // console.log("data", data)
-    
+    const [showMethod, setShowMethod] = useState('flatrate')
+    const [countrySelected, setCountrySelected] = useState({value: 'US'});
+
     useEffect(() => {
-        const movieInformation = async() => {
+        const   ContentInformation = async() => {
             await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
             .then(res => res.json())
             .then(data => setData(data))
         } 
-        movieInformation();
+        ContentInformation();
     }, [])
     
     useEffect(() => {
@@ -32,7 +32,7 @@ const Details = ({ location }) => {
             .then(data => setProviders(data.results))
         } 
         providersInformation();
-    }, [])
+    }, [state.contentId])
 
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
@@ -40,12 +40,18 @@ const Details = ({ location }) => {
         })
     }, [providers])
 
+    useEffect(() => {
+        let value = countrySelected.value;
+                let idx = options.findIndex((name) => name === value);
+                setCountrySelected({value, idx});
+    }, [options])
+
     const handleChange = (option) => {
         let value = option.value;
         let idx = options.findIndex((name) => name === value);
         setCountrySelected({value, idx});
     }
-
+    
     return (
         <Layout>
             <div>
@@ -104,15 +110,35 @@ const Details = ({ location }) => {
                                         <div className="mt-5">
                                             <p className="font-bold">Stream</p>
                                             <div className="flex space-x-5">
-                                                {Object.values(providers)[countrySelected.idx]?.flatrate?.map((item) => (
-                                                   <img 
-                                                        className="w-16 rounded-sm"
-                                                        src={`https://image.tmdb.org/t/p/w500${item.logo_path}`} 
-                                                        alt={`${item.provider_name} image`} 
-                                                    />
-                                                ))}
+                                                { showMethod === 'flatrate' &&
+                                                    Object.values(providers)[countrySelected.idx]?.flatrate?.map((item) => (
+                                                    <img 
+                                                            className="w-16 rounded-sm"
+                                                            src={`https://image.tmdb.org/t/p/w500${item.logo_path}`} 
+                                                            alt={`${item.provider_name} image`} 
+                                                        /> 
+                                                    ))
+                                                }
+                                                {showMethod === 'buy' &&
+                                                    Object.values(providers)[countrySelected.idx]?.buy?.map((item) => (
+                                                    <img 
+                                                            className="w-16 rounded-sm"
+                                                            src={`https://image.tmdb.org/t/p/w500${item.logo_path}`} 
+                                                            alt={`${item.provider_name} image`} 
+                                                        /> 
+                                                    ))
+                                                }
+                                                {showMethod == 'rent' &&
+                                                    Object.values(providers)[countrySelected.idx]?.rent?.map((item) => (
+                                                    <img 
+                                                            className="w-16 rounded-sm"
+                                                            src={`https://image.tmdb.org/t/p/w500${item.logo_path}`} 
+                                                            alt={`${item.provider_name} image`} 
+                                                        /> 
+                                                    ))
+                                                }
                                                 <Dropdown 
-                                                    className="text-xs text-green-500"
+                                                    className="text-xs"
                                                     options={options} 
                                                     onChange={handleChange} 
                                                     value={countrySelected.value} 
