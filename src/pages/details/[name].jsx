@@ -33,6 +33,7 @@ const Details = ({ location }) => {
         } 
         providersInformation();
     }, [state.contentId])
+    console.log("providers", providers)
 
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
@@ -110,7 +111,19 @@ const Details = ({ location }) => {
                                         <div className="mt-5">
                                             <p className="font-bold">Stream</p>
                                             <div className="flex space-x-5">
-                                                { showMethod === 'flatrate' &&
+                                                <button className="my-1" onClick={() => setShowMethod('flatrate')}>Flatrate</button>
+                                                <button className="my-1" onClick={() => setShowMethod('buy')}>Buy</button>
+                                                <button className="my-1" onClick={() => setShowMethod('rent')}>Rent</button>
+                                                <Dropdown 
+                                                    className="text-xs mt-5 ml-10 h-12"
+                                                    options={options} 
+                                                    onChange={handleChange} 
+                                                    value={countrySelected.value} 
+                                                    placeholder="Select an option" 
+                                                />
+                                            </div>
+                                            <div className="flex space-x-5">
+                                                {showMethod === 'flatrate' &&
                                                     Object.values(providers)[countrySelected.idx]?.flatrate?.map((item) => (
                                                     <img 
                                                             className="w-16 rounded-sm"
@@ -137,13 +150,6 @@ const Details = ({ location }) => {
                                                         /> 
                                                     ))
                                                 }
-                                                <Dropdown 
-                                                    className="text-xs"
-                                                    options={options} 
-                                                    onChange={handleChange} 
-                                                    value={countrySelected.value} 
-                                                    placeholder="Select an option" 
-                                                />
                                             </div>
                                         </div>
                                     </div>
