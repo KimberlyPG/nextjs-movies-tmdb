@@ -1,7 +1,9 @@
 import React from 'react'
 import Dropdown from 'react-dropdown';
 
-const Providers = ({ setShowMethod, handleChange, countrySelected, showMethod, providers, options }) => {
+import StreamingImg from './Streaming-img';
+
+const StreamingServices = ({ setShowMethod, handleChange, countrySelected, showMethod, providers, options }) => {
   return (
     <div className="mt-5">
         <p className="font-bold">Stream</p>
@@ -20,29 +22,17 @@ const Providers = ({ setShowMethod, handleChange, countrySelected, showMethod, p
         <div className="flex space-x-5">
             {showMethod === 'flatrate' &&
                 Object.values(providers)[countrySelected.idx]?.flatrate?.map((item) => (
-                    <img 
-                        className="w-16 rounded-sm"
-                        src={`https://image.tmdb.org/t/p/w500${item.logo_path}`} 
-                        alt={`${item.provider_name} image`} 
-                    /> 
+                    <StreamingImg item={item}/> 
                 ))
             }
             {showMethod === 'buy' &&
                 Object.values(providers)[countrySelected.idx]?.buy?.map((item) => (
-                <img 
-                    className="w-16 rounded-sm"
-                    src={`https://image.tmdb.org/t/p/w500${item.logo_path}`} 
-                    alt={`${item.provider_name} image`} 
-                /> 
+                    <StreamingImg item={item}/>  
                 ))
             }
             {showMethod == 'rent' &&
                 Object.values(providers)[countrySelected.idx]?.rent?.map((item) => (
-                <img 
-                    className="w-16 rounded-sm"
-                    src={`https://image.tmdb.org/t/p/w500${item.logo_path}`} 
-                    alt={`${item.provider_name} image`} 
-                /> 
+                    <StreamingImg item={item}/>  
                 ))
             }
         </div>
@@ -50,4 +40,4 @@ const Providers = ({ setShowMethod, handleChange, countrySelected, showMethod, p
   )
 }
 
-export default Providers;
+export default StreamingServices;

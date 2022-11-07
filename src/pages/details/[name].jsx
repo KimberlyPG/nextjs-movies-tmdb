@@ -4,7 +4,7 @@ import Dropdown from 'react-dropdown';
 import Ratings from 'react-ratings-declarative';
 
 import Layout from "../../components/Layout";
-import Providers from "../../components/providers";
+import StreamingServices from "../../components/Streaming-services";
 
 import 'react-dropdown/style.css';
 import { minutesToHours } from "../../utils/minutesToHours";
@@ -124,7 +124,7 @@ const Details = ({ location }) => {
                                             <p className="text-semibold mt-1">{data?.vote_average}/10</p>
                                         </div>
 
-                                        <Providers setShowMethod={setShowMethod} handleChange={handleChange} countrySelected={countrySelected} showMethod={showMethod} providers={providers} options={options}/>
+                                        <StreamingServices setShowMethod={setShowMethod} handleChange={handleChange} countrySelected={countrySelected} showMethod={showMethod} providers={providers} options={options}/>
 
                                     </div>
                                     <div className="flex flex-col">
