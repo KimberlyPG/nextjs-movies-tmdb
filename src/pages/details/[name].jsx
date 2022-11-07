@@ -11,12 +11,11 @@ import { minutesToHours } from "../../utils/minutesToHours";
 const Details = ({ location }) => {
     const { state = {} } = location
     const [data, setData] = useState(null);
-    const [providers, setProviders] = useState(null);
-    const [providersRegions, setProvidersRegions] = useState(null);
+    const [providers, setProviders] = useState([]);
+    const [options, setOptions] = useState([]);
     const [countrySelected, setCountrySelected] = useState('US');
-    console.log("data", data)
-    console.log("providers", providers)
-
+    // console.log("data", data)
+    
     useEffect(() => {
         const movieInformation = async() => {
             await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
@@ -25,7 +24,7 @@ const Details = ({ location }) => {
         } 
         movieInformation();
     }, [])
-
+    
     useEffect(() => {
         const providersInformation = async() => {
             await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}/watch/providers?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
@@ -33,19 +32,20 @@ const Details = ({ location }) => {
             .then(data => setProviders(data.results))
         } 
         providersInformation();
-        const providersRegions = async() => {
-            await fetch(`https://api.themoviedb.org/3/watch/providers/regions?api_key=${process.env.GATSBY_API_KEY}&language=en-US`)
-            .then(res => res.json())
-            .then(data => setProvidersRegions(data.results))
-        }
-        providersRegions();
     }, [])
-    console.log("region", providersRegions)
 
-    const options = [
-        'one', 'two', 'three'
-      ];
-       
+    useEffect(() => {
+        Object.keys(providers).forEach((key) => {
+            setOptions(options => [...options, key])
+        })
+    }, [providers])
+
+    const handleChange = (option) => {
+        let value = option.value;
+        let idx = options.findIndex((name) => name === value);
+        setCountrySelected({value, idx});
+    }
+
     return (
         <Layout>
             <div>
@@ -104,18 +104,18 @@ const Details = ({ location }) => {
                                         <div className="mt-5">
                                             <p className="font-bold">Stream</p>
                                             <div className="flex space-x-5">
-                                                {providers?.US?.flatrate?.map((provider) => (
-                                                    <img 
+                                                {Object.values(providers)[countrySelected.idx]?.flatrate?.map((item) => (
+                                                   <img 
                                                         className="w-16 rounded-sm"
-                                                        src={`https://image.tmdb.org/t/p/w500${provider.logo_path}`} 
-                                                        alt={`${provider.provider_name} image`} 
+                                                        src={`https://image.tmdb.org/t/p/w500${item.logo_path}`} 
+                                                        alt={`${item.provider_name} image`} 
                                                     />
                                                 ))}
                                                 <Dropdown 
                                                     className="text-xs text-green-500"
                                                     options={options} 
-                                                    // onChange={this._onSelect} 
-                                                    value={countrySelected} 
+                                                    onChange={handleChange} 
+                                                    value={countrySelected.value} 
                                                     placeholder="Select an option" 
                                                 />
                                             </div>
