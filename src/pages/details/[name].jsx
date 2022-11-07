@@ -5,8 +5,9 @@ import Layout from "../../components/Layout";
 import StreamingServices from "../../components/Streaming-services";
 import ContentRating from "../../components/Content-rating";
 
-import 'react-dropdown/style.css';
 import { minutesToHours } from "../../utils/minutesToHours";
+import 'react-dropdown/style.css';
+import SearchList from "../../components/Search-list";
 
 const Details = ({ location }) => {
     const { state = {} } = location
@@ -15,23 +16,32 @@ const Details = ({ location }) => {
     const [options, setOptions] = useState([]);
     const [showMethod, setShowMethod] = useState('flatrate')
     const [countrySelected, setCountrySelected] = useState({value: 'US'});
+    const [similar, setSimilar] = useState([]);
+    console.log("data", data)
 
     useEffect(() => {
-        const ContentInformation = async() => {
+        const ContentData = async() => {
             await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
             .then(res => res.json())
             .then(data => setData(data))
         } 
-        ContentInformation();
+        ContentData();
 
-        const providersInformation = async() => {
+        const providersData = async() => {
             await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}/watch/providers?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
             .then(res => res.json())
             .then(data => setProviders(data.results))
         } 
-        providersInformation();
+        providersData();
+
+        const similarData = async() => {
+            await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}/similar?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
+            .then(res => res.json())
+            .then(data => setSimilar(data.results))
+        } 
+        similarData();
     }, [])
-    
+    console.log("similar", similar)
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
             setOptions(options => [...options, key])
@@ -92,7 +102,14 @@ const Details = ({ location }) => {
                                     <p className="text-gray-100 text-lg font-semibold">{data?.overview}</p>
                                 </span>
                                 <ContentRating data={data} />
-                                <StreamingServices setShowMethod={setShowMethod} handleChange={handleChange} countrySelected={countrySelected} showMethod={showMethod} providers={providers} options={options}/>
+                                <StreamingServices 
+                                    setShowMethod={setShowMethod} 
+                                    handleChange={handleChange} 
+                                    countrySelected={countrySelected} 
+                                    showMethod={showMethod} 
+                                    providers={providers}
+                                    options={options}
+                                />
                             </div>
                             <div className="flex flex-col text-white ml-5">
                                 <p className="font-bold">Genres</p>
@@ -102,6 +119,17 @@ const Details = ({ location }) => {
                             </div> 
                         </div>
                     </div>
+                </div>
+            </div>
+            
+            <div className="grid justify-items-center">
+                {state.type === 'movie' ? <h2>Similar movies</h2> : <h2>Similar series</h2> }
+                <div className="grid grid-cols-5 p-10 w-4/5">
+                    {similar && 
+                        similar.map((element) => (
+                            <SearchList item={element}/>
+                        ))
+                    }
                 </div>
             </div>
         </Layout>
