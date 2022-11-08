@@ -3,7 +3,7 @@ import { navigate } from 'gatsby';
 
 import { AiFillStar } from "react-icons/ai";
 
-const SearchList = ({ item, type }) => {
+const ShowCard = ({ item, type }) => {
   if(item.poster_path === null) return 
   return (
     <div className='p-5' onClick={() => navigate(`/details/${item.title}`, {state: {contentId: item.id, type: type }})}>
@@ -29,4 +29,4 @@ const SearchList = ({ item, type }) => {
   )
 }
 
-export default SearchList;
+export default ShowCard;

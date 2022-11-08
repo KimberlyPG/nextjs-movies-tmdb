@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
 import StreamingServices from "../../components/Streaming-services";
 import ContentRating from "../../components/Content-rating";
+import ShowCard from "../../components/Show-card";
 
 import { minutesToHours } from "../../utils/minutesToHours";
 import 'react-dropdown/style.css';
-import SearchList from "../../components/Search-list";
 
 const Details = ({ location }) => {
     const { state = {} } = location
@@ -131,7 +131,7 @@ const Details = ({ location }) => {
                 <div className="grid grid-cols-5 px-10 w-4/5">
                     {similar && 
                         similar.map((element) => (
-                            <SearchList key={element.id} item={element} type={state.type}/>
+                            <ShowCard key={element.id} item={element} type={state.type}/>
                         ))
                     }
                 </div>

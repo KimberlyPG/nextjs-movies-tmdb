@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 
-import SearchList from "../../components/Search-list";
+import ShowCard from "../../components/Show-card";
 import Navbar from "../../components/Navbar";
 import Layout from "../../components/Layout";
 
@@ -37,7 +37,7 @@ const Search = ({ params }) => {
                     <h2 className="pt-2 flex text-2xl font-bold text-gray-600">Search result for {`${param}`}</h2>
                     <div className="grid grid-cols-5 p-10 w-4/5">
                         {content && content?.results?.map((item) => (
-                            <SearchList key={item.id} item={item} type={moviesView ? 'movie': 'tv'}/>
+                            <ShowCard key={item.id} item={item} type={moviesView ? 'movie': 'tv'}/>
                         ))}
                     </div>
                 </div>
