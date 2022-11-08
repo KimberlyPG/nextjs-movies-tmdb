@@ -14,10 +14,10 @@ const StreamingServices = ({ setShowMethod, handleChange, countrySelected, showM
             <button className="mb-3" onClick={() => setShowMethod('buy')}>Buy</button>
             <button className="mb-3" onClick={() => setShowMethod('rent')}>Rent</button>
             <Dropdown 
-                className="text-xs ml-10 w-52"
+                className="text-xs ml-10 w-48 text-xs"
                 options={options} 
                 onChange={handleChange} 
-                value={countrySelected.value} 
+                value={countrySelected} 
                 placeholder="Select an option"
             />
         </div>

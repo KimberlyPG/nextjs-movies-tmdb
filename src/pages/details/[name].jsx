@@ -50,13 +50,15 @@ const Details = ({ location }) => {
     useEffect(() => {
         let value = countrySelected.value;
         let idx = options.findIndex((name) => name.value === value);
-        setCountrySelected({value, idx});
+        let label = <div className="flex"><img className="w-6 mr-3" src={`https://countryflagsapi.com/png/${value}`}/>{regionNames.of(value)}</div>
+        setCountrySelected({value, label, idx});
     }, [options])
     
     const handleChange = (option) => {
         let value = option.value;
         let idx = options.findIndex((name) => name.value === value);
-        setCountrySelected({value, idx});
+        let label = <div className="flex"><img className="w-6 mr-3" src={`https://countryflagsapi.com/png/${value}`}/>{regionNames.of(value)}</div>
+        setCountrySelected({value, label, idx});
     }
 
     console.log("country", countrySelected)
