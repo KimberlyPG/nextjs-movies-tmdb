@@ -9,16 +9,16 @@ const StreamingServices = ({ setShowMethod, handleChange, countrySelected, showM
   return (
     <div className="mt-5 text-white">
         <p className="font-bold">Stream</p>
-        <div className="flex space-x-5 h-10 mb-3">
+        <div className="flex space-x-5 h-8 mb-3">
             <button className="mb-3" onClick={() => setShowMethod('flatrate')}>Flatrate</button>
             <button className="mb-3" onClick={() => setShowMethod('buy')}>Buy</button>
             <button className="mb-3" onClick={() => setShowMethod('rent')}>Rent</button>
             <Dropdown 
-                className="text-xs ml-10"
+                className="text-xs ml-10 w-52"
                 options={options} 
                 onChange={handleChange} 
                 value={countrySelected.value} 
-                placeholder="Select an option" 
+                placeholder="Select an option"
             />
         </div>
         <div className="flex space-x-5">

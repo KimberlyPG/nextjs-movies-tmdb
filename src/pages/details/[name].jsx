@@ -15,7 +15,7 @@ const Details = ({ location }) => {
     const [providers, setProviders] = useState([]);
     const [options, setOptions] = useState([]);
     const [showMethod, setShowMethod] = useState('flatrate')
-    const [countrySelected, setCountrySelected] = useState({value: 'United States'});
+    const [countrySelected, setCountrySelected] = useState({value: 'US'});
     const [similar, setSimilar] = useState([]);
 
     useEffect(() => {
@@ -43,22 +43,23 @@ const Details = ({ location }) => {
 
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
-            setOptions(options => [...options, regionNames.of(key)])
+            setOptions(options => [...options, {value: key, label: <div className="flex"><img className="w-6 mr-3" src={`https://countryflagsapi.com/png/${key}`}/>{regionNames.of(key)}</div>}])
         })
     }, [providers])
 
     useEffect(() => {
         let value = countrySelected.value;
-        let idx = options.findIndex((name) => name === value);
+        let idx = options.findIndex((name) => name.value === value);
         setCountrySelected({value, idx});
     }, [options])
     
     const handleChange = (option) => {
         let value = option.value;
-        let idx = options.findIndex((name) => name === value);
+        let idx = options.findIndex((name) => name.value === value);
         setCountrySelected({value, idx});
     }
 
+    console.log("country", countrySelected)
     const regionNames = new Intl.DisplayNames(
         ['en'], {type: 'region'}
       );
