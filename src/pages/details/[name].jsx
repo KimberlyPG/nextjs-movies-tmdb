@@ -17,7 +17,6 @@ const Details = ({ location }) => {
     const [showMethod, setShowMethod] = useState('flatrate')
     const [countrySelected, setCountrySelected] = useState({value: 'US'});
     const [similar, setSimilar] = useState([]);
-    console.log("data", data)
 
     useEffect(() => {
         const ContentData = async() => {
@@ -41,7 +40,7 @@ const Details = ({ location }) => {
         } 
         similarData();
     }, [state.contentId])
-    console.log("similar", similar)
+
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
             setOptions(options => [...options, key])

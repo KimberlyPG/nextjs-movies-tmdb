@@ -1,9 +1,11 @@
 import React from 'react'
+import { useState } from 'react';
 import Dropdown from 'react-dropdown';
 
 import StreamingImg from './Streaming-img';
 
 const StreamingServices = ({ setShowMethod, handleChange, countrySelected, showMethod, providers, options }) => {
+
   return (
     <div className="mt-5 text-white">
         <p className="font-bold">Stream</p>
