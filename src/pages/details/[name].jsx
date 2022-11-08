@@ -15,7 +15,7 @@ const Details = ({ location }) => {
     const [providers, setProviders] = useState([]);
     const [options, setOptions] = useState([]);
     const [showMethod, setShowMethod] = useState('flatrate')
-    const [countrySelected, setCountrySelected] = useState({value: 'US'});
+    const [countrySelected, setCountrySelected] = useState({value: 'United States'});
     const [similar, setSimilar] = useState([]);
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const Details = ({ location }) => {
 
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
-            setOptions(options => [...options, key])
+            setOptions(options => [...options, regionNames.of(key)])
         })
     }, [providers])
 
@@ -58,6 +58,10 @@ const Details = ({ location }) => {
         let idx = options.findIndex((name) => name === value);
         setCountrySelected({value, idx});
     }
+
+    const regionNames = new Intl.DisplayNames(
+        ['en'], {type: 'region'}
+      );
 
     return (
         <Layout>
