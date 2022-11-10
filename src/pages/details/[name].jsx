@@ -11,13 +11,15 @@ import 'react-dropdown/style.css';
 
 const Details = ({ location }) => {
     const { state = {} } = location
+    // const countryName = localStorage.getItem('country');
+    const [countryName, setCountryName] = useState(null);
     const [data, setData] = useState(null);
     const [providers, setProviders] = useState([]);
     const [options, setOptions] = useState([]);
     const [showMethod, setShowMethod] = useState('flatrate')
-    const [countrySelected, setCountrySelected] = useState({value: 'US'});
+    const [countrySelected, setCountrySelected] = useState({value: JSON.parse(countryName)});
     const [similar, setSimilar] = useState([]);
-
+    console.log("selected", countrySelected)
     useEffect(() => {
         const ContentData = async() => {
             await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
@@ -39,32 +41,48 @@ const Details = ({ location }) => {
             .then(data => setSimilar(data.results))
         } 
         similarData();
+
+        verifyCountry();
     }, [state.contentId])
 
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
-            setOptions(options => [...options, {value: key, label: <div className="flex"><img className="w-6 mr-3" src={`https://countryflagsapi.com/png/${key}`}/>{regionNames.of(key)}</div>}])
+            setOptions(options => [...options, {value: key, label: <div className="flex"><img className="w-6 mr-3" src={`https://flagcdn.com/w20/${key.toLowerCase()}.png`}/>{regionNames.of(key)}</div>}])
         })
     }, [providers])
-
+    
     useEffect(() => {
-        let value = countrySelected.value;
-        let idx = options.findIndex((name) => name.value === value);
-        let label = <div className="flex"><img className="w-6 mr-3" src={`https://countryflagsapi.com/png/${value}`}/>{regionNames.of(value)}</div>
-        setCountrySelected({value, label, idx});
+        if(countrySelected.value) {
+            let value = countrySelected?.value;
+            let idx = options.findIndex((name) => name.value === value);
+            console.log("value", value, "idx", idx)
+            let label = <div className="flex"><img className="w-6 mr-3" src={`https://flagcdn.com/w20/${value.toLowerCase()}.png`}/>{regionNames.of(value)}</div>
+            setCountrySelected({value, label, idx});
+        }
     }, [options])
     
-    const handleChange = (option) => {
-        let value = option.value;
-        let idx = options.findIndex((name) => name.value === value);
-        let label = <div className="flex"><img className="w-6 mr-3" src={`https://countryflagsapi.com/png/${value}`}/>{regionNames.of(value)}</div>
-        setCountrySelected({value, label, idx});
+    const verifyCountry = () => {
+        if (localStorage.getItem('country') === null) {
+            localStorage.setItem('country', JSON.stringify('US'));    
+            setCountryName(localStorage.getItem('country'));
+        } 
+        else setCountryName(localStorage.getItem('country'));
     }
 
-    console.log("country", countrySelected)
+    const handleChange = (option) => {
+        localStorage.removeItem('country');
+        let value = option.value;
+        let idx = options.findIndex((name) => name.value === value);
+        let label = <div className="flex"><img className="w-6 mr-3" src={`https://flagcdn.com/w20/${value.toLowerCase()}.png`}/>{regionNames.of(value)}</div>
+        setCountrySelected({value, label, idx});
+
+        localStorage.setItem('country', JSON.stringify(value));
+    }
+
     const regionNames = new Intl.DisplayNames(
         ['en'], {type: 'region'}
       );
+
 
     return (
         <Layout>
