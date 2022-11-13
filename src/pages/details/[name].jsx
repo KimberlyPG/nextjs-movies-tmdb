@@ -11,16 +11,13 @@ import 'react-dropdown/style.css';
 
 const Details = ({ location }) => {
     const { state = {} } = location
-    // const countryName = localStorage.getItem('country');
-    const [countryName, setCountryName] = useState(null);
     const [data, setData] = useState(null);
     const [providers, setProviders] = useState([]);
     const [options, setOptions] = useState([]);
     const [showMethod, setShowMethod] = useState('flatrate')
-    const [countrySelected, setCountrySelected] = useState({value: countryName});
+    const [countrySelected, setCountrySelected] = useState('');
     const [similar, setSimilar] = useState([]);
-    console.log("selected", countrySelected)
-    console.log("country name", JSON.parse(countryName));
+
     useEffect(() => {
         const ContentData = async() => {
             await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
