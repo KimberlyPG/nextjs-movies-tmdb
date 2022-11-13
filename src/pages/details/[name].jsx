@@ -17,9 +17,10 @@ const Details = ({ location }) => {
     const [providers, setProviders] = useState([]);
     const [options, setOptions] = useState([]);
     const [showMethod, setShowMethod] = useState('flatrate')
-    const [countrySelected, setCountrySelected] = useState({value: JSON.parse(countryName)});
+    const [countrySelected, setCountrySelected] = useState({value: countryName});
     const [similar, setSimilar] = useState([]);
     console.log("selected", countrySelected)
+    console.log("country name", JSON.parse(countryName));
     useEffect(() => {
         const ContentData = async() => {
             await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
@@ -62,11 +63,13 @@ const Details = ({ location }) => {
     }, [options])
     
     const verifyCountry = () => {
+        const countryName = localStorage.getItem('country');
+
         if (localStorage.getItem('country') === null) {
             localStorage.setItem('country', JSON.stringify('US'));    
-            setCountryName(localStorage.getItem('country'));
+            setCountrySelected({value: JSON.parse(countryName) });
         } 
-        else setCountryName(localStorage.getItem('country'));
+        else setCountrySelected({value: JSON.parse(countryName) });
     }
 
     const handleChange = (option) => {
