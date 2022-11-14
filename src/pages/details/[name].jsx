@@ -61,6 +61,10 @@ const Details = ({ location }) => {
     
     const getSavedContry = () => localStorage.getItem('country');
 
+    const regionNames = new Intl.DisplayNames(
+        ['en'], {type: 'region'}
+    );
+
     const verifyCountry = () => {       
         if (localStorage.getItem('country') === null) {
             localStorage.setItem('country', JSON.stringify('US'));    
@@ -80,10 +84,6 @@ const Details = ({ location }) => {
 
         localStorage.setItem('country', JSON.stringify(value));
     }
-
-    const regionNames = new Intl.DisplayNames(
-        ['en'], {type: 'region'}
-    );
 
     return (
         <Layout>

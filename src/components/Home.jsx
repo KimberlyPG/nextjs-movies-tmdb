@@ -50,12 +50,27 @@ query{
   }
 }  
 `
+const NOWPLAYING_MOVIES = gql`
+  query{
+    nowPlayingMovies {
+      ok 
+      error 
+      movies {
+        id
+        name: original_title
+        poster_path
+        vote_average
+    }
+    }
+  }  
+`
 
 const Home = () => {
     const [moviesView, setMoviesView] = useState(true);
 
     const { loading: popularMoviesLoading, error: popularMoviesError, data: popularMoviesData } = useQuery(POPULAR_MOVIES);
     const { loading: popularShowsLoading, error: popularShowsError, data: popularShowsData } = useQuery(POPULAR_SHOWS);
+    const {data: nowPlayingMoviesData} = useQuery(NOWPLAYING_MOVIES);
    
     const queryMoviesAndTv =  useStaticQuery(graphql`
     query MyQuery {
@@ -101,16 +116,18 @@ const Home = () => {
           (
           <>
             <h2 className="text-lg font-bold px-3">Top rated movies</h2>
-            <Movies movie={queryMoviesAndTv.movies.nodes} name={queryMoviesAndTv.movies.nodes.name} />
+            <Movies movie={queryMoviesAndTv.movies.nodes} type='normal' />
+            {/* <h2 className="text-lg font-bold px-3">Now playing movies</h2>
+            <Movies movie={nowPlayingMoviesData?.nowPlayingMovies?.movies} type='large'/> */}
             <h2 className="text-lg font-bold px-3">Popular movies</h2>
-            <Movies movie={popularMoviesData.popularMovies.movies} name={popularMoviesData.popularMovies.movies.original_title} />
+            <Movies movie={popularMoviesData.popularMovies.movies} type='normal' />
           </>
           ):(
           <>
             <h2 className="text-lg font-bold px-3">Top rated tv shows</h2>
-            <TvShows tv={queryMoviesAndTv.tv.nodes} />
+            <TvShows tv={queryMoviesAndTv.tv.nodes} type='normal' />
             <h2 className="text-lg font-bold px-3">Popular shows</h2>
-            <TvShows tv={popularShowsData.popularShows.shows} />
+            <TvShows tv={popularShowsData.popularShows.shows} type='normal' />
           </>
           )
           }

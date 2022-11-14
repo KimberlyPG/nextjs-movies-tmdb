@@ -4,12 +4,12 @@ import Carousel from 'react-multi-carousel';
 import MovieAndTvCard from './MovieAndTv-card';
 
 import 'react-multi-carousel/lib/styles.css';
-import { responsive } from '../utils/carousel_responsive';
+import { responsive_normal, responsive_large } from '../utils/carousel_responsive';
 
-const Movies = ({ movie }) => {
+const Movies = ({ movie, type }) => {
   
   return (
-    <Carousel responsive={responsive} centerMode={true} >
+    <Carousel responsive={type === 'normal'? responsive_normal: responsive_large} centerMode={true} >
         {movie && movie.map((item) => (
             <div className="h-full p-3">
               <MovieAndTvCard key={item.tmdbId} data={item} name={item.name} type='movie' />
