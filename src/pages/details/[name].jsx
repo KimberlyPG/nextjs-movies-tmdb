@@ -59,14 +59,16 @@ const Details = ({ location }) => {
         }
     }, [options])
     
-    const verifyCountry = () => {
-        const countryName = localStorage.getItem('country');
+    const getSavedContry = () => localStorage.getItem('country');
 
+    const verifyCountry = () => {       
         if (localStorage.getItem('country') === null) {
             localStorage.setItem('country', JSON.stringify('US'));    
-            setCountrySelected({value: JSON.parse(countryName) });
+            setCountrySelected({ value: JSON.parse(getSavedContry()) });
         } 
-        else setCountrySelected({value: JSON.parse(countryName) });
+        else {
+            setCountrySelected({ value: JSON.parse(getSavedContry()) });
+        } 
     }
 
     const handleChange = (option) => {
@@ -81,8 +83,7 @@ const Details = ({ location }) => {
 
     const regionNames = new Intl.DisplayNames(
         ['en'], {type: 'region'}
-      );
-
+    );
 
     return (
         <Layout>
