@@ -7,6 +7,8 @@ import Navbar from "./Navbar";
 import Movies from "./Movies";
 import TvShows from "./TvShows";
 
+import 'react-multi-carousel/lib/styles.css';
+
 import { POPULAR_MOVIES, POPULAR_SHOWS, NOWPLAYING_MOVIES } from "../api/apollo_queries";
 
 const Home = () => {
@@ -63,8 +65,8 @@ const Home = () => {
             <Movies movie={queryMoviesAndTv.movies.nodes} type='normal' />
             <h2 className="text-lg font-bold px-3">Popular movies</h2>
             <Movies movie={popularMoviesData.popularMovies.movies} type='normal' />
-            <h2 className="text-lg font-bold px-3">Now playing movies</h2>
-            <Movies movie={nowPlayingMoviesData?.nowPlayingMovies?.movies} type='large'/>
+            {/* <h2 className="text-lg font-bold px-3 mt-10">Now playing movies</h2> */}
+            {/* <Movies movie={nowPlayingMoviesData?.nowPlayingMovies?.movies} type='large' /> */}
           </>
           ):(
           <>

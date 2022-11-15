@@ -53,6 +53,7 @@ export const NOWPLAYING_MOVIES = gql`
         id
         name: original_title
         poster_path
+        backdrop_path
         vote_average
     }
     }
