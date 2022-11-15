@@ -10,10 +10,10 @@ import { searchContent } from "../../api/search";
 const Search = ({ params }) => {
     const param = params[`*`]
     const [moviesView, setMoviesView] = useState(true);
-    const [moviesData, setmoviesData] = useState(null);
-    const [tvData, setTvData] = useState(null);
+    const [moviesData, setmoviesData] = useState([]);
+    const [tvData, setTvData] = useState([]);
     const [status, setStatus] = useState('');
-    const [content, setContent] = useState('');
+    const [content, setContent] = useState([]);
 
     useEffect(() => {
         moviesView === true ? setContent(moviesData) : setContent(tvData) 
@@ -36,7 +36,7 @@ const Search = ({ params }) => {
                     </div>
                     <h2 className="pt-2 flex text-2xl font-bold text-gray-600">Search result for {`${param}`}</h2>
                     <div className="grid grid-cols-5 p-10 w-4/5">
-                        {content && content?.results?.map((item) => (
+                        {content && content?.map((item) => (
                             <ShowCard key={item.id} item={item} type={moviesView ? 'movie': 'tv'}/>
                         ))}
                     </div>
