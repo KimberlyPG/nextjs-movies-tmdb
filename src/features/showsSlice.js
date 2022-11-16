@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 // import { RootState } from '../app/store';
 
 const initialState = [
-
 ]
 
 export const showsSlice = createSlice({
