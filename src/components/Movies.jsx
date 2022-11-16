@@ -1,10 +1,11 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React from 'react'
 import Carousel from 'react-multi-carousel';
 
 import MovieAndTvCard from './MovieAndTv-card';
 
 import 'react-multi-carousel/lib/styles.css';
 import { responsive_normal, responsive_large } from '../utils/carousel_responsive';
+import { useEffect } from 'react';
 
 const Movies = ({ movie, type }) => {
 

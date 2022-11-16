@@ -63,10 +63,10 @@ const Home = () => {
           <>
             <h2 className="text-lg font-bold px-3">Popular movies</h2>
             <Movies movie={popularMoviesData.popularMovies.movies} type='normal' />
-            <h2 className="text-lg font-bold px-3">Top rated movies</h2>
+            <h2 className="text-lg font-bold px-3 mt-5">Top rated movies</h2>
             <Movies movie={queryMoviesAndTv.movies.nodes} type='normal' />
-            <h2 className="text-lg font-bold px-3 mt-10">Now playing movies</h2> 
-            <Movies movie={nowPlayingMoviesData.nowPlayingMovies.movies} type='large' />
+            <h2 className="text-lg font-bold px-3 mt-5">Now playing movies</h2> 
+            <Movies movie={nowPlayingMoviesData.nowPlayingMovies.movies} type='normal' />
           </>
           ):(
           <>
