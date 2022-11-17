@@ -3,14 +3,16 @@ import React from 'react';
 // import { store } from './src/app/store';
 import { ApolloProvider } from '@apollo/client';
 import { client } from './src/apollo/client';
+import Layout from './src/components/Layout';
 
 export const wrapRootElement = ({ element }) => {
   return (
     // <Provider store={store}>
+    <Layout>
       <ApolloProvider client={client}>
         {element}    
       </ApolloProvider>
-    // </Provider>
+    </Layout>
   )
 };
 

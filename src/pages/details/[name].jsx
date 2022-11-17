@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import Layout from "../../components/Layout";
 import StreamingServices from "../../components/StreamingServices";
 import ContentRating from "../../components/Content-rating";
 import ShowCard from "../../components/Show-card";
@@ -92,7 +91,7 @@ const Details = ({ location }) => {
     }
 
     return (
-        <Layout>
+        <>
             <div className="w-full" 
                 style={{
                     backgroundSize: 'cover', 
@@ -167,7 +166,7 @@ const Details = ({ location }) => {
                     }
                 </div>
             </div>
-        </Layout>
+        </>
     )
 
 }
