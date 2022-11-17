@@ -17,6 +17,7 @@
   "dependencies": {
     "-": "^0.0.1",
     "@apollo/client": "^3.7.0",
+    "@loadable/component": "^5.15.2",
     "@reduxjs/toolkit": "^1.9.0",
     "gatsby": "^4.24.3",
     "gatsby-plugin-layout": "^3.24.0",

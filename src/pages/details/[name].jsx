@@ -9,6 +9,8 @@ import ShowCard from "../../components/Show-card";
 import { minutesToHours } from "../../utils/minutesToHours";
 import 'react-dropdown/style.css';
 
+const isBrowser = typeof window !== "undefined"
+
 const Details = ({ location }) => {
     const { state = {} } = location
     const [data, setData] = useState(null);
@@ -59,30 +61,34 @@ const Details = ({ location }) => {
         }
     }, [options])
     
-    const getSavedContry = () => localStorage.getItem('country');
-
+    const getSavedContry = () => typeof window !== "undefined" && window.localStorage.getItem('country');
+ 
     const regionNames = new Intl.DisplayNames(
         ['en'], {type: 'region'}
     );
 
     const verifyCountry = () => {       
-        if (localStorage.getItem('country') === null) {
-            localStorage.setItem('country', JSON.stringify('US'));    
-            setCountrySelected({ value: JSON.parse(getSavedContry()) });
-        } 
-        else {
-            setCountrySelected({ value: JSON.parse(getSavedContry()) });
-        } 
+        if (isBrowser) {
+            if (window.localStorage.getItem('country') === null) {
+                window.localStorage.setItem('country', JSON.stringify('US'));    
+                setCountrySelected({ value: JSON.parse(getSavedContry()) });
+            } 
+            else {
+                setCountrySelected({ value: JSON.parse(getSavedContry()) });
+            } 
+        }
+        
     }
 
     const handleChange = (option) => {
-        localStorage.removeItem('country');
+        typeof window !== "undefined" && window.localStorage.removeItem('country');
+        
         let value = option.value;
         let idx = options.findIndex((name) => name.value === value);
         let label = <div className="flex"><img className="w-6 mr-3" src={`https://flagcdn.com/w20/${value.toLowerCase()}.png`}/>{regionNames.of(value)}</div>
         setCountrySelected({value, label, idx});
 
-        localStorage.setItem('country', JSON.stringify(value));
+        typeof window !== "undefined" && window.localStorage.setItem('country', JSON.stringify(value));
     }
 
     return (

@@ -5,7 +5,7 @@ import ShowCard from "../../components/Show-card";
 import Navbar from "../../components/Navbar";
 import Layout from "../../components/Layout";
 
-import { searchContent } from "../../api/search";
+import { searchContent } from "../../tmdb/search";
 
 const Search = ({ params }) => {
     const param = params[`*`]

@@ -8,7 +8,7 @@ import Movies from "./Movies";
 import TvShows from "./TvShows";
 
 import 'react-multi-carousel/lib/styles.css';
-import { POPULAR_MOVIES, POPULAR_SHOWS, NOWPLAYING_MOVIES } from "../api/apollo_queries";
+import { POPULAR_MOVIES, POPULAR_SHOWS, NOWPLAYING_MOVIES } from "../tmdb/apollo_queries";
 
 const Home = () => {
   const [moviesView, setMoviesView] = useState(true);
