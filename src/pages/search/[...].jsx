@@ -10,7 +10,6 @@ import { searchContent } from "../../tmdb/search";
 
 const Search = ({ params }) => {
     const param = params[`*`]
-    const [hasMounted, setHasMounted] = useState(false);
     const [moviesView, setMoviesView] = useState(true);
     const [moviesData, setmoviesData] = useState([]);
     const [tvData, setTvData] = useState([]);
