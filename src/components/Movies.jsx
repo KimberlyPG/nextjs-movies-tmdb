@@ -5,7 +5,6 @@ import MovieAndTvCard from './MovieAndTv-card';
 
 import 'react-multi-carousel/lib/styles.css';
 import { responsive_normal, responsive_large } from '../utils/carousel_responsive';
-import { useEffect } from 'react';
 
 const Movies = ({ movie, type }) => {
 

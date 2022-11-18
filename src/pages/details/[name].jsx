@@ -19,6 +19,7 @@ const Details = ({ location }) => {
     const [countrySelected, setCountrySelected] = useState('');
     const [similar, setSimilar] = useState([]);
 
+    console.log("data", data)
     useEffect(() => {
         const ContentData = async() => {
             await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
@@ -59,7 +60,7 @@ const Details = ({ location }) => {
             setCountrySelected({value, label, idx});
         }
     }, [options])
-    
+ 
     const getSavedContry = () => typeof window !== "undefined" && window.localStorage.getItem('country');
  
     const regionNames = new Intl.DisplayNames(
