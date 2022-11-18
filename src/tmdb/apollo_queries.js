@@ -55,6 +55,7 @@ export const NOWPLAYING_MOVIES = gql`
         poster_path
         backdrop_path
         vote_average
+        vote_count
     }
     }
   }  
