@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { Link } from "gatsby";
+import { HiOutlineLink } from "react-icons/hi";
 
 import StreamingServices from "../../components/StreamingServices";
 import ContentRating from "../../components/Content-rating";
@@ -141,6 +143,10 @@ const Details = ({ location }) => {
                                     providers={providers}
                                     options={options}
                                 />
+                                <Link className="flex text-white w-28 py-1 px-2 rounded-sm space-x-2 font-semibold" to={data?.homepage} target="_blank">
+                                    <HiOutlineLink />
+                                    <p className="text-white text-center">Website</p> 
+                                </Link>
                             </div>
                             <div className="flex flex-col text-white ml-5">
                                 <p className="font-bold">Genres</p>
