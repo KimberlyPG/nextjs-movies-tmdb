@@ -19,7 +19,7 @@ const SearchBar = () => {
 
     return (
         <div className="flex justify-end mr-3">
-            <form class="relative lg:w-96 xs:w-full xs:text-xs"  onSubmit={navigateToResults}>
+            <form class="relative lg:w-96 xs:w-full xs:text-xs sm:text-sm"  onSubmit={navigateToResults}>
                 <input 
                     class="peer cursor-pointer relative z-10 w-9 h-9 rounded-full pl-8 border bg-transparent
                     outline-none xs:focus:w-full xs:focus:cursor-text xs:focus:border-cyan-400 xs:focus:pl-16 focus:justify-start focus:pr-4

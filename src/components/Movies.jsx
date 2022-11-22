@@ -11,7 +11,7 @@ const Movies = ({ movie, type }) => {
   return (
     <Carousel responsive={type === 'normal'? responsive_normal: responsive_large} centerMode={true} >
         {movie && movie.map((item) => (
-            <div className="h-full p-3">
+            <div className="h-full sm:p-3 xs:p-1">
               <MovieAndTvCard key={item.tmdbId} data={item} name={item.name} type='movie' />
             </div>
           )
