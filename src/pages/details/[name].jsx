@@ -21,7 +21,6 @@ const Details = ({ location }) => {
     const [countrySelected, setCountrySelected] = useState('');
     const [similar, setSimilar] = useState([]);
 
-    console.log("data", data)
     useEffect(() => {
         const ContentData = async() => {
             await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
@@ -57,7 +56,6 @@ const Details = ({ location }) => {
         if(countrySelected.value) {
             let value = countrySelected?.value;
             let idx = options.findIndex((name) => name.value === value);
-            console.log("value", value, "idx", idx)
             let label = <div className="flex"><img className="w-6 mr-3" src={`https://flagcdn.com/w20/${value.toLowerCase()}.png`}/>{regionNames.of(value)}</div>
             setCountrySelected({value, label, idx});
         }

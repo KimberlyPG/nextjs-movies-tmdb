@@ -2,7 +2,6 @@ import React, { useEffect } from "react"
 import { navigate } from "gatsby";
 
 const MovieAndTvCard = ({ data, name, type }) => {
-    console.log("data", data)
 
     return (
         <div className="relative hover:opacity-70 h-full cursor-pointer" onClick={() => navigate(`/details/${name}`, {state: {contentId: data.id, type: type }})}>
