@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 
-import ShowCard from "../../components/Show-card";
+import ShowCard from "../../components/ShowCard";
 import Navbar from "../../components/Navbar";
 
 import { searchContent } from "../../tmdb/search";

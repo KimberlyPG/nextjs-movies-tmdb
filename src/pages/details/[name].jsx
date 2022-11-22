@@ -4,7 +4,7 @@ import { Link } from "gatsby";
 import { HiOutlineLink } from "react-icons/hi";
 
 import StreamingServices from "../../components/StreamingServices";
-import ShowCard from "../../components/Show-card";
+import ShowCard from "../../components/ShowCard";
 import ShowsRating from "../../components/ShowsRating";
 
 import { minutesToHours } from "../../utils/minutesToHours";
