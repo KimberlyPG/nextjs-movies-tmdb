@@ -21,11 +21,13 @@ const ShowCard = ({ item, type }) => {
                   )}
                 </div>    
             </span>
-            <img 
-                className="rounded-xl hover:opacity-80"
-                src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path}`} 
-                alt={`${item.title} poster`}
-            />
+            <div className='overflow-hidden'>
+              <img 
+                  className="rounded-xl hover:opacity-80 hover:scale-110"
+                  src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path}`} 
+                  alt={`${item.title} poster`}
+              />
+            </div>
         </div>
         <h3 className='font-bold text-sm'>{item.title ? item.title : item.name}</h3>
         <span className='flex items-center space-x-2 text-sm'>
