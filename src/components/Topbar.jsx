@@ -6,15 +6,16 @@ import SearchBar from './SearchBar'
 import logo from '../assets/logo.svg'
 
 const Topbar = () => {
+
 return (
-    <div className='flex bg-[#FFFFFF] h-14 items-center px-8 shadow-md'>
+    <div className='flex lg:h-14 xs:h-12 items-center shadow-md'>
         <img
-            className='w-36 cursor-pointer' 
+            className='peer-focus:hidden lg:w-36 xs:w-24 cursor-pointer ml-3' 
             src={logo} 
             alt="page logo" 
             onClick={() => navigate('/')}
         />
-        <div className='grid justify-center w-screen mt-1'>
+        <div className='grid lg:justify-center xs:justify-end w-full mt-1'>
             <SearchBar />
         </div>
     </div>

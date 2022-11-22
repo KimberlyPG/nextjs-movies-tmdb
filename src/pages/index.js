@@ -2,7 +2,7 @@ import * as React from "react"
 
 import Home from "../components/Home"
 
-import '../assets/global.css'
+import '../assets/style.css'
 
 const IndexPage = () => {
 
