@@ -21,7 +21,7 @@ export const responsive_normal = {
     // },
     mobile: {
       breakpoint: { max: 700, min: 0 },
-      items: 2,
+      items: 1.5,
       slidesToSlide: 2
     }
   };

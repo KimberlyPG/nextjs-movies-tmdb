@@ -7,9 +7,9 @@ const ShowCard = ({ item, type }) => {
 
   if(item.poster_path === null) return 
   return (
-    <div className='p-5' onClick={() => navigate(`/details/${item.title}`, {state: {contentId: item.id, type: type }})}>
+    <div className='sm:p-5 xs:p-2' onClick={() => navigate(`/details/${item.title}`, {state: {contentId: item.id, type: type }})}>
         <div className='relative cursor-pointer'>
-            <span className='flex absolute bottom-0 p-1 text-white space-x-5 text-xs font-bold'>
+            <span className='flex z-10 absolute bottom-0 p-1 text-white space-x-5 text-xs font-bold'>
                 {item.release_date &&
                   <p className='bg-gray-600 bg-opacity-60 rounded-lg px-2 py-1'>{item?.release_date?.split("-")[0]}</p>
                 }
@@ -21,11 +21,13 @@ const ShowCard = ({ item, type }) => {
                   )}
                 </div>    
             </span>
-            <img 
-                className="rounded-xl hover:opacity-80"
-                src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path}`} 
-                alt={`${item.title} poster`}
-            />
+            <div className='overflow-hidden'>
+              <img 
+                  className="rounded-xl hover:opacity-80 hover:scale-110"
+                  src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path}`} 
+                  alt={`${item.title} poster`}
+              />
+            </div>
         </div>
         <h3 className='font-bold text-sm'>{item.title ? item.title : item.name}</h3>
         <span className='flex items-center space-x-2 text-sm'>
