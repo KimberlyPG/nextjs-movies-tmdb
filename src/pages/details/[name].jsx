@@ -4,8 +4,8 @@ import { Link } from "gatsby";
 import { HiOutlineLink } from "react-icons/hi";
 
 import StreamingServices from "../../components/StreamingServices";
-import ContentRating from "../../components/Content-rating";
 import ShowCard from "../../components/Show-card";
+import ShowsRating from "../../components/ShowsRating";
 
 import { minutesToHours } from "../../utils/minutesToHours";
 import 'react-dropdown/style.css';
@@ -97,27 +97,27 @@ const Details = ({ location }) => {
                 style={{
                     backgroundSize: 'cover', 
                     backgroundImage:`linear-gradient(0deg, rgba(1, 124, 128,0.8), rgba(1, 124, 128,0.8)), url(https://image.tmdb.org/t/p/w1280/${data?.backdrop_path})`,
-                    backgroundAttachment: 'fixed'
+                    backgroundAttachment: 'fixed',
                 }}>
-                <div className="flex p-10 mx-20 justify-center" >
-                    <div>
-                        <img 
-                            className="rounded-xl w-80"
-                            src={`https://image.tmdb.org/t/p/w1280/${data?.poster_path}`} 
-                        />
-                        {state.type === 'movie' ? (
-                            <span className="flex text-white space-x-5 font-semibold text-lg ml-3">
-                                <p>{data?.release_date?.split('-')[0]}</p>
-                                <p>{minutesToHours(data?.runtime)}</p>
-                            </span>
-                            ):(
-                            <span className="flex text-white space-x-5 font-semibold text-lg ml-3">
-                                <p>{data?.first_air_date?.split('-')[0]}</p>
-                                <p>{data?.seasons.length}{data?.seasons.length > 1 ? ' Seasons' : ' Season'}</p>
-                            </span>
-                        )}
-                    </div>
-                    <div className="flex w-3/5 flex-col mx-20">
+                <div className="flex xs:flex-col lg:flex-row lg:p-10 xs:p-4 lg:mx-20 justify-center items-center">
+                        <div>
+                            <img 
+                                className="rounded-xl lg:w-80 xs:w-64"
+                                src={`https://image.tmdb.org/t/p/w1280/${data?.poster_path}`} 
+                            />
+                            {state.type === 'movie' ? (
+                                <span className="flex text-white space-x-5 font-semibold lg:text-lg xs:text-xs ml-3">
+                                    <p>{data?.release_date?.split('-')[0]}</p>
+                                    <p>{minutesToHours(data?.runtime)}</p>
+                                </span>
+                                ):(
+                                <span className="flex text-white space-x-5 font-semibold lg:text-lg xs:text-xs ml-3">
+                                    <p>{data?.first_air_date?.split('-')[0]}</p>
+                                    <p>{data?.seasons.length}{data?.seasons.length > 1 ? ' Seasons' : ' Season'}</p>
+                                </span>
+                            )}
+                        </div>
+                    <div className="flex lg:w-3/5 xs:w-full flex-col lg:mx-20 xs:mx-2 lg:items-start xs:items-center">
                         <span className="my-5">
                             {state.type === 'movie' ?
                                 <h2 className="text-2xl text-white font-bold text-3xl">{data?.title}</h2>
@@ -126,13 +126,13 @@ const Details = ({ location }) => {
                             }
                             <p className="text-gray-100">{data?.tagline}</p>
                         </span>
-                        <div className="flex">
+                        <div className="lg:flex my-5">
                             <div className="space-y-5">
                                 <span>
-                                    <h3 className="text-white font-bold text-lg">Overview</h3>
-                                    <p className="text-gray-100 text-lg font-semibold">{data?.overview}</p>
+                                    <h3 className="text-white font-bold lg:text-lg xs:text-sm">Overview</h3>
+                                    <p className="text-gray-100 lg:text-lg xs:text-xs font-semibold">{data?.overview}</p>
                                 </span>
-                                <ContentRating data={data} />
+                                <ShowsRating data={data} />
                                 <StreamingServices 
                                     setShowMethod={setShowMethod} 
                                     handleChange={handleChange} 
@@ -146,10 +146,10 @@ const Details = ({ location }) => {
                                     <p className="text-white text-center">Website</p> 
                                 </Link>
                             </div>
-                            <div className="flex flex-col text-white ml-5">
-                                <p className="font-bold">Genres</p>
+                            <div className="flex lg:flex-col text-white lg:ml-5">
+                                <p className="font-bold lg:text-sm xs-text-xs">Genres</p>
                                 {data?.genres.map((genre) => (
-                                    <p className="border border-green-300 rounded-lg mb-2 text-center px-2">{genre.name}</p>
+                                    <p className="border border-green-300 rounded-lg lg:mb-2 text-center px-2 xs:mx-1 xs:text-xs">{genre.name}</p>
                                 ))}
                             </div> 
                         </div>
