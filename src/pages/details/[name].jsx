@@ -163,7 +163,7 @@ const Details = ({ location }) => {
                     ):( 
                     <h2 className="text-gray-500 text-2xl">Similar series</h2>
                 )}
-                <div className="grid grid-cols-5 px-10 w-4/5">
+                <div className="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 xs:px-2 lg:px-10 lg:w-4/5">
                     {similar && 
                         similar.map((element) => (
                             <ShowCard key={element.id} item={element} type={state.type}/>
