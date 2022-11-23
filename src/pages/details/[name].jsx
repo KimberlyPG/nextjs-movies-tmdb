@@ -172,7 +172,9 @@ const Details = ({ location }) => {
                 <div className="grid xl:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 xl:px-10 lg:px-5 xs:px-2 xl:w-4/5">
                     {similar && 
                         similar.map((element) => (
-                            <ShowCard key={element.id} item={element} type={state.type}/>
+                            <div className="lg:p-5 xs:p-2">
+                                <ShowCard key={element.id} item={element} type={state.type} page='details'/>
+                            </div>
                         ))
                     }
                 </div>

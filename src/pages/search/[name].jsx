@@ -36,7 +36,9 @@ const Search = ({ params }) => {
                 <h2 className="pt-2 flex sm:text-2xl xs:text-xl font-bold text-gray-600">Search result for {`${param}`}</h2>
                 <div className="grid xl:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 xl:px-10 lg:px-5 xs:px-2 xl:w-4/5">
                     {content && content?.map((item) => (
-                        <ShowCard key={item.id} item={item} type={moviesView ? 'movie': 'tv'}/>
+                        <div className="lg:p-5 xs:p-2">
+                            <ShowCard key={item.id} item={item} type={moviesView ? 'movie': 'tv'} page='search'/>
+                        </div>
                     ))}
                 </div>
             </div>
