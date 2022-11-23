@@ -10,19 +10,10 @@ const MovieAndTvCard = ({ data, name, type }) => {
                     <p className="text-xs text-green-600">{data.vote_average}</p>
                 </div>
             }
-            {data.poster_path.original !== undefined ? (
-                <img 
-                    className="hover:opacity-90 h-full rounded-xl hover:scale-110"
-                    src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.poster_path.original}`} 
-                />
-                ):
-                ( 
-                <img 
-                    className="hover:opacity-90 h-full rounded-xl hover:scale-110"
-                    src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.poster_path}`} 
-                />
-                )
-            }
+            <img 
+                className="hover:opacity-90 h-full rounded-xl hover:scale-110"
+                src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.poster_path.original !== undefined ? data.poster_path.original : data.poster_path}`} 
+            />                    
         </div>         
     )
 }

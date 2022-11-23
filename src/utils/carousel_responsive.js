@@ -1,4 +1,4 @@
-export const responsive_normal = {
+export const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
       items: 11,
