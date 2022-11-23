@@ -8,15 +8,15 @@ import Movies from "./Movies";
 import TvShows from "./TvShows";
 
 import 'react-multi-carousel/lib/styles.css';
-import { POPULAR_MOVIES, POPULAR_SHOWS, NOWPLAYING_MOVIES } from "../tmdb/apollo_queries";
+import { POPULAR_MOVIES, NOWPLAYING_MOVIES, POPULAR_SHOWS, AIRING_TODAY_SHOWS } from "../tmdb/apollo_queries";
 
 const Home = () => {
   const [moviesView, setMoviesView] = useState(true);
 
   const { loading: popularMoviesLoading, error: popularMoviesError, data: popularMoviesData } = useQuery(POPULAR_MOVIES);
   const { loading: popularShowsLoading, error: popularShowsError, data: popularShowsData } = useQuery(POPULAR_SHOWS);
-  const { loading: nowPlayingMoviesLoading, error: nowPlayingMoviesError, data: nowPlayingMoviesData} = useQuery(NOWPLAYING_MOVIES);
-  
+  const { loading: nowPlayingMoviesLoading, error: nowPlayingMoviesError, data: nowPlayingMoviesData } = useQuery(NOWPLAYING_MOVIES);
+  const { loading: airingTodayShowsLoading, error: airingTodayShowsError, data: airingTodayShowsData } = useQuery(AIRING_TODAY_SHOWS);
   
   const queryMoviesAndTv =  useStaticQuery(graphql`
   query MyQuery {
@@ -70,10 +70,12 @@ const Home = () => {
           </>
           ):(
           <>
-            <h2 className="text-lg font-bold px-3">Popular shows</h2>
-            <TvShows tv={popularShowsData.popularShows.shows} type='normal' />
+            <h2 className="text-lg font-bold px-3">TV shows airing today</h2>
+            <TvShows tv={airingTodayShowsData.airingTodayShows.shows} />
             <h2 className="text-lg font-bold px-3">Top rated tv shows</h2>
             <TvShows tv={queryMoviesAndTv.tv.nodes} type='normal' />
+            <h2 className="text-lg font-bold px-3">Popular shows</h2>
+            <TvShows tv={popularShowsData.popularShows.shows} type='normal' />
           </>
           )
           }
