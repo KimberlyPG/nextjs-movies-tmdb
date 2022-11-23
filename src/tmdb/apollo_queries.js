@@ -4,46 +4,19 @@ import { gql } from "@apollo/client";
 export const POPULAR_MOVIES = gql`
 query{
   popularMovies{
-      ok
+    ok
     error
     movies {
       id
-      imdb_id
-      adult
-      homepage
       name: original_title
       overview
       poster_path
-      release_date
-      tagline
       vote_average
-      vote_count
     }
   }
 } 
 `;
 
-export const POPULAR_SHOWS = gql`
-query{
-  popularShows{
-      ok
-    error
-    shows {
-      id
-      homepage
-      name
-      type
-      original_name
-      number_of_seasons
-      number_of_episodes
-      poster_path
-      first_air_date
-      original_language
-      vote_count
-    }
-  }
-}  
-`
 export const NOWPLAYING_MOVIES = gql`
   query{
     nowPlayingMovies {
@@ -53,10 +26,36 @@ export const NOWPLAYING_MOVIES = gql`
         id
         name: original_title
         poster_path
-        backdrop_path
         vote_average
-        vote_count
-    }
+      }
     }
   }  
-`
+`;
+
+export const POPULAR_SHOWS = gql`
+query{
+  popularShows{
+    ok
+    error
+    shows {
+      id
+      name
+      poster_path
+    }
+  }
+}  
+`;
+
+export const AIRING_TODAY_SHOWS = gql`
+query{
+  airingTodayShows{
+    ok
+    error
+    shows {
+      id
+      name
+      poster_path
+    }
+  }
+}  
+`;
