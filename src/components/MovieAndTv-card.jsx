@@ -6,7 +6,9 @@ const MovieAndTvCard = ({ data, name, type }) => {
     return (
         <div className="relative h-full overflow-hidden cursor-pointer" onClick={() => navigate(`/details/${name}`, {state: {contentId: data.id, type: type }})}>
             {data.vote_average !== 0 && data.vote_average!== undefined &&
-                <p className="z-10 text-xs text-green-600 absolute m-3 bg-gray-200 bg-opacity-300 p-2 rounded-full">{data.vote_average}</p>
+                <div className="flex justify-center z-10 absolute p-2 rounded-full h-8 w-8 m-3 bg-gray-200 bg-opacity-90">
+                    <p className="text-xs text-green-600">{data.vote_average}</p>
+                </div>
             }
             {data.poster_path.original !== undefined ? (
                 <img 

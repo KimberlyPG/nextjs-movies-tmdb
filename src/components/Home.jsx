@@ -56,7 +56,7 @@ const Home = () => {
     if (popularMoviesError || popularShowsError || nowPlayingMoviesError) return <div>Error...</div>;
     return (
       <>   
-        <div className="xl:mx-20 lg:mx-5 xs:mx-2 lg:mt-5 sm:mt-5">
+        <div className="2xl:mx-20 xl:mx-8 lg:mx-5 xs:mx-2 lg:mt-5 sm:mt-5">
           <Navbar setMoviesView={setMoviesView}/>
           {moviesView === true ? 
           (
