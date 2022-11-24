@@ -169,12 +169,10 @@ const Details = ({ location }) => {
                     ):( 
                     <h2 className="text-gray-500 text-2xl">Similar series</h2>
                 )}
-                <div className="grid xl:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 xl:px-10 lg:px-5 xs:px-2 xl:w-4/5">
+                <div className="grid lg:gap-5 xs:gap-2 xl:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 lg:gap-9 xs:gap-2 xl:px-10 lg:px-5 xs:px-2 xl:w-4/5 mt-4">
                     {similar && 
                         similar.map((element) => (
-                            <div className="lg:p-5 xs:p-2">
-                                <ShowCard key={element.id} item={element} type={state.type} page='details'/>
-                            </div>
+                            <ShowCard key={element.id} item={element} type={state.type} page='details'/>
                         ))
                     }
                 </div>
