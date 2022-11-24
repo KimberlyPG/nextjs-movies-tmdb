@@ -4,9 +4,8 @@ import {  graphql, useStaticQuery } from "gatsby";
 import { useQuery } from "@apollo/client";
 
 import Navbar from "./Navbar";
-import Movies from "./Movies";
-import TvShows from "./TvShows";
 import Skeletons from "./Skeletons";
+import MultiCarousel from "./MultiCarousel";
 
 import 'react-multi-carousel/lib/styles.css';
 import { POPULAR_MOVIES, NOWPLAYING_MOVIES, POPULAR_SHOWS, AIRING_TODAY_SHOWS } from "../tmdb/apollo_queries";
@@ -63,20 +62,20 @@ const Home = () => {
           (
           <>
             <h2 className="text-lg font-bold px-3">Popular movies</h2>
-            <Movies movie={popularMoviesData.popularMovies.movies} />
+            <MultiCarousel show={popularMoviesData.popularMovies.movies} type='movie' />
             <h2 className="text-lg font-bold px-3 mt-5">Top rated movies</h2>
-            <Movies movie={queryMoviesAndTv.movies.nodes} />
+            <MultiCarousel show={queryMoviesAndTv.movies.nodes} type='movie' />
             <h2 className="text-lg font-bold px-3 mt-5">Now playing movies</h2> 
-            <Movies movie={nowPlayingMoviesData.nowPlayingMovies.movies} />
+            <MultiCarousel show={nowPlayingMoviesData.nowPlayingMovies.movies} type='movie' />
           </>
           ):(
           <>
             <h2 className="text-lg font-bold px-3">TV shows airing today</h2>
-            <TvShows tv={airingTodayShowsData.airingTodayShows.shows} />
+            <MultiCarousel show={airingTodayShowsData.airingTodayShows.shows} type='tv' />
             <h2 className="text-lg font-bold px-3">Top rated tv shows</h2>
-            <TvShows tv={queryMoviesAndTv.tv.nodes} />
+            <MultiCarousel show={queryMoviesAndTv.tv.nodes} type='tv' />
             <h2 className="text-lg font-bold px-3">Popular shows</h2>
-            <TvShows tv={popularShowsData.popularShows.shows} />
+            <MultiCarousel show={popularShowsData.popularShows.shows} type='tv' />
           </>
           )
           }

@@ -6,13 +6,12 @@ import ShowCard from './ShowCard';
 import 'react-multi-carousel/lib/styles.css';
 import { responsive } from '../utils/carousel_responsive';
 
-const Movies = ({ movie }) => {
-
+const MultiCarousel = ({ show, type }) => {
   return (
     <Carousel responsive={responsive} centerMode={true} >
-        {movie && movie.map((item) => (
+        {show && show.map((item) => (
             <div className="h-full sm:p-3 xs:p-1">
-              <ShowCard key={item.id} item={item} type='movie' page='home' />
+              <ShowCard key={item.id} item={item} type={type} page='home' />
             </div>
           )
           )}
@@ -21,4 +20,4 @@ const Movies = ({ movie }) => {
 }
 
 
-export default Movies;
+export default MultiCarousel;

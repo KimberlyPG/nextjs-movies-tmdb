@@ -12,7 +12,6 @@ module.exports = {
         sessionID: process.env.GATSBY_SESSION_ID,
       },
     },
-    `gatsby-plugin-netlify`,
-    
+    `gatsby-plugin-netlify`,   
   ],
 }
