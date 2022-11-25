@@ -9,6 +9,7 @@ import SimilarShows from "../../components/SimilarShows";
 
 import { minutesToHours } from "../../utils/minutesToHours";
 import 'react-dropdown/style.css';
+import Genres from "../../components/Genres";
 
 // import { detailsData } from "../../tmdb/detailsData";
 
@@ -145,18 +146,7 @@ const Details = ({ location }) => {
                                     options={options}
                                 />
                             </div>
-                            <div className="flex flex-col lg:ml-5">
-                                <p className="font-bold text-white lg:text-base md:text-sm xs:text-xs lg:mb-2">Genres</p>
-                                <div className="flex lg:flex-col">
-                                    {data?.genres.map((genre) => (
-                                        <div className="flex xs:mr-2 xl:mr-0">
-                                            <p className="lg:border w-full lg:border-green-300 rounded-lg lg:mb-2 xs:text-green-500 lg:text-white lg:text-center lg:px-2 xl:text-base lg:text-sm xs:text-xs">
-                                                {genre.name}
-                                            </p>
-                                        </div>
-                                    ))}
-                                </div> 
-                            </div>
+                            <Genres data={data?.genres} />
                         </div>
                         <Link className="flex xs:items-center text-white w-28 rounded-sm space-x-2 font-semibold" to={data?.homepage} target="_blank">
                             <HiOutlineLink className="xs:text-sm sm:text-sm lg:text-base"/>
