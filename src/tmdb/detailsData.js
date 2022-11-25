@@ -8,10 +8,10 @@ export const detailsData = async( state, setData, slug ) => {
         }
     })
     .then((data) => {
-    if(!data.results) {
-        setData(data);
-    } else {
-        setData(data.results);
-    }
+		if(!data.results) {
+			setData(data);
+		} else {
+			setData(data.results);
+		}
     });
 }

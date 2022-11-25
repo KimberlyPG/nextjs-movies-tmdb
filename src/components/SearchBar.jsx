@@ -34,7 +34,7 @@ const SearchBar = () => {
                 />
             </form>
         </div>
-    )
-}
+    );
+};
 
 export default SearchBar;

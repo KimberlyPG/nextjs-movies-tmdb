@@ -16,8 +16,7 @@ const MultiCarousel = ({ show, type }) => {
           )
           )}
     </Carousel>
-  )
-}
-
+  );
+};
 
 export default MultiCarousel;

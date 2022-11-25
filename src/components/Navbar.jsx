@@ -10,24 +10,24 @@ const Navbar = ({ setMoviesView }) => {
     const toggle = (value) => {
         setMoviesView(value);
         if(value) {
-          setMoviesButtonBg('#1B5BA9');
-          setMoviesButtonColor('#FFFFFF');
-          setShowsButtonBg('transparent');
-          setShowsButtonColor('#C2C8CD');
+			setMoviesButtonBg('#1B5BA9');
+			setMoviesButtonColor('#FFFFFF');
+			setShowsButtonBg('transparent');
+			setShowsButtonColor('#C2C8CD');
         }
         else {
-          setMoviesButtonBg('transparent');
-          setMoviesButtonColor('#C2C8CD');
-          setShowsButtonBg('#1B5BA9');
-          setShowsButtonColor('#FFFFFF')
+			setMoviesButtonBg('transparent');
+			setMoviesButtonColor('#C2C8CD');
+			setShowsButtonBg('#1B5BA9');
+			setShowsButtonColor('#FFFFFF');
         }
       }
-  return (
-    <div className='flex space-x-6 my-10'>   
-      <button className="text-gray-500 rounded-xl px-4" onClick={() => toggle(true)} style={{backgroundColor: `${moviesButtonBg}`, color: `${moviesButtonColor}`}}>Movies</button>
-      <button className="text-gray-500 rounded-xl px-4" onClick={() => toggle(false)} style={{backgroundColor: `${showsButtonBg}`, color: `${showsButtonColor}`}}>Tv Shows</button>
-    </div>
-  )
-}
+	return (
+		<div className='flex space-x-6 my-10'>   
+			<button className="text-gray-500 rounded-xl px-4" onClick={() => toggle(true)} style={{backgroundColor: `${moviesButtonBg}`, color: `${moviesButtonColor}`}}>Movies</button>
+			<button className="text-gray-500 rounded-xl px-4" onClick={() => toggle(false)} style={{backgroundColor: `${showsButtonBg}`, color: `${showsButtonColor}`}}>Tv Shows</button>
+		</div>
+	);
+};
 
 export default Navbar;

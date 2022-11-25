@@ -7,7 +7,7 @@ return (
         <Topbar />
         {children}
     </div>
-  )
-}
+  );
+};
 
 export default Layout;
