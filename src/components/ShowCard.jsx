@@ -1,39 +1,41 @@
 import React from 'react'
 import { navigate } from 'gatsby';
 
-import { AiFillStar } from "react-icons/ai";
+const ShowCard = ({ item, type, page }) => {
+  
+  const navigateToDetails = () => {
+    navigate(`/details/${item.title}`, {state: {contentId: item.id, type: type }})
+  }
 
-const ShowCard = ({ item, type }) => {
-
-  if(item.poster_path === null) return 
+  if(item.poster_path === null) return null
   return (
-    <div className='sm:p-5 xs:p-2' onClick={() => navigate(`/details/${item.title}`, {state: {contentId: item.id, type: type }})}>
-        <div className='relative cursor-pointer'>
-            <span className='flex z-10 absolute bottom-0 p-1 text-white space-x-5 text-xs font-bold'>
-                {item.release_date &&
-                  <p className='bg-gray-600 bg-opacity-60 rounded-lg px-2 py-1'>{item?.release_date?.split("-")[0]}</p>
-                }
-                <div className='bg-gray-600 bg-opacity-60 rounded-lg px-2 py-1 border border-green-400'>
-                  {item.adult === true ? (
-                    <p>18+</p> 
-                    ):(
-                    <p>ALL</p>
-                  )}
-                </div>    
-            </span>
-            <div className='overflow-hidden'>
-              <img 
-                  className="rounded-xl hover:opacity-80 hover:scale-110"
-                  src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path}`} 
-                  alt={`${item.title} poster`}
-              />
-            </div>
-        </div>
-        <h3 className='font-bold text-sm'>{item.title ? item.title : item.name}</h3>
-        <span className='flex items-center space-x-2 text-sm'>
-            <AiFillStar className='text-yellow-500' />
-            <p className='text-gray-500'>{item.vote_average}</p>
+    <div className='cursor-pointer' onClick={navigateToDetails}> 
+      <div className='relative'>
+        {item.vote_average !== 0 && item.vote_average!== undefined &&
+          <div className="flex justify-center z-10 absolute p-2 rounded-full h-8 w-8 m-3 bg-gray-200 bg-opacity-90">
+              <p className="text-xs text-green-600">{item.vote_average}</p>
+          </div>
+        } 
+        <span className='flex z-10 absolute bottom-0 p-1 text-xs text-white font-bold space-x-5'>
+          {item.release_date && page !== 'home' &&
+            <p className='bg-gray-600 bg-opacity-60 rounded-lg px-2 py-1'>{item.release_date.split("-")[0]}</p>           
+          }   
+          {item.first_air_date && page !== 'home' &&
+            <p className='bg-gray-600 bg-opacity-60 rounded-lg px-2 py-1'>{item.first_air_date.split("-")[0]}</p>           
+          }   
+          {item.adult !== undefined && page !== 'home' &&
+            <p className='bg-gray-600 bg-opacity-60 rounded-lg px-2 py-1 border border-green-400'>{item.adult === false ? 'ALL': '18+'}</p> 
+          }
         </span>
+        <div className='overflow-hidden'>
+          <img 
+              className="hover:opacity-90 h-full rounded-xl hover:scale-110"
+              src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path.original === undefined ? item.poster_path : item.poster_path.original}`} 
+              alt={`${item.name} poster`}
+          /> 
+        </div>
+      </div> 
+      {page !== 'home' &&  <h3 className='font-bold text-sm'>{item.title ? item.title : item.name}</h3>}              
     </div>
   )
 }

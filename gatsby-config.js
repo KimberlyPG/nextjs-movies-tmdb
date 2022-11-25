@@ -10,8 +10,8 @@ module.exports = {
       options: {
         apiKey: process.env.GATSBY_API_KEY,
         sessionID: process.env.GATSBY_SESSION_ID,
-      }
+      },
     },
-    `gatsby-plugin-netlify`
+    `gatsby-plugin-netlify`,   
   ],
 }

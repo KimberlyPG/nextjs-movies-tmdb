@@ -4,11 +4,13 @@ import { Link } from "gatsby";
 import { HiOutlineLink } from "react-icons/hi";
 
 import StreamingServices from "../../components/StreamingServices";
-import ShowCard from "../../components/ShowCard";
 import ShowsRating from "../../components/ShowsRating";
+import SimilarShows from "../../components/SimilarShows";
 
 import { minutesToHours } from "../../utils/minutesToHours";
 import 'react-dropdown/style.css';
+
+import { detailsData } from "../../tmdb/detailsData";
 
 const isBrowser = typeof window !== "undefined"
 
@@ -22,26 +24,9 @@ const Details = ({ location }) => {
     const [similar, setSimilar] = useState([]);
 
     useEffect(() => {
-        const ContentData = async() => {
-            await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
-            .then(res => res.json())
-            .then(data => setData(data))
-        } 
-        ContentData();
-
-        const providersData = async() => {
-            await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}/watch/providers?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
-            .then(res => res.json())
-            .then(data => setProviders(data.results))
-        } 
-        providersData();
-
-        const similarData = async() => {
-            await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}/similar?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
-            .then(res => res.json())
-            .then(data => setSimilar(data.results))
-        } 
-        similarData();
+        detailsData(state, setData, '')
+        detailsData(state, setProviders, 'watch/providers')
+        detailsData(state, setSimilar, 'similar')
 
         verifyCountry();
     }, [state.contentId])
@@ -76,8 +61,7 @@ const Details = ({ location }) => {
             else {
                 setCountrySelected({ value: JSON.parse(getSavedContry()) });
             } 
-        }
-        
+        }   
     }
 
     const handleChange = (option) => {
@@ -98,25 +82,26 @@ const Details = ({ location }) => {
                     backgroundSize: 'cover', 
                     backgroundImage:`linear-gradient(0deg, rgba(1, 124, 128,0.8), rgba(1, 124, 128,0.8)), url(https://image.tmdb.org/t/p/w1280/${data?.backdrop_path})`,
                     backgroundAttachment: 'fixed',
-                }}>
+                }}
+            >
                 <div className="flex md:flex-row xs:flex-col xl:p-10 xs:p-4 xl:mx-20 justify-center items-center">
-                        <div>
-                            <img 
-                                className="rounded-xl md:w-80 xs:w-64"
-                                src={`https://image.tmdb.org/t/p/w1280/${data?.poster_path}`} 
-                            />
-                            {state.type === 'movie' ? (
-                                <span className="flex text-white space-x-5 font-semibold lg:text-lg md:text-md xs:text-sm ml-3">
-                                    <p>{data?.release_date?.split('-')[0]}</p>
-                                    <p>{minutesToHours(data?.runtime)}</p>
-                                </span>
-                                ):(
-                                <span className="flex text-white space-x-5 font-semibold lg:text-lg md:text-md xs:text-sm ml-3">
-                                    <p>{data?.first_air_date?.split('-')[0]}</p>
-                                    <p>{data?.seasons.length}{data?.seasons.length > 1 ? ' Seasons' : ' Season'}</p>
-                                </span>
-                            )}
-                        </div>
+                    <div>
+                        <img 
+                            className="rounded-xl md:w-80 xs:w-64"
+                            src={`https://image.tmdb.org/t/p/w1280/${data?.poster_path}`} 
+                        />
+                        {state.type === 'movie' ? (
+                            <span className="flex text-white space-x-5 font-semibold lg:text-lg md:text-md xs:text-sm ml-3">
+                                <p>{data?.release_date?.split('-')[0]}</p>
+                                <p>{minutesToHours(data?.runtime)}</p>
+                            </span>
+                            ):(
+                            <span className="flex text-white space-x-5 font-semibold lg:text-lg md:text-md xs:text-sm ml-3">
+                                <p>{data?.first_air_date?.split('-')[0]}</p>
+                                <p>{data?.seasons.length}{data?.seasons.length > 1 ? ' Seasons' : ' Season'}</p>
+                            </span>
+                        )}
+                    </div>
                     <div className="flex lg:w-3/5 md:w-3/5 xs:w-full flex-col xl:mx-20 md:mx-10 xs:mx-2 md:items-start xs:items-center">
                         <span className="my-5">
                             {state.type === 'movie' ?
@@ -161,22 +146,8 @@ const Details = ({ location }) => {
                         </Link>
                     </div>
                 </div>
-            </div>
-            
-            <div className="grid justify-items-center mt-10">
-                {state.type === 'movie' ? (
-                    <h2 className="text-gray-500 text-2xl">Similar movies</h2> 
-                    ):( 
-                    <h2 className="text-gray-500 text-2xl">Similar series</h2>
-                )}
-                <div className="grid xl:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 xl:px-10 lg:px-5 xs:px-2 xl:w-4/5">
-                    {similar && 
-                        similar.map((element) => (
-                            <ShowCard key={element.id} item={element} type={state.type}/>
-                        ))
-                    }
-                </div>
-            </div>
+            </div>   
+            <SimilarShows state={state} similar={similar} />
         </>
     )
 
