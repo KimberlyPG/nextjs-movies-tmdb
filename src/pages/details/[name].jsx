@@ -10,7 +10,7 @@ import SimilarShows from "../../components/SimilarShows";
 import { minutesToHours } from "../../utils/minutesToHours";
 import 'react-dropdown/style.css';
 
-import { detailsData } from "../../tmdb/detailsData";
+// import { detailsData } from "../../tmdb/detailsData";
 
 const isBrowser = typeof window !== "undefined"
 
@@ -22,11 +22,29 @@ const Details = ({ location }) => {
     const [showMethod, setShowMethod] = useState('flatrate')
     const [countrySelected, setCountrySelected] = useState('');
     const [similar, setSimilar] = useState([]);
+    console.log("state", state)
 
     useEffect(() => {
-        detailsData(state, setData, '')
-        detailsData(state, setProviders, 'watch/providers')
-        detailsData(state, setSimilar, 'similar')
+        const ContentData = async() => {
+            await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
+            .then(res => res.json())
+            .then(data => setData(data))
+        } 
+        ContentData();
+
+        const providersData = async() => {
+            await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}/watch/providers?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
+            .then(res => res.json())
+            .then(data => setProviders(data.results))
+        } 
+        providersData();
+
+        const similarData = async() => {
+            await fetch(`https://api.themoviedb.org/3/${state.type}/${state.contentId}/similar?api_key=${process.env.GATSBY_API_KEY}&language=en-US`) 
+            .then(res => res.json())
+            .then(data => setSimilar(data.results))
+        } 
+        similarData();
 
         verifyCountry();
     }, [state.contentId])
