@@ -23,7 +23,7 @@ const Home = () => {
     movies: allTmdbMovieTopRated(sort: {fields: release_date, order: DESC}) {
         nodes {
           id: tmdbId
-          name: title
+          title
           release_date
           poster_path {
             original
@@ -38,7 +38,7 @@ const Home = () => {
       tv: allTmdbTvTopRated {
         nodes {
           id: tmdbId
-          name  
+          title: name  
           first_air_date
           poster_path {
             original

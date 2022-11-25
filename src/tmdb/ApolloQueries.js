@@ -7,7 +7,7 @@ export const POPULAR_MOVIES = gql`
 			error
 			movies {
 				id
-				name: original_title
+				title: original_title
 				overview
 				poster_path
 				vote_average
@@ -23,7 +23,7 @@ export const NOWPLAYING_MOVIES = gql`
 			error
 			movies {
 				id
-				name: original_title
+				title: original_title
 				poster_path
 				vote_average
 			}
@@ -38,7 +38,7 @@ export const POPULAR_SHOWS = gql`
 			error
 			shows {
 				id
-				name
+				title: name
 				poster_path
 			}
 		}
@@ -52,7 +52,7 @@ export const AIRING_TODAY_SHOWS = gql`
 			error
 			shows {
 				id
-				name
+				title: name
 				poster_path
 			}
 		}
