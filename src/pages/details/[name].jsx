@@ -13,8 +13,6 @@ import Genres from "../../components/Genres";
 
 import { detailsData } from "../../tmdb/detailsData";
 
-const isBrowser = typeof window !== "undefined"
-
 const Details = ({ location }) => {
     const { state = {} } = location
     const [details, setDetails] = useState(null);
@@ -23,6 +21,23 @@ const Details = ({ location }) => {
     const [showMethod, setShowMethod] = useState('flatrate')
     const [countrySelected, setCountrySelected] = useState('');
     const [similar, setSimilar] = useState([]);
+
+    
+    const getSavedContry = () => window.localStorage.getItem('country');
+ 
+    const regionNames = new Intl.DisplayNames(
+        ['en'], {type: 'region'}
+    );
+
+    const verifyCountry = () => {       
+        if (window.localStorage.getItem('country') === null) {
+            window.localStorage.setItem('country', JSON.stringify('US'));    
+            setCountrySelected({ value: JSON.parse(getSavedContry()) });
+        } 
+        else {
+            setCountrySelected({ value: JSON.parse(getSavedContry()) });
+        } 
+    }
 
     useEffect(() => {
         detailsData(state, setDetails, '')
@@ -46,34 +61,16 @@ const Details = ({ location }) => {
             setCountrySelected({value, label, idx});
         }
     }, [options])
- 
-    const getSavedContry = () => typeof window !== "undefined" && window.localStorage.getItem('country');
- 
-    const regionNames = new Intl.DisplayNames(
-        ['en'], {type: 'region'}
-    );
-
-    const verifyCountry = () => {       
-        if (isBrowser) {
-            if (window.localStorage.getItem('country') === null) {
-                window.localStorage.setItem('country', JSON.stringify('US'));    
-                setCountrySelected({ value: JSON.parse(getSavedContry()) });
-            } 
-            else {
-                setCountrySelected({ value: JSON.parse(getSavedContry()) });
-            } 
-        }   
-    }
-
+   
     const handleChange = (option) => {
-        typeof window !== "undefined" && window.localStorage.removeItem('country');
+        window.localStorage.removeItem('country');
         
         let value = option.value;
         let idx = options.findIndex((name) => name.value === value);
         let label = <div className="flex"><img className="w-6 mr-3" src={`https://flagcdn.com/w20/${value.toLowerCase()}.png`}/>{regionNames.of(value)}</div>
         setCountrySelected({value, label, idx});
 
-        typeof window !== "undefined" && window.localStorage.setItem('country', JSON.stringify(value));
+        window.localStorage.setItem('country', JSON.stringify(value));
     }
 
     return (
