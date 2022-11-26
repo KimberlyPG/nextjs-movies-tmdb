@@ -6,13 +6,12 @@ import { HiOutlineLink } from "react-icons/hi";
 import StreamingServices from "../../components/StreamingServices";
 import ShowsRating from "../../components/ShowsRating";
 import SimilarShows from "../../components/SimilarShows";
-import CountrySelect from "../../components/Dropdown";
+import Genres from "../../components/Genres";
 
 import { minutesToHours } from "../../utils/minutesToHours";
 import 'react-dropdown/style.css';
-import Genres from "../../components/Genres";
-
 import { detailsData } from "../../tmdb/detailsData";
+
 
 const Details = ({ location }) => {
     const { state = {} } = location
@@ -54,20 +53,10 @@ const Details = ({ location }) => {
         })
     }, [providers])
     
-    // useEffect(() => {
-    //     if(countrySelected.value) {
-    //         let value = countrySelected?.value;
-    //         let idx = options.findIndex((name) => name.value === value);
-    //         let label = regionNames.of(value)
-    //         setCountrySelected({value, label, idx});
-    //     }
-    // }, [options])
-   
-    const handleChange = (option) => {
-        window.localStorage.removeItem('country');
-        let label = regionNames.of(option)
-        setCountrySelected({option, label});
-        window.localStorage.setItem('country', JSON.stringify(option));
+    const handleChange = (value) => {
+        let label = regionNames.of(value)
+        setCountrySelected({value, label});
+        window.localStorage.setItem('country', JSON.stringify(value));
     }
 
     return (
@@ -113,15 +102,14 @@ const Details = ({ location }) => {
                                     <p className="text-gray-100 xl:text-lg lg:text-base sm:text-sm xs:text-xs font-semibold">{details?.overview}</p>
                                 </span>
                                 <ShowsRating data={details} />
-                                {/* <StreamingServices 
-                                    setShowMethod={setShowMethod} 
-                                    handleChange={handleChange} 
-                                    countrySelected={countrySelected} 
+                                <StreamingServices 
                                     showMethod={showMethod} 
+                                    setShowMethod={setShowMethod} 
+                                    options={options} 
+                                    countrySelected={countrySelected} 
+                                    handleChange={handleChange} 
                                     providers={providers}
-                                    options={options}
-                                /> */}
-                                <CountrySelect options={options} countrySelected={countrySelected} handleChange={handleChange} providers={providers} />
+                                />
                             </div>
                             <Genres data={details?.genres} />
                         </div>

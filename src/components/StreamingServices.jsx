@@ -1,9 +1,11 @@
 import React from 'react'
-import Dropdown from 'react-dropdown';
+
+import Dropdown from './Dropdown';
 
 import StreamingImg from './StreamingImg';
 
-const StreamingServices = ({ setShowMethod, handleChange, countrySelected, showMethod, providers, options }) => {
+const StreamingServices = ({ showMethod, setShowMethod, options, countrySelected, handleChange, providers }) => {
+    console.log("country", countrySelected)
 
     return (
         <>
@@ -16,24 +18,23 @@ const StreamingServices = ({ setShowMethod, handleChange, countrySelected, showM
                         <button className="mb-3 lg:text-base xs:text-sm" onClick={() => setShowMethod('rent')}>Rent</button>
                         <Dropdown 
                             options={options} 
-                            onChange={handleChange} 
-                            value={countrySelected} 
-                            placeholder="Select an option"
+                            countrySelected={countrySelected} 
+                            handleChange={handleChange}
                         />
                     </div>
                     <div className="flex space-x-5">
                         {showMethod === 'flatrate' &&
-                            providers[countrySelected.value].flatrate.map((item) => (         
+                            providers[countrySelected.value]?.flatrate?.map((item) => (         
                                 <StreamingImg item={item}/> 
                             ))
                         }
                         {showMethod === 'buy' &&
-                            providers[countrySelected.value].buy.map((item) => (
+                            providers[countrySelected.value]?.buy?.map((item) => (
                                 <StreamingImg item={item}/>  
                             ))
                         }
                         {showMethod === 'rent' &&
-                            providers[countrySelected.value].rent.map((item) => (
+                            providers[countrySelected.value]?.rent?.map((item) => (
                                 <StreamingImg item={item}/>  
                             ))
                         }

@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-const CountrySelect = ({ options, countrySelected, handleChange, providers }) => {
+const Dropdown = ({ options, countrySelected, handleChange }) => {
 
 	return (
 		<Autocomplete
@@ -40,4 +40,4 @@ const CountrySelect = ({ options, countrySelected, handleChange, providers }) =>
 	);
 }
 
-export default CountrySelect;
+export default Dropdown;
