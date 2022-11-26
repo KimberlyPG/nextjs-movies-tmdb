@@ -1,5 +1,11 @@
 import React from 'react'
 
+/**
+ * Create a backdrop and contains movies and series details
+ * @param {object} details movie or serie backdrop
+ * @param children details component
+ */
+
 const DetailsContainer = ({ details, children }) => {
   return (
     <div className="w-full" 
@@ -11,7 +17,7 @@ const DetailsContainer = ({ details, children }) => {
     >
         {children}
     </div>
-  )
-}
+  );
+};
 
-export default DetailsContainer
+export default DetailsContainer;

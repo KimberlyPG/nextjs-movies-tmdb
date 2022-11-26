@@ -1,6 +1,19 @@
 import React from 'react'
 import { navigate } from 'gatsby';
 
+/**
+ * Creates the movie or serie card for all the pages
+ * @param {string} item.poster_path movie or serie poster
+ * @param {number} item.vote_average rating for the movie or serie
+ * @param {string} item.release_date movies release date
+ * @param {string} item.first_air_date series first air date
+ * @param {boolean} item.adult check if the movie or serie is restricted
+ * @param {string} item.name series name
+ * @param {string} item.title movies name
+ * @param {string} type movie or serie
+ * @param {string} page	page name
+ */
+
 const ShowCard = ({ item, type, page }) => {
   
 	const navigateToDetails = () => {

@@ -10,47 +10,51 @@ import MultiCarousel from "./MultiCarousel";
 import 'react-multi-carousel/lib/styles.css';
 import { POPULAR_MOVIES, NOWPLAYING_MOVIES, POPULAR_SHOWS, AIRING_TODAY_SHOWS } from "../tmdb/ApolloQueries";
 
-const Home = () => {
-  const [moviesView, setMoviesView] = useState(true);
+/** 
+* main page with information about movies and series 
+*/
 
-  const { loading: popularMoviesLoading, error: popularMoviesError, data: popularMoviesData } = useQuery(POPULAR_MOVIES);
-  const { loading: popularShowsLoading, error: popularShowsError, data: popularShowsData } = useQuery(POPULAR_SHOWS);
-  const { loading: nowPlayingMoviesLoading, error: nowPlayingMoviesError, data: nowPlayingMoviesData } = useQuery(NOWPLAYING_MOVIES);
-  const { loading: airingTodayShowsLoading, error: airingTodayShowsError, data: airingTodayShowsData } = useQuery(AIRING_TODAY_SHOWS);
-  
-  const queryMoviesAndTv =  useStaticQuery(graphql`
-  query MyQuery {
-    movies: allTmdbMovieTopRated(sort: {fields: release_date, order: DESC}) {
-        nodes {
-          id: tmdbId
-          title
-          release_date
-          poster_path {
-            original
-          }
-          adult
-          popularity
-          overview
-          vote_average
-          genre_ids
-        }
-      }
-      tv: allTmdbTvTopRated {
-        nodes {
-          id: tmdbId
-          title: name  
-          first_air_date
-          poster_path {
-            original
-          }
-          popularity
-          overview
-          vote_average     
-          genre_ids
-        }
-      }
-    }    
-    `);
+const Home = () => {
+	const [moviesView, setMoviesView] = useState(true);
+
+	const { loading: popularMoviesLoading, error: popularMoviesError, data: popularMoviesData } = useQuery(POPULAR_MOVIES);
+	const { loading: popularShowsLoading, error: popularShowsError, data: popularShowsData } = useQuery(POPULAR_SHOWS);
+	const { loading: nowPlayingMoviesLoading, error: nowPlayingMoviesError, data: nowPlayingMoviesData } = useQuery(NOWPLAYING_MOVIES);
+	const { loading: airingTodayShowsLoading, error: airingTodayShowsError, data: airingTodayShowsData } = useQuery(AIRING_TODAY_SHOWS);
+	
+	const queryMoviesAndTv =  useStaticQuery(graphql`
+	query MyQuery {
+		movies: allTmdbMovieTopRated(sort: {fields: release_date, order: DESC}) {
+			nodes {
+			id: tmdbId
+			title
+			release_date
+			poster_path {
+				original
+			}
+			adult
+			popularity
+			overview
+			vote_average
+			genre_ids
+			}
+		}
+		tv: allTmdbTvTopRated {
+			nodes {
+			id: tmdbId
+			title: name  
+			first_air_date
+			poster_path {
+				original
+			}
+			popularity
+			overview
+			vote_average     
+			genre_ids
+			}
+		}
+	}    
+	`);
 
     if (popularMoviesLoading || nowPlayingMoviesLoading || popularShowsLoading || airingTodayShowsLoading) return <Skeletons />
     if (popularMoviesError || nowPlayingMoviesError || popularShowsError || airingTodayShowsError) return <div>Something went wrong...</div>;

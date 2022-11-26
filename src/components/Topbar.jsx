@@ -5,6 +5,10 @@ import SearchBar from "./SearchBar";
 
 import logo from "../assets/logo.svg";
 
+/**
+ * topbar that includes tmdb image and a searchbar
+ */
+
 const Topbar = () => {
 	return (
 		<div className="flex lg:h-14 xs:h-12 items-center shadow-md space-x-6">

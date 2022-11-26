@@ -4,6 +4,10 @@ import Carousel from "react-multi-carousel";
 import { Skeleton } from "@mui/material";
 import { responsive } from "../utils/carousel_responsive";
 
+/**
+ * shows a skeleton on loading state
+*/
+
 const Skeletons = () => {
 	return (
 		<div className="flex flex-col 2xl:mx-20 xl:mx-8 lg:mx-5 xs:mx-2 my-10 lg:mt-5 sm:mt-5">

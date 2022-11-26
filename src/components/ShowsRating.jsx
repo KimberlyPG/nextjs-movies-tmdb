@@ -1,6 +1,11 @@
 import React from 'react'
 import Rating from "@mui/material/Rating";
 
+/**
+ * shows the movie or serie rating on details page
+ * @param {number} data.vote_average rating for the movie or serie
+ */
+
 const ShowsRating = ({ data }) => {
 	return (
 		<div className="flex space-x-2 mt-5 text-white">

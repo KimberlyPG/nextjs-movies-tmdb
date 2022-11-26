@@ -6,6 +6,11 @@ import Skeletons from "../../components/Skeletons";
 import { searchContent } from "../../tmdb/search";
 import ShowsList from "../../components/ShowsList";
 
+/**
+ * page that shows all the search results 
+ * @param {object} params getting the movie or serie name from the dynamic route 
+ */
+
 const Search = ({ params }) => {
 	const param = params[`name`];
 	const [moviesView, setMoviesView] = useState(true);

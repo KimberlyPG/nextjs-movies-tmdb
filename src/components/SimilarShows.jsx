@@ -2,6 +2,12 @@ import React from 'react'
 
 import ShowsList from './ShowsList';
 
+/**
+ * rendering the similar movies or series for details page
+ * @param {string} state.type content type, movie or serie
+ * @param {array} similar similar movies or series 
+ */
+
 const SimilarShows = ({ state, similar }) => {
 	return (
 		<div className="grid justify-items-center mt-10">

@@ -1,5 +1,11 @@
 import React from "react";
 
+/**
+ * shows streaming service image 
+ * @param {string} item.logo_path streaming platform image
+ * @param {string} item.provider_name streaming platform name
+ */
+
 const StreamingImg = ({ item }) => {
 	return (
 		<img

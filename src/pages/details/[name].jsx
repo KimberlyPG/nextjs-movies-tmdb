@@ -13,12 +13,16 @@ import DetailsPoster from "../../components/DetailsPoster";
 import 'react-dropdown/style.css';
 import { detailsData } from "../../tmdb/detailsData";
 
+/**
+ * page that shows all the movies or series details
+ * @param {object} location getting state data from show card component
+ */
+
 const Details = ({ location }) => {
     const { state = {} } = location
     const [details, setDetails] = useState(null);
     const [providers, setProviders] = useState([]);
     const [options, setOptions] = useState([]);
-    const [showMethod, setShowMethod] = useState('flatrate')
     const [countrySelected, setCountrySelected] = useState('');
     const [similar, setSimilar] = useState([]);
 
@@ -80,8 +84,6 @@ const Details = ({ location }) => {
                                 </span>
                                 <ShowsRating data={details} />
                                 <StreamingServices 
-                                    showMethod={showMethod} 
-                                    setShowMethod={setShowMethod} 
                                     options={options} 
                                     countrySelected={countrySelected} 
                                     handleChange={handleChange} 
@@ -101,8 +103,7 @@ const Details = ({ location }) => {
             </DetailsContainer>   
             <SimilarShows state={state} similar={similar} />
         </>
-    )
-
-}
+    );
+};
 
 export default Details;

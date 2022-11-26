@@ -18,6 +18,13 @@ const CssTextField = styled(TextField)({
 	},
 });
 
+/**
+ * details page countries dropdown
+ * @param {array} options countries code array 
+ * @param {object} countrySelected country code and name for the country selected 
+ * @param {() => void} handleChange country code and name for the country selected   
+ */
+
 const Dropdown = ({ options, countrySelected, handleChange }) => {
 
 	return (

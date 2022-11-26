@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Dropdown from './Dropdown';
 
 import StreamingImg from './StreamingImg';
 
-const StreamingServices = ({ showMethod, setShowMethod, options, countrySelected, handleChange, providers }) => {
+/**
+ * render the streaming services and the dropdown with countries
+ * @param {array} options countries code array 
+ * @param {object} countrySelected country code and name for the country selected 
+ * @param {() => void} handleChange country code and name for the country selected   
+ * @param {array} providers[countrySelected.value].flatrate showing streaming services with flatrate method
+ * @param {array} [countrySelected.value].buy showing streaming services with buy method
+ * @param {array} providers[countrySelected.value].rent showing streaming services with rent
+ */
+
+const StreamingServices = ({ options, countrySelected, handleChange, providers }) => {
+    const [showMethod, setShowMethod] = useState('flatrate');
 
     return (
         <>

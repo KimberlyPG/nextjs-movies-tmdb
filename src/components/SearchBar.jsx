@@ -2,6 +2,10 @@ import React, { useState }  from "react";
 import { navigate } from "gatsby";
 import { BsSearch } from "react-icons/bs";
 
+/**
+ * search movies or series and see the results page
+ */
+
 const SearchBar = () => {
     const [showName, setShowName] = useState('');
       

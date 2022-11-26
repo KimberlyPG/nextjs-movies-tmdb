@@ -2,6 +2,16 @@ import React from 'react'
 
 import { minutesToHours } from '../utils/minutesToHours'
 
+/**
+ * Shows poster, release date and duration
+ * @param {string} state content type, movie or serie
+ * @param {object} details.poster_path movie or serie poster
+ * @param {object} details.release_date movies release date
+ * @param {object} details.runtime movies runtime
+ * @param {object} details.first_air_date series first air date
+ * @param {object} details.seasons series number of seasons
+ */
+
 const DetailsPoster = ({ state, details }) => {
   return (
     <div>
@@ -21,7 +31,7 @@ const DetailsPoster = ({ state, details }) => {
             </span>
         )}
     </div>
-  )
-}
+  );
+};
 
-export default DetailsPoster
+export default DetailsPoster;

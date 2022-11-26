@@ -1,6 +1,11 @@
 import React from 'react'
 import { useState } from "react";
 
+/**
+ * toggle between movies and series view
+ * @param {boolean} setMoviesView verify if the user selected movies or series 
+ */
+
 const Navbar = ({ setMoviesView }) => {
     const [moviesButtonBg, setMoviesButtonBg] = useState('#1B5BA9');
     const [showsButtonBg, setShowsButtonBg] = useState('transparent');
@@ -24,8 +29,12 @@ const Navbar = ({ setMoviesView }) => {
       }
 	return (
 		<div className='flex space-x-6 my-10'>   
-			<button className="text-gray-500 rounded-xl px-4" onClick={() => toggle(true)} style={{backgroundColor: `${moviesButtonBg}`, color: `${moviesButtonColor}`}}>Movies</button>
-			<button className="text-gray-500 rounded-xl px-4" onClick={() => toggle(false)} style={{backgroundColor: `${showsButtonBg}`, color: `${showsButtonColor}`}}>Tv Shows</button>
+			<button 
+				className="text-gray-500 rounded-xl px-4" 
+				onClick={() => toggle(true)} style={{backgroundColor: `${moviesButtonBg}`, color: `${moviesButtonColor}`}}>Movies</button>
+			<button 
+				className="text-gray-500 rounded-xl px-4" 
+				onClick={() => toggle(false)} style={{backgroundColor: `${showsButtonBg}`, color: `${showsButtonColor}`}}>Tv Shows</button>
 		</div>
 	);
 };
