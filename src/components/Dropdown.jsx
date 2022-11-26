@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { alpha, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
 const CssTextField = styled(TextField)({
 	'& label.Mui-focused': {
@@ -16,7 +16,7 @@ const CssTextField = styled(TextField)({
 		borderColor: '#E1E1E1',
 	  },
 	},
-  });
+});
 
 const Dropdown = ({ options, countrySelected, handleChange }) => {
 
@@ -24,7 +24,7 @@ const Dropdown = ({ options, countrySelected, handleChange }) => {
 		<Autocomplete
 			sx={{ width: 200 }}
 			size={"small"}
-			color="white"
+			color={"white"}
 			options={options}
 			autoHighlight
 			onClick={(event, value) => {handleChange(value.value)}}
@@ -56,6 +56,6 @@ const Dropdown = ({ options, countrySelected, handleChange }) => {
 			)}
 		/>	
 	);
-}
+};
 
 export default Dropdown;

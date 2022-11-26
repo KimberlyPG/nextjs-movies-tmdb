@@ -5,7 +5,6 @@ import Dropdown from './Dropdown';
 import StreamingImg from './StreamingImg';
 
 const StreamingServices = ({ showMethod, setShowMethod, options, countrySelected, handleChange, providers }) => {
-    console.log("country", countrySelected)
 
     return (
         <>
