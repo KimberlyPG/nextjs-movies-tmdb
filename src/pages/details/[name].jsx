@@ -6,6 +6,7 @@ import { HiOutlineLink } from "react-icons/hi";
 import StreamingServices from "../../components/StreamingServices";
 import ShowsRating from "../../components/ShowsRating";
 import SimilarShows from "../../components/SimilarShows";
+import CountrySelect from "../../components/Dropdown";
 
 import { minutesToHours } from "../../utils/minutesToHours";
 import 'react-dropdown/style.css';
@@ -32,10 +33,10 @@ const Details = ({ location }) => {
     const verifyCountry = () => {       
         if (window.localStorage.getItem('country') === null) {
             window.localStorage.setItem('country', JSON.stringify('US'));    
-            setCountrySelected({ value: JSON.parse(getSavedContry()) });
+            setCountrySelected({ value: JSON.parse(getSavedContry()), label: regionNames.of(JSON.parse(getSavedContry())) });
         } 
         else {
-            setCountrySelected({ value: JSON.parse(getSavedContry()) });
+            setCountrySelected({ value: JSON.parse(getSavedContry()), label: regionNames.of(JSON.parse(getSavedContry())) });
         } 
     }
 
@@ -46,31 +47,27 @@ const Details = ({ location }) => {
        
         verifyCountry();
     }, [state.contentId])
-    
+
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
-            setOptions(options => [...options, {value: key, label: <div className="flex"><img className="w-6 mr-3" src={`https://flagcdn.com/w20/${key.toLowerCase()}.png`}/>{regionNames.of(key)}</div>}])
+            setOptions(options => [...options, {value: key, label: regionNames.of(key)}])
         })
     }, [providers])
     
-    useEffect(() => {
-        if(countrySelected.value) {
-            let value = countrySelected?.value;
-            let idx = options.findIndex((name) => name.value === value);
-            let label = <div className="flex"><img className="w-6 mr-3" src={`https://flagcdn.com/w20/${value.toLowerCase()}.png`}/>{regionNames.of(value)}</div>
-            setCountrySelected({value, label, idx});
-        }
-    }, [options])
+    // useEffect(() => {
+    //     if(countrySelected.value) {
+    //         let value = countrySelected?.value;
+    //         let idx = options.findIndex((name) => name.value === value);
+    //         let label = regionNames.of(value)
+    //         setCountrySelected({value, label, idx});
+    //     }
+    // }, [options])
    
     const handleChange = (option) => {
         window.localStorage.removeItem('country');
-        
-        let value = option.value;
-        let idx = options.findIndex((name) => name.value === value);
-        let label = <div className="flex"><img className="w-6 mr-3" src={`https://flagcdn.com/w20/${value.toLowerCase()}.png`}/>{regionNames.of(value)}</div>
-        setCountrySelected({value, label, idx});
-
-        window.localStorage.setItem('country', JSON.stringify(value));
+        let label = regionNames.of(option)
+        setCountrySelected({option, label});
+        window.localStorage.setItem('country', JSON.stringify(option));
     }
 
     return (
@@ -116,14 +113,15 @@ const Details = ({ location }) => {
                                     <p className="text-gray-100 xl:text-lg lg:text-base sm:text-sm xs:text-xs font-semibold">{details?.overview}</p>
                                 </span>
                                 <ShowsRating data={details} />
-                                <StreamingServices 
+                                {/* <StreamingServices 
                                     setShowMethod={setShowMethod} 
                                     handleChange={handleChange} 
                                     countrySelected={countrySelected} 
                                     showMethod={showMethod} 
                                     providers={providers}
                                     options={options}
-                                />
+                                /> */}
+                                <CountrySelect options={options} countrySelected={countrySelected} handleChange={handleChange} providers={providers} />
                             </div>
                             <Genres data={details?.genres} />
                         </div>

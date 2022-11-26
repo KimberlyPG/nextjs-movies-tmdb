@@ -15,7 +15,6 @@ const StreamingServices = ({ setShowMethod, handleChange, countrySelected, showM
                         <button className="mb-3 lg:text-base xs:text-sm" onClick={() => setShowMethod('buy')}>Buy</button>
                         <button className="mb-3 lg:text-base xs:text-sm" onClick={() => setShowMethod('rent')}>Rent</button>
                         <Dropdown 
-                            className="text-xs ml-10 w-48 text-xs"
                             options={options} 
                             onChange={handleChange} 
                             value={countrySelected} 
@@ -24,17 +23,17 @@ const StreamingServices = ({ setShowMethod, handleChange, countrySelected, showM
                     </div>
                     <div className="flex space-x-5">
                         {showMethod === 'flatrate' &&
-                            Object.values(providers)[countrySelected.idx]?.flatrate?.map((item) => (
+                            providers[countrySelected.value].flatrate.map((item) => (         
                                 <StreamingImg item={item}/> 
                             ))
                         }
                         {showMethod === 'buy' &&
-                            Object.values(providers)[countrySelected.idx]?.buy?.map((item) => (
+                            providers[countrySelected.value].buy.map((item) => (
                                 <StreamingImg item={item}/>  
                             ))
                         }
                         {showMethod === 'rent' &&
-                            Object.values(providers)[countrySelected.idx]?.rent?.map((item) => (
+                            providers[countrySelected.value].rent.map((item) => (
                                 <StreamingImg item={item}/>  
                             ))
                         }
