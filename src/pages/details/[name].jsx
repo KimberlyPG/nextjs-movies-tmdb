@@ -59,6 +59,8 @@ const Details = ({ location }) => {
         window.localStorage.setItem('country', JSON.stringify(value));
     }
 
+    console.log("details", details)
+
     return (
         <>
             <div className="w-full" 
@@ -82,7 +84,7 @@ const Details = ({ location }) => {
                             ):(
                             <span className="flex text-white space-x-5 font-semibold lg:text-lg md:text-md xs:text-sm ml-3">
                                 <p>{details?.first_air_date?.split('-')[0]}</p>
-                                <p>{details?.seasons.length}{details?.seasons.length > 1 ? ' Seasons' : ' Season'}</p>
+                                <p>{details?.seasons?.length}{details?.seasons.length > 1 ? ' Seasons' : ' Season'}</p>
                             </span>
                         )}
                     </div>
@@ -113,10 +115,12 @@ const Details = ({ location }) => {
                             </div>
                             <Genres data={details?.genres} />
                         </div>
-                        <Link className="flex xs:items-center text-white w-28 rounded-sm space-x-2 font-semibold" to={details?.homepage} target="_blank">
-                            <HiOutlineLink className="xs:text-sm sm:text-sm lg:text-base"/>
-                            <p className="text-white text-center xs:text-sm sm:text-sm lg:text-base">Website</p> 
-                        </Link>
+                        {details?.homepage !== '' &&
+                            <Link className="flex xs:items-center text-white w-28 rounded-sm space-x-2 font-semibold" to={details?.homepage} target="_blank">
+                                <HiOutlineLink className="xs:text-sm sm:text-sm lg:text-base"/>
+                                <p className="text-white text-center xs:text-sm sm:text-sm lg:text-base">Website</p> 
+                            </Link>
+                        }
                     </div>
                 </div>
             </div>   
