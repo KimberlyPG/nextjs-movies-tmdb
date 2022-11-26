@@ -1,40 +1,39 @@
 import React from 'react'
-import Dropdown from 'react-dropdown';
+
+import Dropdown from './Dropdown';
 
 import StreamingImg from './StreamingImg';
 
-const StreamingServices = ({ setShowMethod, handleChange, countrySelected, showMethod, providers, options }) => {
+const StreamingServices = ({ showMethod, setShowMethod, options, countrySelected, handleChange, providers }) => {
 
     return (
         <>
             {options.length > 0 &&
                 <div className="mt-5 text-white">
                     <p className="font-bold lg:text-base xs:text-sm">Stream</p>
-                    <div className="flex space-x-5 h-8 mb-3">
-                        <button className="mb-3 lg:text-base xs:text-sm" onClick={() => setShowMethod('flatrate')}>Flatrate</button>
-                        <button className="mb-3 lg:text-base xs:text-sm" onClick={() => setShowMethod('buy')}>Buy</button>
-                        <button className="mb-3 lg:text-base xs:text-sm" onClick={() => setShowMethod('rent')}>Rent</button>
+                    <div className="flex space-x-5 h-8 mb-5">
+                        <button className="mt-1 lg:text-base xs:text-sm" onClick={() => setShowMethod('flatrate')}>Flatrate</button>
+                        <button className="mt-1 lg:text-base xs:text-sm" onClick={() => setShowMethod('buy')}>Buy</button>
+                        <button className="mt-1 lg:text-base xs:text-sm" onClick={() => setShowMethod('rent')}>Rent</button>
                         <Dropdown 
-                            className="text-xs ml-10 w-48 text-xs"
                             options={options} 
-                            onChange={handleChange} 
-                            value={countrySelected} 
-                            placeholder="Select an option"
+                            countrySelected={countrySelected} 
+                            handleChange={handleChange}
                         />
                     </div>
                     <div className="flex space-x-5">
                         {showMethod === 'flatrate' &&
-                            Object.values(providers)[countrySelected.idx]?.flatrate?.map((item) => (
+                            providers[countrySelected.value]?.flatrate?.map((item) => (         
                                 <StreamingImg item={item}/> 
                             ))
                         }
                         {showMethod === 'buy' &&
-                            Object.values(providers)[countrySelected.idx]?.buy?.map((item) => (
+                            providers[countrySelected.value]?.buy?.map((item) => (
                                 <StreamingImg item={item}/>  
                             ))
                         }
                         {showMethod === 'rent' &&
-                            Object.values(providers)[countrySelected.idx]?.rent?.map((item) => (
+                            providers[countrySelected.value]?.rent?.map((item) => (
                                 <StreamingImg item={item}/>  
                             ))
                         }

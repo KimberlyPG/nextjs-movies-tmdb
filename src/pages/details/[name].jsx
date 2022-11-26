@@ -6,11 +6,11 @@ import { HiOutlineLink } from "react-icons/hi";
 import StreamingServices from "../../components/StreamingServices";
 import ShowsRating from "../../components/ShowsRating";
 import SimilarShows from "../../components/SimilarShows";
-
-import { minutesToHours } from "../../utils/minutesToHours";
-import 'react-dropdown/style.css';
 import Genres from "../../components/Genres";
+import DetailsContainer from "../../components/DetailsContainer";
+import DetailsPoster from "../../components/DetailsPoster";
 
+import 'react-dropdown/style.css';
 import { detailsData } from "../../tmdb/detailsData";
 
 const Details = ({ location }) => {
@@ -22,7 +22,6 @@ const Details = ({ location }) => {
     const [countrySelected, setCountrySelected] = useState('');
     const [similar, setSimilar] = useState([]);
 
-    
     const getSavedContry = () => window.localStorage.getItem('country');
  
     const regionNames = new Intl.DisplayNames(
@@ -32,10 +31,10 @@ const Details = ({ location }) => {
     const verifyCountry = () => {       
         if (window.localStorage.getItem('country') === null) {
             window.localStorage.setItem('country', JSON.stringify('US'));    
-            setCountrySelected({ value: JSON.parse(getSavedContry()) });
+            setCountrySelected({ value: JSON.parse(getSavedContry()), label: regionNames.of(JSON.parse(getSavedContry())) });
         } 
         else {
-            setCountrySelected({ value: JSON.parse(getSavedContry()) });
+            setCountrySelected({ value: JSON.parse(getSavedContry()), label: regionNames.of(JSON.parse(getSavedContry())) });
         } 
     }
 
@@ -46,60 +45,24 @@ const Details = ({ location }) => {
        
         verifyCountry();
     }, [state.contentId])
-    
+
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
-            setOptions(options => [...options, {value: key, label: <div className="flex"><img className="w-6 mr-3" src={`https://flagcdn.com/w20/${key.toLowerCase()}.png`}/>{regionNames.of(key)}</div>}])
+            setOptions(options => [...options, {value: key, label: regionNames.of(key)}])
         })
     }, [providers])
     
-    useEffect(() => {
-        if(countrySelected.value) {
-            let value = countrySelected?.value;
-            let idx = options.findIndex((name) => name.value === value);
-            let label = <div className="flex"><img className="w-6 mr-3" src={`https://flagcdn.com/w20/${value.toLowerCase()}.png`}/>{regionNames.of(value)}</div>
-            setCountrySelected({value, label, idx});
-        }
-    }, [options])
-   
-    const handleChange = (option) => {
-        window.localStorage.removeItem('country');
-        
-        let value = option.value;
-        let idx = options.findIndex((name) => name.value === value);
-        let label = <div className="flex"><img className="w-6 mr-3" src={`https://flagcdn.com/w20/${value.toLowerCase()}.png`}/>{regionNames.of(value)}</div>
-        setCountrySelected({value, label, idx});
-
+    const handleChange = (value) => {
+        let label = regionNames.of(value)
+        setCountrySelected({value, label});
         window.localStorage.setItem('country', JSON.stringify(value));
     }
 
     return (
         <>
-            <div className="w-full" 
-                style={{
-                    backgroundSize: 'cover', 
-                    backgroundImage:`linear-gradient(0deg, rgba(1, 124, 128,0.8), rgba(1, 124, 128,0.8)), url(https://image.tmdb.org/t/p/w1280/${details?.backdrop_path})`,
-                    backgroundAttachment: 'fixed',
-                }}
-            >
+            <DetailsContainer details={details}>
                 <div className="flex md:flex-row xs:flex-col xl:p-10 xs:p-4 xl:mx-20 justify-center items-center">
-                    <div>
-                        <img 
-                            className="rounded-xl md:w-80 xs:w-64"
-                            src={`https://image.tmdb.org/t/p/w1280/${details?.poster_path}`} 
-                        />
-                        {state.type === 'movie' ? (
-                            <span className="flex text-white space-x-5 font-semibold lg:text-lg md:text-md xs:text-sm ml-3">
-                                <p>{details?.release_date?.split('-')[0]}</p>
-                                <p>{minutesToHours(details?.runtime)}</p>
-                            </span>
-                            ):(
-                            <span className="flex text-white space-x-5 font-semibold lg:text-lg md:text-md xs:text-sm ml-3">
-                                <p>{details?.first_air_date?.split('-')[0]}</p>
-                                <p>{details?.seasons.length}{details?.seasons.length > 1 ? ' Seasons' : ' Season'}</p>
-                            </span>
-                        )}
-                    </div>
+                    <DetailsPoster state={state} details={details} />
                     <div className="flex lg:w-3/5 md:w-3/5 xs:w-full flex-col xl:mx-20 md:mx-10 xs:mx-2 md:items-start xs:items-center">
                         <span className="my-5">
                             {state.type === 'movie' ?
@@ -117,23 +80,25 @@ const Details = ({ location }) => {
                                 </span>
                                 <ShowsRating data={details} />
                                 <StreamingServices 
-                                    setShowMethod={setShowMethod} 
-                                    handleChange={handleChange} 
-                                    countrySelected={countrySelected} 
                                     showMethod={showMethod} 
+                                    setShowMethod={setShowMethod} 
+                                    options={options} 
+                                    countrySelected={countrySelected} 
+                                    handleChange={handleChange} 
                                     providers={providers}
-                                    options={options}
                                 />
                             </div>
                             <Genres data={details?.genres} />
                         </div>
-                        <Link className="flex xs:items-center text-white w-28 rounded-sm space-x-2 font-semibold" to={details?.homepage} target="_blank">
-                            <HiOutlineLink className="xs:text-sm sm:text-sm lg:text-base"/>
-                            <p className="text-white text-center xs:text-sm sm:text-sm lg:text-base">Website</p> 
-                        </Link>
+                        {details?.homepage !== '' &&
+                            <Link className="flex xs:items-center text-white w-28 rounded-sm space-x-2 font-semibold" to={details?.homepage} target="_blank">
+                                <HiOutlineLink className="xs:text-sm sm:text-sm lg:text-base"/>
+                                <p className="text-white text-center xs:text-sm sm:text-sm lg:text-base">Website</p> 
+                            </Link>
+                        }
                     </div>
                 </div>
-            </div>   
+            </DetailsContainer>   
             <SimilarShows state={state} similar={similar} />
         </>
     )
