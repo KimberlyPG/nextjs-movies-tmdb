@@ -16,8 +16,8 @@ const MultiCarousel = ({ show, type }) => {
   return (
     <Carousel responsive={responsive} centerMode={true} >
         {show && show.map((item) => (
-            <div className="h-full sm:p-3 xs:p-1">
-              <ShowCard key={item.id} item={item} type={type} page='home' />
+            <div key={item.id} className="h-full sm:p-3 xs:p-1">
+              <ShowCard item={item} type={type} page="home" />
             </div>
           )
           )}

@@ -18,7 +18,7 @@ const Skeletons = () => {
 		<Skeleton variant="rounded" width={170} height={14} className='px-3' />
 		<Carousel responsive={responsive} centerMode={true}>
 			{Array.from({ length: 9 }, (_, i) => (
-			<div className="w-full sm:p-3 xs:p-1">
+			<div key={'popularSkeleton'} className="w-full sm:p-3 xs:p-1">
 				<Skeleton variant="rounded" height={240} />
 			</div>
 			))}
@@ -26,7 +26,7 @@ const Skeletons = () => {
 		<Skeleton variant="rounded" width={170} height={14} className='px-3 mt-5' />
 		<Carousel responsive={responsive} centerMode={true}>
 			{Array.from({ length: 9 }, (_, i) => (
-			<div className="w-full sm:p-3 xs:p-1">
+			<div key={'TopSkeleton'} className="w-full sm:p-3 xs:p-1">
 				<Skeleton variant="rounded" height={240} />
 			</div>
 			))}
@@ -34,7 +34,7 @@ const Skeletons = () => {
 		<Skeleton variant="rounded" width={170} height={14} className='px-3 mt-5' />
 		<Carousel responsive={responsive} centerMode={true}>
 			{Array.from({ length: 9 }, (_, i) => (
-			<div className="w-full sm:p-3 xs:p-1">
+			<div key={'nowSkeleton'} className="w-full sm:p-3 xs:p-1">
 				<Skeleton variant="rounded" height={240} />
 			</div>
 			))}

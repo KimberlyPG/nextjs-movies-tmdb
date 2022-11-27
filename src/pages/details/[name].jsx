@@ -32,23 +32,22 @@ const Details = ({ location }) => {
         ['en'], {type: 'region'}
     );
 
-    const verifyCountry = () => {       
-        if (window.localStorage.getItem('country') === null) {
-            window.localStorage.setItem('country', JSON.stringify('US'));    
-            setCountrySelected({ value: JSON.parse(getSavedContry()), label: regionNames.of(JSON.parse(getSavedContry())) });
-        } 
-        else {
-            setCountrySelected({ value: JSON.parse(getSavedContry()), label: regionNames.of(JSON.parse(getSavedContry())) });
-        } 
-    }
-
     useEffect(() => {
         detailsData(state, setDetails, '')
         detailsData(state, setProviders, '/watch/providers');
         detailsData(state, setSimilar, '/similar');
        
+        const verifyCountry = () => {       
+            if (window.localStorage.getItem('country') === null) {
+                window.localStorage.setItem('country', JSON.stringify('US'));    
+                setCountrySelected({ value: JSON.parse(getSavedContry()), label: regionNames.of(JSON.parse(getSavedContry())) });
+            } 
+            else {
+                setCountrySelected({ value: JSON.parse(getSavedContry()), label: regionNames.of(JSON.parse(getSavedContry())) });
+            } 
+        }
         verifyCountry();
-    }, [state.contentId])
+    }, [state])
 
     useEffect(() => {
         Object.keys(providers).forEach((key) => {

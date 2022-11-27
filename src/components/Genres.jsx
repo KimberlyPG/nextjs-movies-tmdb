@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * movies and series genres list for details page
- * @param {array} data getting movies and series genres   
+ * @param {array} data getting movies or series genres   
  */
 
 const Genres = ({ data }) => {
@@ -13,7 +13,7 @@ const Genres = ({ data }) => {
             </p>
             <div className="flex lg:flex-col">
                 {data?.map((genre) => (
-                    <div className="flex xs:mr-2 xl:mr-0">
+                    <div key={genre.id} className="flex xs:mr-2 xl:mr-0">
                         <p className="lg:border w-full lg:border-green-300 rounded-lg lg:mb-2 xs:text-green-500 
                         lg:text-white lg:text-center lg:px-2 xl:text-base lg:text-sm xs:text-xs">
                             {genre.name}
