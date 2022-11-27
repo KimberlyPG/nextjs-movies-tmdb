@@ -26,6 +26,16 @@ const CssTextField = styled(TextField)({
  */
 
 const Dropdown = ({ options, countrySelected, handleChange }) => {
+	
+	const regionNames = new Intl.DisplayNames(
+        ['en'], {type: 'region'}
+    );
+
+	const defaultValues = () => {
+		const value = countrySelected.value;
+		const label = regionNames.of(countrySelected.value);
+		return {value, label}
+	}
 
 	return (
 		<Autocomplete
@@ -34,11 +44,11 @@ const Dropdown = ({ options, countrySelected, handleChange }) => {
 			color={"white"}
 			options={options}
 			autoHighlight
-			onClick={(event, value) => {handleChange(value.value)}}
 			onChange={(event, value) => {handleChange(value.value)}} 
-			value={countrySelected}
+			value={defaultValues()}
 			getOptionLabel={(option) => option.label}
 			disableClearable
+			isOptionEqualToValue={(option, value) => option.value === value.value}
 			renderOption={(props, option) => (
 				<Box component="li" sx={{ '& > img': { mr: 2 }}} {...props}>
 					<img
@@ -47,7 +57,7 @@ const Dropdown = ({ options, countrySelected, handleChange }) => {
 						src={`https://flagcdn.com/w20/${option.value.toLowerCase()}.png`}
 						alt=""
 					/>
-					{option.label}
+					{regionNames.of(option.value)}
 				</Box>
 			)}
 			renderInput={(params) => (

@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link } from "gatsby";
 import { HiOutlineLink } from "react-icons/hi";
 
 import StreamingServices from "../../components/StreamingServices";
@@ -14,7 +13,7 @@ import 'react-dropdown/style.css';
 import { detailsData } from "../../tmdb/detailsData";
 
 /**
- * page that shows all the movies or series details
+ * page that shows all the movies or series details and also the similar shows
  * @param {object} location getting state data from show card component
  */
 
@@ -26,11 +25,10 @@ const Details = ({ location }) => {
     const [countrySelected, setCountrySelected] = useState('');
     const [similar, setSimilar] = useState([]);
 
-    const getSavedContry = () => window.localStorage.getItem('country');
- 
-    const regionNames = new Intl.DisplayNames(
-        ['en'], {type: 'region'}
-    );
+    const getSavedContry = () => {
+        const country = window.localStorage.getItem('country');
+        return JSON.parse(country);
+    };
 
     useEffect(() => {
         detailsData(state, setDetails, '')
@@ -40,10 +38,10 @@ const Details = ({ location }) => {
         const verifyCountry = () => {       
             if (window.localStorage.getItem('country') === null) {
                 window.localStorage.setItem('country', JSON.stringify('US'));    
-                setCountrySelected({ value: JSON.parse(getSavedContry()), label: regionNames.of(JSON.parse(getSavedContry())) });
+                setCountrySelected({ value: getSavedContry() });
             } 
             else {
-                setCountrySelected({ value: JSON.parse(getSavedContry()), label: regionNames.of(JSON.parse(getSavedContry())) });
+                setCountrySelected({ value: getSavedContry() });
             } 
         }
         verifyCountry();
@@ -51,13 +49,12 @@ const Details = ({ location }) => {
 
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
-            setOptions(options => [...options, {value: key, label: regionNames.of(key)}])
+            setOptions(options => [...options, {value: key}])
         })
     }, [providers])
     
     const handleChange = (value) => {
-        let label = regionNames.of(value)
-        setCountrySelected({value, label});
+        setCountrySelected({value});
         window.localStorage.setItem('country', JSON.stringify(value));
     }
 
@@ -92,10 +89,15 @@ const Details = ({ location }) => {
                             <Genres data={details?.genres} />
                         </div>
                         {details?.homepage !== '' &&
-                            <Link className="flex xs:items-center text-white w-28 rounded-sm space-x-2 font-semibold" to={details?.homepage} target="_blank">
+                            <a 
+                                className="flex xs:items-center text-white w-28 rounded-sm space-x-2 font-semibold" 
+                                href={details?.homepage} 
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 <HiOutlineLink className="xs:text-sm sm:text-sm lg:text-base"/>
                                 <p className="text-white text-center xs:text-sm sm:text-sm lg:text-base">Website</p> 
-                            </Link>
+                            </a>
                         }
                     </div>
                 </div>
