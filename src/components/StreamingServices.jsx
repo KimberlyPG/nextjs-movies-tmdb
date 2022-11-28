@@ -35,17 +35,17 @@ const StreamingServices = ({ options, countrySelected, handleChange, providers }
                     <div className="flex space-x-5">
                         {showMethod === 'flatrate' &&
                             providers[countrySelected.value]?.flatrate?.map((item) => (         
-                                <StreamingImg item={item}/> 
+                                <StreamingImg key={item.provider_id} item={item}/> 
                             ))
                         }
                         {showMethod === 'buy' &&
                             providers[countrySelected.value]?.buy?.map((item) => (
-                                <StreamingImg item={item}/>  
+                                <StreamingImg key={item.provider_id} item={item}/>  
                             ))
                         }
                         {showMethod === 'rent' &&
                             providers[countrySelected.value]?.rent?.map((item) => (
-                                <StreamingImg item={item}/>  
+                                <StreamingImg key={item.provider_id} item={item}/>  
                             ))
                         }
                     </div>
