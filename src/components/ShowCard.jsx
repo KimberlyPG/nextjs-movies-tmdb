@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby';
 
+import { ratingFormat } from '../utils/ratingFormat';
+
 /**
  * Creates the movie or serie card for all the pages
  * @param {string} item.poster_path movie or serie poster
@@ -23,7 +25,7 @@ const ShowCard = ({ item, type, page }) => {
 				<div className='relative'>
 					{item.vote_average !== 0 && item.vote_average!== undefined &&
 						<div className="flex justify-center z-10 absolute p-2 rounded-full h-8 w-8 m-3 bg-gray-200 bg-opacity-90">
-							<p className="text-xs text-green-600">{item.vote_average}</p>
+							<p className="text-xs text-green-600">{ratingFormat(item.vote_average)}</p>
 						</div>
 					} 
 					<span className='flex z-10 absolute bottom-0 p-1 text-xs text-white font-bold space-x-5'>

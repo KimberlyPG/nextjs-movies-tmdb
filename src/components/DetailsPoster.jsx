@@ -17,7 +17,7 @@ const DetailsPoster = ({ state, details }) => {
     <div>
         <img 
             className="rounded-xl md:w-80 xs:w-64"
-            src={`https://image.tmdb.org/t/p/w1280/${details?.poster_path}`} 
+            src={`https://image.tmdb.org/t/p/w780/${details?.poster_path}`} 
             alt={`${details?.poster_path} poster`}
         />
         {state.type === 'movie' ? (
