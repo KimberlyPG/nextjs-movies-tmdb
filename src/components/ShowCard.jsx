@@ -42,7 +42,7 @@ const ShowCard = ({ item, type, page }) => {
 					<div className='overflow-hidden h-full'>
 						<img 
 							className="hover:opacity-90 h-full rounded-xl hover:scale-110"
-							src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path.original === undefined ? item.poster_path : item.poster_path.original}`} 
+							src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${item.poster_path}`} 
 							alt={`${item.name} poster`}
 						/> 
 					</div>
