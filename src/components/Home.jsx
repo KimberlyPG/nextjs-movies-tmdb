@@ -13,6 +13,7 @@ const Home = () => {
 	const [moviesView, setMoviesView] = useState(true);
 	const [topRatedMovies, setTopRatedMovies] = useState([]);
 	const [topRatedTv, setTopRatedTv] = useState([]);
+	const [popularMovies, setPopularMovies] = useState([]);
 
 	const { loading: popularMoviesLoading, error: popularMoviesError, data: popularMoviesData } = useQuery(POPULAR_MOVIES);
 	const { loading: popularShowsLoading, error: popularShowsError, data: popularShowsData } = useQuery(POPULAR_SHOWS);
@@ -20,10 +21,11 @@ const Home = () => {
 	const { loading: airingTodayShowsLoading, error: airingTodayShowsError, data: airingTodayShowsData } = useQuery(AIRING_TODAY_SHOWS);
 
 	useEffect(() => {
-		showsData('movie', setTopRatedMovies);
-		showsData('tv', setTopRatedTv);
+		showsData('movie', 'top_rated', setTopRatedMovies);
+		showsData('tv', 'top_rated', setTopRatedTv);
+		showsData('movie', 'popular', setPopularMovies);
 	}, [])
-
+	console.log("popular", popularMovies)
 
     if (popularMoviesLoading || nowPlayingMoviesLoading || popularShowsLoading || airingTodayShowsLoading) return <Skeletons />
     // if (popularMoviesError || nowPlayingMoviesError || popularShowsError || airingTodayShowsError) return <div>Something went wrong...</div>;
@@ -34,7 +36,7 @@ const Home = () => {
 				{moviesView === true ? (
 				<>
 					<h2 className="text-lg font-bold px-3">Popular movies</h2>
-					{/* <MultiCarousel key="popularMovie" show={popularMoviesData.popularMovies.movies} type="movie" /> */}
+					<MultiCarousel key="popularMovie" show={popularMovies?.results} type="movie" />
 					<h2 className="text-lg font-bold px-3 mt-5">Top rated movies</h2>
 					<MultiCarousel key="movieTop" show={topRatedMovies?.results} type="movie" />
 					<h2 className="text-lg font-bold px-3 mt-5">Now playing movies</h2> 
