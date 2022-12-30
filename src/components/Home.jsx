@@ -14,6 +14,7 @@ const Home = () => {
 	const [topRatedMovies, setTopRatedMovies] = useState([]);
 	const [topRatedTv, setTopRatedTv] = useState([]);
 	const [popularMovies, setPopularMovies] = useState([]);
+	const [popularTv, setPopularTv] = useState([]);
 
 	const { loading: popularMoviesLoading, error: popularMoviesError, data: popularMoviesData } = useQuery(POPULAR_MOVIES);
 	const { loading: popularShowsLoading, error: popularShowsError, data: popularShowsData } = useQuery(POPULAR_SHOWS);
@@ -24,8 +25,9 @@ const Home = () => {
 		showsData('movie', 'top_rated', setTopRatedMovies);
 		showsData('tv', 'top_rated', setTopRatedTv);
 		showsData('movie', 'popular', setPopularMovies);
+		showsData('tv', 'popular', setPopularTv);
 	}, [])
-	console.log("popular", popularMovies)
+	console.log("popular", popularTv)
 
     if (popularMoviesLoading || nowPlayingMoviesLoading || popularShowsLoading || airingTodayShowsLoading) return <Skeletons />
     // if (popularMoviesError || nowPlayingMoviesError || popularShowsError || airingTodayShowsError) return <div>Something went wrong...</div>;
@@ -49,7 +51,7 @@ const Home = () => {
 					<h2 className="text-lg font-bold px-3">Top rated tv shows</h2>
 					<MultiCarousel key="tvTop" show={topRatedTv?.results} type="tv" />
 					<h2 className="text-lg font-bold px-3">Popular shows</h2>
-					{/* <MultiCarousel key="popularTv" show={popularShowsData.popularShows.shows} type="tv" /> */}
+					<MultiCarousel key="popularTv" show={popularTv?.results} type="tv" />
 				</>
 				)}
 			</div>
