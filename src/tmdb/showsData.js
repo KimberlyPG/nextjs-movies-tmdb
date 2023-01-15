@@ -1,4 +1,5 @@
-export const showsData = async( state, slug, setData) => {
+export const showsData = async( state, slug, setData, setStatus) => {
+  setStatus("loading");
     await fetch(`https://api.themoviedb.org/3/${state}/${slug}?api_key=${process.env.GATSBY_API_KEY}&language=en-US&page=1`) 
     .then((response) => {
         if (!response.ok) {
@@ -8,6 +9,7 @@ export const showsData = async( state, slug, setData) => {
         }
     })
     .then((data) => {
-        setData(data);
+        setData(data?.results);
+        setStatus(true);
     });
 }
