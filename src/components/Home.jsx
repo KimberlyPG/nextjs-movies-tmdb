@@ -16,6 +16,7 @@ const Home = () => {
 	const [popularMovies, setPopularMovies] = useState([]);
 	const [popularTv, setPopularTv] = useState([]);
 	const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
+	const [nowPlayingTv, setNowPlayingTv] = useState([]);
 
 	const { loading: popularMoviesLoading, error: popularMoviesError, data: popularMoviesData } = useQuery(POPULAR_MOVIES);
 	const { loading: popularShowsLoading, error: popularShowsError, data: popularShowsData } = useQuery(POPULAR_SHOWS);
@@ -28,6 +29,7 @@ const Home = () => {
 		showsData('movie', 'popular', setPopularMovies);
 		showsData('tv', 'popular', setPopularTv);
 		showsData('movie', 'now_playing', setNowPlayingMovies)
+		showsData('tv', 'airing_today', setNowPlayingTv)
 	}, [])
 	console.log("popular", popularTv)
 
@@ -49,7 +51,7 @@ const Home = () => {
 				):(
 				<>
 					<h2 className="text-lg font-bold px-3">TV shows airing today</h2>
-					{/* <MultiCarousel key="airing" show={airingTodayShowsData.airingTodayShows.shows} type="tv" /> */}
+					<MultiCarousel key="airing" show={nowPlayingTv?.results} type="tv" />
 					<h2 className="text-lg font-bold px-3">Top rated tv shows</h2>
 					<MultiCarousel key="tvTop" show={topRatedTv?.results} type="tv" />
 					<h2 className="text-lg font-bold px-3">Popular shows</h2>
