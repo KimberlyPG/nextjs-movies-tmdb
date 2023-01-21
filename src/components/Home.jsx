@@ -56,7 +56,6 @@ const Home = () => {
 	`);
 
     if (popularMoviesLoading || nowPlayingMoviesLoading || popularShowsLoading || airingTodayShowsLoading) return <Skeletons />
-    if (popularMoviesError || nowPlayingMoviesError || popularShowsError || airingTodayShowsError) return <div>Something went wrong...</div>;
     return (
 		<>   
 			<div className="2xl:mx-20 xl:mx-8 lg:mx-5 xs:mx-2 lg:mt-5 sm:mt-5">
