@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import SearchBar from "./SearchBar";
 
-import logo from "../assets/logo.svg";
+import logo from "../styles/logo.svg";
 
 /**
  * topbar that includes tmdb logo and a searchbar

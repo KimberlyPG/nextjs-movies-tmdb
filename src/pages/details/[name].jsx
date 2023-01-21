@@ -87,7 +87,7 @@ const Details = ({ location }) => {
                             </div>
                             <Genres data={details?.genres} />
                         </div>
-                        {/* {details?.homepage !== '' &&
+                        {details?.homepage !== '' &&
                             <a 
                                 className="flex xs:items-center text-white w-28 rounded-sm space-x-2 font-semibold" 
                                 href={details?.homepage} 
@@ -97,7 +97,7 @@ const Details = ({ location }) => {
                                 <HiOutlineLink className="xs:text-sm sm:text-sm lg:text-base"/>
                                 <p className="text-white text-center xs:text-sm sm:text-sm lg:text-base">Website</p> 
                             </a>
-                        } */}
+                        }
                     </div>
                 </div>
             </DetailsContainer>   
