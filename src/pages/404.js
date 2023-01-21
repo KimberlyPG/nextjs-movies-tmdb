@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link } from "gatsby"
+import Link from "next/link"
 
 const pageStyles = {
   color: "#232129",
