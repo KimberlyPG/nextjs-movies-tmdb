@@ -5,7 +5,7 @@ module.exports = {
   env:{
     apiKey: process.env.NEXT_API_KEY,
     sessionId: process.env.NEXT_SESSION_ID,
-    secret: process.env.JWT_SECRET
+    // secret: process.env.JWT_SECRET
   },
   images: {
     domains: ['static-cdn.jtvnw.net'],
