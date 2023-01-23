@@ -9,7 +9,6 @@ import ShowsList from "../../components/ShowsList";
 
 /**
  * page that shows all the search results 
- * @param {object} params getting the movie or serie name from the dynamic route 
  */
 
 const Search = () => {

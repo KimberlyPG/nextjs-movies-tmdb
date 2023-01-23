@@ -20,7 +20,7 @@ const ShowCard = ({ item, type, page }) => {
   
 	if(item.poster_path === null) return null
 	return (
-		<Link href={`/details/${item.title}`} state={{contentId: item.id, type: type}} >
+		<Link href={{pathname: `/details/${item.title}`, query: {contentId: (item.id), type: (type) }}} >
 			<div className='cursor-pointer'> 
 				<div className='relative'>
 					{item.vote_average !== 0 && item.vote_average!== undefined &&
