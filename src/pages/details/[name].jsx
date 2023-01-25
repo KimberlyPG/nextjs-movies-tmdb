@@ -1,5 +1,5 @@
-import React from "react";
 import { useState, useEffect } from "react";
+import { useRouter } from 'next/router';
 import { HiOutlineLink } from "react-icons/hi";
 
 import StreamingServices from "../../components/StreamingServices";
@@ -17,8 +17,11 @@ import { detailsData } from "../../tmdb/detailsData";
  * @param {object} location getting state data from show card component
  */
 
-const Details = ({ location }) => {
-    const { state = {} } = location
+const Details = () => {
+    const router = useRouter();
+    console.log("a", router.query.contentId);
+    const contentId = router.query.contentId;
+    const type = router.query.type;
     const [details, setDetails] = useState(null);
     const [providers, setProviders] = useState([]);
     const [options, setOptions] = useState([]);
@@ -31,9 +34,9 @@ const Details = ({ location }) => {
     };
 
     useEffect(() => {
-        detailsData(state, setDetails, '')
-        detailsData(state, setProviders, '/watch/providers');
-        detailsData(state, setSimilar, '/similar');
+        detailsData(contentId, type, setDetails, '')
+        detailsData(contentId, type, setProviders, '/watch/providers');
+        detailsData(contentId, type, setSimilar, '/similar');
        
         const verifyCountry = () => {       
             if (window.localStorage.getItem('country') === null) {
@@ -45,7 +48,7 @@ const Details = ({ location }) => {
             } 
         }
         verifyCountry();
-    }, [state])
+    }, [router])
 
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
@@ -62,10 +65,10 @@ const Details = ({ location }) => {
         <>
             <DetailsContainer details={details}>
                 <div className="flex md:flex-row xs:flex-col xl:p-10 xs:p-4 xl:mx-20 justify-center items-center">
-                    <DetailsPoster state={state} details={details} />
+                    <DetailsPoster type={type} details={details} />
                     <div className="flex lg:w-3/5 md:w-3/5 xs:w-full flex-col xl:mx-20 md:mx-10 xs:mx-2 md:items-start xs:items-center">
                         <span className="my-5">
-                            {state.type === 'movie' ?
+                            {type === 'movie' ?
                                 <h2 className="2xl:text-3xl xl:text-2xl md:text-xl text-white font-bold">{details?.title}</h2>
                                 :
                                 <h2 className="2xl:text-3xl xl:text-2xl md:text-xl text-white font-bold">{details?.name}</h2>
@@ -102,7 +105,7 @@ const Details = ({ location }) => {
                     </div>
                 </div>
             </DetailsContainer>   
-            <SimilarShows state={state} similar={similar} />
+            <SimilarShows type={type} similar={similar} />
         </>
     );
 };

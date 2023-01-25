@@ -12,7 +12,7 @@ import { minutesToHours } from '../utils/minutesToHours'
  * @param {object} details.seasons series number of seasons
  */
 
-const DetailsPoster = ({ state, details }) => {
+const DetailsPoster = ({ type, details }) => {
   return (
     <div>
         <img 
@@ -20,7 +20,7 @@ const DetailsPoster = ({ state, details }) => {
             src={`https://image.tmdb.org/t/p/w780/${details?.poster_path}`} 
             alt={`${details?.poster_path} poster`}
         />
-        {state.type === 'movie' ? (
+        {type === 'movie' ? (
             <span className="flex text-white space-x-5 font-semibold lg:text-lg md:text-md xs:text-sm ml-3">
                 <p>{details?.release_date?.split('-')[0]}</p>
                 <p>{minutesToHours(details?.runtime)}</p>

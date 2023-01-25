@@ -8,15 +8,15 @@ import ShowsList from './ShowsList';
  * @param {array} similar similar movies or series 
  */
 
-const SimilarShows = ({ state, similar }) => {
+const SimilarShows = ({ type, similar }) => {
 	return (
 		<div className="grid justify-items-center mt-10">
-			{state.type === 'movie' ? (
+			{type === 'movie' ? (
 				<h2 className="text-gray-500 text-2xl">Similar movies</h2> 
 				):( 
 				<h2 className="text-gray-500 text-2xl">Similar series</h2>
 			)}
-			<ShowsList data={similar} type={state.type} page='details' />
+			<ShowsList data={similar} type={type} page='details' />
 		</div>
   	);
 };

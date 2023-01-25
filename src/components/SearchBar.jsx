@@ -1,5 +1,5 @@
 import React, { useState }  from "react";
-import { navigate } from "gatsby";
+import { useRouter } from 'next/navigation';
 import { BsSearch } from "react-icons/bs";
 
 /**
@@ -8,6 +8,7 @@ import { BsSearch } from "react-icons/bs";
 
 const SearchBar = () => {
     const [showName, setShowName] = useState('');
+    const router = useRouter();
       
     const handleChange = (event) => {
         event.preventDefault();
@@ -16,7 +17,7 @@ const SearchBar = () => {
 
     const navigateToResults = (event) => {
         event.preventDefault();
-        navigate(`/search/${showName}`)
+        router.push(`/search/${showName}`)
         setShowName('');
     }
 
