@@ -14,5 +14,10 @@ module.exports = {
     });
 
     return config;
-  }
+  },
+  images: {
+    domains: [
+      'https://heartfelt-gecko-b08628.netlify.app/',
+    ]
+  },
 }
