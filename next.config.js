@@ -18,6 +18,7 @@ module.exports = {
   images: {
     domains: [
       'https://heartfelt-gecko-b08628.netlify.app/',
+      'static-cdn.jtvnw.net'
     ]
   },
 }
