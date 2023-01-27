@@ -3,8 +3,8 @@
 module.exports = {
   reactStrictMode: true,
   env:{
-    apiKey: process.env.NEXT_API_KEY,
-    sessionId: process.env.NEXT_SESSION_ID,
+    apiKey: process.env.NEXT_PUBLIC_API_KEY,
+    sessionId: process.env.NEXT_PUBLIC_SESSION_ID,
     // secret: process.env.JWT_SECRET
   },
   webpack(config) {
