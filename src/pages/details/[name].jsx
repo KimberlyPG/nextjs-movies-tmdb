@@ -14,12 +14,10 @@ import { detailsData } from "../../tmdb/detailsData";
 
 /**
  * page that shows all the movies or series details and also the similar shows
- * @param {object} location getting state data from show card component
  */
 
 const Details = () => {
     const router = useRouter();
-    console.log("a", router.query.contentId);
     const contentId = router.query.contentId;
     const type = router.query.type;
     const [details, setDetails] = useState(null);
@@ -68,11 +66,11 @@ const Details = () => {
                     <DetailsPoster type={type} details={details} />
                     <div className="flex lg:w-3/5 md:w-3/5 xs:w-full flex-col xl:mx-20 md:mx-10 xs:mx-2 md:items-start xs:items-center">
                         <span className="my-5">
-                            {type === 'movie' ?
+                            {type === 'movie' ? (
                                 <h2 className="2xl:text-3xl xl:text-2xl md:text-xl text-white font-bold">{details?.title}</h2>
-                                :
+                            ):(
                                 <h2 className="2xl:text-3xl xl:text-2xl md:text-xl text-white font-bold">{details?.name}</h2>
-                            }
+                            )}
                             <p className="text-gray-100 xl:text-base lg:text-lg xs:text-sm">{details?.tagline}</p>
                         </span>
                         <div className="lg:flex my-5">
