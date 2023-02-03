@@ -15,7 +15,7 @@ const Home = () => {
 	const [popularTv, setPopularTv] = useState([]);
 	const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
 	const [nowPlayingTv, setNowPlayingTv] = useState([]);
-	const [status, setStatus] = useState(true);
+	const [status, setStatus] = useState<boolean | string>(true);
 
 	useEffect(() => {
 		showsData('movie', 'top_rated', setTopRatedMovies, setStatus);
