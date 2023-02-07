@@ -1,4 +1,4 @@
-import React from 'react'
+import { ReactNode, FC } from 'react'
 import Topbar from './Topbar'
 
 /**
@@ -6,7 +6,11 @@ import Topbar from './Topbar'
  * @param children whole app
  */
 
-const Layout = ({ children }) => {
+interface LayoutProps{
+  children: ReactNode
+}
+
+const Layout: FC<LayoutProps> = ({ children }) => {
 return (
     <div>
         <Topbar />
