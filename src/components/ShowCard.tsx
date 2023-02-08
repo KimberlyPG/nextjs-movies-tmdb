@@ -18,7 +18,7 @@ import { HomeMovies, HomeTv } from 'types/tmdb-types';
  */
 
 type ShowCardProps = {
-	item: HomeMovies & HomeTv;
+	item: HomeMovies | HomeTv;
 	type: string;
 	page: string;
 }  

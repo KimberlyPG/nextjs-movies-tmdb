@@ -30,4 +30,3 @@ export type HomeTv = {
     vote_average:      number;
     vote_count:        number;
 }
-
