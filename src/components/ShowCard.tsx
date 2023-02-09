@@ -2,7 +2,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 
 import { ratingFormat } from '../utils/ratingFormat';
-import { HomeMovies, HomeTv } from 'types/tmdb-types';
+import { HomeMovies, HomeTv } from '../types/tmdb-types';
 
 /**
  * Creates the movie or serie card for all the pages
@@ -18,7 +18,7 @@ import { HomeMovies, HomeTv } from 'types/tmdb-types';
  */
 
 type ShowCardProps = {
-	item: HomeMovies | HomeTv;
+	item: HomeMovies & HomeTv;
 	type: string;
 	page: string;
 }  

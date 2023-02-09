@@ -5,7 +5,7 @@ import ShowCard from './ShowCard';
 
 import 'react-multi-carousel/lib/styles.css';
 import { responsive } from '../utils/carousel_responsive';
-import { HomeMovies, HomeTv } from 'types/tmdb-types';
+import { HomeMovies, HomeTv } from '../types/tmdb-types';
 /**
  * carousel with movies or series cards
  * @param {array} show movies or series data
