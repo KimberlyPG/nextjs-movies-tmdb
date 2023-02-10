@@ -1,4 +1,5 @@
-import React from 'react'
+import { FC } from 'react'
+import { HomeMovies, HomeTv } from '../types/tmdb-types';
 
 import ShowCard from './ShowCard'
 
@@ -9,7 +10,13 @@ import ShowCard from './ShowCard'
  * @param {string} page	page name
  */
 
-const ShowsList = ({ data, type, page }) => {
+type ShowsListProps = {
+	data: HomeMovies[] | HomeTv[];
+	type: string;
+	page: string;
+}
+
+const ShowsList: FC<ShowsListProps> = ({ data, type, page }) => {
   	return (
 		<div className="grid lg:gap-5 xs:gap-2 xl:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 lg:gap-9 xs:gap-2 xl:px-10 lg:px-5 xs:px-2 xl:w-4/5 mt-4">
 			{data && 

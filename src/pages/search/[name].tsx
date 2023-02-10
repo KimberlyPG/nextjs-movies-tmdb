@@ -18,7 +18,7 @@ const Search = () => {
 	const [moviesView, setMoviesView] = useState<boolean>(true);
 	const [moviesData, setmoviesData] = useState<HomeMovies[]>([]);
 	const [tvData, setTvData] = useState<HomeTv[]>([]);
-	const [status, setStatus] = useState(true);
+	const [status, setStatus] = useState<string | boolean>(true);
 	const [content, setContent] = useState<HomeMovies[] | HomeTv[]>([]);
 	console.log("md", moviesData)
 

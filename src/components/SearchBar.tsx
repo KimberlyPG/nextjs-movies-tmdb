@@ -1,4 +1,4 @@
-import { useState, ChangeEvent }  from "react";
+import { useState, ChangeEvent, FormEvent }  from "react";
 import { useRouter } from 'next/navigation';
 import { BsSearch } from "react-icons/bs";
 
@@ -15,7 +15,7 @@ const SearchBar = () => {
         setShowName(event.target.value);
     }
 
-    const navigateToResults = (event: ChangeEvent<HTMLInputElement>) => {
+    const navigateToResults = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         router.push(`/search/${showName}`)
         setShowName('');
