@@ -24,7 +24,7 @@ type ShowCardProps = {
 }  
 
 const ShowCard: FC<ShowCardProps> = ({ item, type, page }) => {
-  
+
 	if(item.poster_path === null) return null
 	return (
 		<Link href={{pathname: `/details/${item.title}`, query: {contentId: (item.id), type: (type) }}} >

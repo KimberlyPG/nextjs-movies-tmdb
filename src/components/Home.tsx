@@ -10,12 +10,12 @@ import { HomeMovies, HomeTv } from "../types/tmdb-types";
 
 const Home = () => {
 	const [moviesView, setMoviesView] = useState<boolean>(true);
-	const [topRatedMovies, setTopRatedMovies] = useState([]);
-	const [topRatedTv, setTopRatedTv] = useState([]);
-	const [popularMovies, setPopularMovies] = useState([]);
-	const [popularTv, setPopularTv] = useState([]);
-	const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
-	const [nowPlayingTv, setNowPlayingTv] = useState([]);([]);
+	const [topRatedMovies, setTopRatedMovies] = useState<HomeMovies[]>([]);
+	const [topRatedTv, setTopRatedTv] = useState<HomeTv[]>([]);
+	const [popularMovies, setPopularMovies] = useState<HomeMovies[]>([]);
+	const [popularTv, setPopularTv] = useState<HomeTv[]>([]);
+	const [nowPlayingMovies, setNowPlayingMovies] = useState<HomeMovies[]>([]);
+	const [nowPlayingTv, setNowPlayingTv] = useState<HomeTv[]>([]);([]);
 	const [status, setStatus] = useState<boolean | string>(true);
 
 	useEffect(() => {
