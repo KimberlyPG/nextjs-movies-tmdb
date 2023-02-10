@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import { useState, ChangeEvent }  from "react";
 import { useRouter } from 'next/navigation';
 import { BsSearch } from "react-icons/bs";
 
@@ -7,15 +7,15 @@ import { BsSearch } from "react-icons/bs";
  */
 
 const SearchBar = () => {
-    const [showName, setShowName] = useState('');
+    const [showName, setShowName] = useState<string>('');
     const router = useRouter();
       
-    const handleChange = (event) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         setShowName(event.target.value);
     }
 
-    const navigateToResults = (event) => {
+    const navigateToResults = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         router.push(`/search/${showName}`)
         setShowName('');
