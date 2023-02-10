@@ -6,6 +6,7 @@ import Skeletons from "../../components/Skeletons";
 
 import { searchContent } from "../../tmdb/search";
 import ShowsList from "../../components/ShowsList";
+import { HomeMovies, HomeTv } from "../../types/tmdb-types";
 
 /**
  * page that shows all the search results 
@@ -14,11 +15,12 @@ import ShowsList from "../../components/ShowsList";
 const Search = () => {
 	const router = useRouter();
 	const { name } = router.query;
-	const [moviesView, setMoviesView] = useState(true);
-	const [moviesData, setmoviesData] = useState([]);
-	const [tvData, setTvData] = useState([]);
+	const [moviesView, setMoviesView] = useState<boolean>(true);
+	const [moviesData, setmoviesData] = useState<HomeMovies[]>([]);
+	const [tvData, setTvData] = useState<HomeTv[]>([]);
 	const [status, setStatus] = useState(true);
-	const [content, setContent] = useState([]);
+	const [content, setContent] = useState<HomeMovies[] | HomeTv[]>([]);
+	console.log("md", moviesData)
 
 	useEffect(() => {
 		moviesView === true ? setContent(moviesData) : setContent(tvData);
