@@ -11,6 +11,7 @@ import DetailsPoster from "../../components/DetailsPoster";
 
 import 'react-dropdown/style.css';
 import { detailsData } from "../../tmdb/detailsData";
+import { ShowDetails, SimilarShowsData } from "../../types/tmdb-types";
 
 /**
  * page that shows all the movies or series details and also the similar shows
@@ -20,11 +21,11 @@ const Details = () => {
     const router = useRouter();
     const contentId = router.query.contentId;
     const type = router.query.type;
-    const [details, setDetails] = useState(null);
+    const [details, setDetails] = useState<ShowDetails>(null);
     const [providers, setProviders] = useState([]);
     const [options, setOptions] = useState([]);
-    const [countrySelected, setCountrySelected] = useState('');
-    const [similar, setSimilar] = useState([]);
+    const [countrySelected, setCountrySelected] = useState<string>('');
+    const [similar, setSimilar] = useState<SimilarShowsData[] | []>([]);
 
     const getSavedContry = () => {
         const country = window.localStorage.getItem('country');
