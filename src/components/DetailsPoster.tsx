@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { minutesToHours } from '../utils/minutesToHours'
+import { HomeMovies, HomeTv } from '../types/tmdb-types';
 
 /**
  * Shows poster, release date and duration
@@ -11,6 +12,11 @@ import { minutesToHours } from '../utils/minutesToHours'
  * @param {object} details.first_air_date series first air date
  * @param {object} details.seasons series number of seasons
  */
+
+type DetailsPosterProps = {
+    type: string;
+    details: HomeMovies | HomeTv;
+}
 
 const DetailsPoster = ({ type, details }) => {
   return (
