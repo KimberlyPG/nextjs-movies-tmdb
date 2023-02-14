@@ -1,12 +1,18 @@
-import React from 'react'
+import { FC } from "react";
 import Rating from "@mui/material/Rating";
+
+import { HomeMovies } from "../types/tmdb-types";
 
 /**
  * shows the movie or serie rating on details page
  * @param {number} data.vote_average rating for the movie or serie
  */
 
-const ShowsRating = ({ data }) => {
+type ShowsRatingProps = {
+	data: HomeMovies;
+}
+
+const ShowsRating: FC<ShowsRatingProps> = ({ data }) => {
 	return (
 		<div className="flex space-x-2 mt-5 text-white">
 			<Rating 
