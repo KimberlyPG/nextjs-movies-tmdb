@@ -31,7 +31,7 @@ export type HomeTv = {
     vote_count:        number;
 }
 
-export interface ShowDetails {
+export type ShowDetails = {
     adult:                 boolean;
     backdrop_path:         string;
     belongs_to_collection: null;
@@ -59,30 +59,30 @@ export interface ShowDetails {
     vote_count:            number;
 }
 
-export interface Genre {
+export type Genre = {
     id:   number;
     name: string;
 }
 
-export interface ProductionCompany {
+export type ProductionCompany = {
     id:             number;
     logo_path:      null | string;
     name:           string;
     origin_country: string;
 }
 
-export interface ProductionCountry {
+export type ProductionCountry = {
     iso_3166_1: string;
     name:       string;
 }
 
-export interface SpokenLanguage {
+export type SpokenLanguage = {
     english_name: string;
     iso_639_1:    string;
     name:         string;
 }
 
-export interface SimilarShowsData {
+export type SimilarShowsData = {
     adult:             boolean;
     backdrop_path:     string;
     genre_ids:         number[];
