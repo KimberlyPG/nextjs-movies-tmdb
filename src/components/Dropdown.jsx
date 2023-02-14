@@ -32,8 +32,8 @@ const Dropdown = ({ options, countrySelected, handleChange }) => {
     );
 
 	const defaultValues = () => {
-		const value = countrySelected.value;
-		const label = regionNames.of(countrySelected.value);
+		const value = countrySelected;
+		const label = regionNames.of(countrySelected);
 		return {value, label}
 	}
 
@@ -44,8 +44,8 @@ const Dropdown = ({ options, countrySelected, handleChange }) => {
 			color={"white"}
 			options={options}
 			autoHighlight
-			onChange={(event, value) => {handleChange(value.value)}} 
 			value={defaultValues()}
+			onChange={(event, value) => {handleChange(value.value)}} 
 			getOptionLabel={(option) => regionNames.of(option.value) || ""}
 			disableClearable
 			isOptionEqualToValue={(option, value) => option.value === value.value}

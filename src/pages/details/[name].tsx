@@ -40,10 +40,10 @@ const Details = () => {
         const verifyCountry = () => {       
             if (window.localStorage.getItem('country') === null) {
                 window.localStorage.setItem('country', JSON.stringify('US'));    
-                setCountrySelected({ value: getSavedContry() });
+                setCountrySelected(getSavedContry());
             } 
             else {
-                setCountrySelected({ value: getSavedContry() });
+                setCountrySelected(getSavedContry());
             } 
         }
         verifyCountry();
@@ -54,9 +54,9 @@ const Details = () => {
             setOptions(options => [...options, {value: key}])
         })
     }, [providers])
-    
+ 
     const handleChange = (value) => {
-        setCountrySelected({value});
+        setCountrySelected(value);
         window.localStorage.setItem('country', JSON.stringify(value));
     }
 
