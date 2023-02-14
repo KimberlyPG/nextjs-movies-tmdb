@@ -1,12 +1,18 @@
-import React from 'react'
+import { FC, ReactNode } from 'react';
 
+import { HomeTv } from '../types/tmdb-types';
 /**
  * Create a backdrop and contains movies and series details
  * @param {object} details movie or serie backdrop
  * @param children details component
  */
 
-const DetailsContainer = ({ details, children }) => {
+type DetailsContainerProps = {
+    details: HomeTv;
+	children: ReactNode;
+}
+
+const DetailsContainer: FC<DetailsContainerProps> = ({ details, children }) => {
   return (
     <div className="w-full" 
         style={{
