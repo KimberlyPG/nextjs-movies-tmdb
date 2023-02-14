@@ -17,15 +17,19 @@ import { ShowDetails, SimilarShowsData } from "../../types/tmdb-types";
  * page that shows all the movies or series details and also the similar shows
  */
 
+type Options = {
+    value: string;
+} 
+
 const Details = () => {
     const router = useRouter();
     const contentId = router.query.contentId;
     const type = router.query.type;
     const [details, setDetails] = useState<ShowDetails>(null);
     const [providers, setProviders] = useState([]);
-    const [options, setOptions] = useState([]);
+    const [options, setOptions] = useState<Options[]>([]);
     const [countrySelected, setCountrySelected] = useState<string>('');
-    const [similar, setSimilar] = useState<SimilarShowsData[] | []>([]);
+    const [similar, setSimilar] = useState<SimilarShowsData[]>([]);
 
     const getSavedContry = () => {
         const country = window.localStorage.getItem('country');
@@ -36,7 +40,7 @@ const Details = () => {
         detailsData(contentId, type, setDetails, '')
         detailsData(contentId, type, setProviders, '/watch/providers');
         detailsData(contentId, type, setSimilar, '/similar');
-       
+        
         const verifyCountry = () => {       
             if (window.localStorage.getItem('country') === null) {
                 window.localStorage.setItem('country', JSON.stringify('US'));    
@@ -48,7 +52,7 @@ const Details = () => {
         }
         verifyCountry();
     }, [router])
-
+    
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
             setOptions(options => [...options, {value: key}])
