@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import {FC, useEffect, useState } from "react"
 
 import Navbar from "./Navbar";
 import Skeletons from "./Skeletons";
@@ -8,7 +8,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { showsData } from "../tmdb/showsData";
 import { HomeMovies, HomeTv } from "../types/tmdb-types";
 
-const Home = () => {
+const Shows: FC = () => {
 	const [moviesView, setMoviesView] = useState<boolean>(true);
 	const [topRatedMovies, setTopRatedMovies] = useState<HomeMovies[]>([]);
 	const [topRatedTv, setTopRatedTv] = useState<HomeTv[]>([]);
@@ -56,4 +56,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Shows;

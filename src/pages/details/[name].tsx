@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { NextPage } from "next";
 import { useRouter } from 'next/router';
 import { HiOutlineLink } from "react-icons/hi";
 
@@ -21,7 +22,7 @@ type Options = {
     value: string;
 } 
 
-const Details = () => {
+const Details: NextPage = () => {
     const router = useRouter();
     const contentId = router.query.contentId;
     const type = router.query.type;
