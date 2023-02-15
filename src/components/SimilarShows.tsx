@@ -1,6 +1,8 @@
-import React from 'react'
+import { FC } from "react";
 
 import ShowsList from './ShowsList';
+
+import { SimilarShowsData } from '../types/tmdb-types';
 
 /**
  * rendering the similar movies or series for details page
@@ -8,7 +10,12 @@ import ShowsList from './ShowsList';
  * @param {array} similar similar movies or series 
  */
 
-const SimilarShows = ({ type, similar }) => {
+type SimilarShowsProps = {
+	type: string;
+	similar: SimilarShowsData[];
+}
+
+const SimilarShows: FC<SimilarShowsProps> = ({ type, similar }) => {
 	return (
 		<div className="grid justify-items-center mt-10">
 			{type === 'movie' ? (
