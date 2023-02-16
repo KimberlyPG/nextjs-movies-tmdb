@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Rating from "@mui/material/Rating";
 
-import { HomeMovies } from "../types/tmdb-types";
+import { MoviesDetails, TvDetails } from "../types/tmdb-types";
 
 /**
  * shows the movie or serie rating on details page
@@ -9,7 +9,7 @@ import { HomeMovies } from "../types/tmdb-types";
  */
 
 type ShowsRatingProps = {
-	data: HomeMovies;
+	data: MoviesDetails | TvDetails;
 }
 
 const ShowsRating: FC<ShowsRatingProps> = ({ data }) => {

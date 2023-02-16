@@ -12,26 +12,26 @@ import DetailsPoster from "../../components/DetailsPoster";
 
 import 'react-dropdown/style.css';
 import { detailsData } from "../../tmdb/detailsData";
-import { ShowDetails, SimilarShowsData } from "../../types/tmdb-types";
+import { MoviesDetails, TvDetails, SimilarShowsData } from "../../types/tmdb-types";
 
 /**
  * page that shows all the movies or series details and also the similar shows
  */
 
-type Options = {
+interface Options {
     value: string;
 } 
 
 const Details: NextPage = () => {
     const router = useRouter();
-    const contentId = router.query.contentId;
-    const type = router.query.type;
-    const [details, setDetails] = useState<ShowDetails>(null);
+    const contentId = router.query.contentId as string;
+    const type = router.query.type as string;
+    const [details, setDetails] = useState<MoviesDetails | TvDetails>(null);
     const [providers, setProviders] = useState([]);
     const [options, setOptions] = useState<Options[]>([]);
     const [countrySelected, setCountrySelected] = useState<string>('');
     const [similar, setSimilar] = useState<SimilarShowsData[]>([]);
-
+ 
     const getSavedContry = () => {
         const country = window.localStorage.getItem('country');
         return JSON.parse(country);

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ChangeEvent, FC } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -25,7 +25,17 @@ const CssTextField = styled(TextField)({
  * @param {() => void} handleChange country code and name for the country selected   
  */
 
-const Dropdown = ({ options, countrySelected, handleChange }) => {
+type Values = {
+    value: string;
+}
+
+type DropdownProps = {
+	options: Values[];
+	countrySelected: string;
+	handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const Dropdown: FC<DropdownProps> = ({ options, countrySelected, handleChange }) => {
 	
 	const regionNames = new Intl.DisplayNames(
         ['en'], {type: 'region'}

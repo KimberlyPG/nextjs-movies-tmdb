@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import { HomeMovies, HomeTv } from '../types/tmdb-types';
+import { MoviesDetails, TvDetails } from '../types/tmdb-types';
 /**
  * Create a backdrop and contains movies and series details
  * @param {object} details movie or serie backdrop
@@ -8,8 +8,8 @@ import { HomeMovies, HomeTv } from '../types/tmdb-types';
  */
 
 type DetailsContainerProps = {
-    details: HomeTv | HomeMovies;
-	children: ReactNode;
+    details: MoviesDetails | TvDetails;
+	  children: ReactNode;
 }
 
 const DetailsContainer: FC<DetailsContainerProps> = ({ details, children }) => {

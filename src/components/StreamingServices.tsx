@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { FC, useState, ChangeEvent } from 'react'
 
 import Dropdown from './Dropdown';
 
@@ -14,7 +14,19 @@ import StreamingImg from './StreamingImg';
  * @param {array} providers[countrySelected.value].rent showing streaming services with rent
  */
 
-const StreamingServices = ({ options, countrySelected, handleChange, providers }) => {
+type Values = {
+    value: string;
+}
+
+type StreamingServicesProps = {
+    options: Values[];
+    countrySelected: string;
+    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    providers: [];
+}
+
+
+const StreamingServices: FC<StreamingServicesProps> = ({ options, countrySelected, handleChange, providers }) => {
     const [showMethod, setShowMethod] = useState('flatrate');
 
     return (

@@ -6,7 +6,7 @@ import Topbar from './Topbar'
  * @param children whole app
  */
 
-interface LayoutProps{
+type LayoutProps = {
   children: ReactNode
 }
 
