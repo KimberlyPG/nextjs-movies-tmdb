@@ -165,3 +165,10 @@ export type SimilarShowsData = {
     vote_average:      number;
     vote_count:        number;
 }
+
+export type StreamingCompany = {
+    logo_path:        string;
+    provider_id:      number;
+    provider_name:    string;
+    display_priority: number;
+}

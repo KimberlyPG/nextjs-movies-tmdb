@@ -26,12 +26,13 @@ const Details: NextPage = () => {
     const router = useRouter();
     const contentId = router.query.contentId as string;
     const type = router.query.type as string;
-    const [details, setDetails] = useState<MoviesDetails | TvDetails>(null);
-    const [providers, setProviders] = useState([]);
+    const [details, setDetails] = useState<MoviesDetails & TvDetails>(null);
+    const [providers, setProviders] = useState<{}>({});
     const [options, setOptions] = useState<Options[]>([]);
     const [countrySelected, setCountrySelected] = useState<string>('');
     const [similar, setSimilar] = useState<SimilarShowsData[]>([]);
  
+    console.log("prov", providers)
     const getSavedContry = () => {
         const country = window.localStorage.getItem('country');
         return JSON.parse(country);

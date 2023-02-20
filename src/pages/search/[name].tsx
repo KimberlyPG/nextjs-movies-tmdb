@@ -20,7 +20,6 @@ const Search = () => {
 	const [tvData, setTvData] = useState<HomeTv[]>([]);
 	const [status, setStatus] = useState<string | boolean>(true);
 	const [content, setContent] = useState<HomeMovies[] | HomeTv[]>([]);
-	console.log("md", moviesData)
 
 	useEffect(() => {
 		moviesView === true ? setContent(moviesData) : setContent(tvData);

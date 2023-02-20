@@ -22,7 +22,7 @@ type StreamingServicesProps = {
     options: Values[];
     countrySelected: string;
     handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    providers: [];
+    providers: {};
 }
 
 
