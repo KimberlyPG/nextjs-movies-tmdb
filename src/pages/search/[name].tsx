@@ -14,7 +14,7 @@ import { HomeMovies, HomeTv } from "../../types/tmdb-types";
 
 const Search = () => {
 	const router = useRouter();
-	const { name } = router.query;
+	const name = router.query.name as string;
 	const [moviesView, setMoviesView] = useState<boolean>(true);
 	const [moviesData, setmoviesData] = useState<HomeMovies[]>([]);
 	const [tvData, setTvData] = useState<HomeTv[]>([]);
