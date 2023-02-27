@@ -59,7 +59,7 @@ export type MoviesDetails = {
     vote_count:            number;
 }
 
-export interface TvDetails {
+export type TvDetails = {
     adult:                boolean;
     backdrop_path:        string;
     created_by:           any[];
@@ -94,7 +94,7 @@ export interface TvDetails {
     vote_count:           number;
 }
 
-export interface TEpisodeToAir {
+export type TEpisodeToAir = {
     air_date:        string;
     episode_number:  number;
     id:              number;
@@ -109,14 +109,14 @@ export interface TEpisodeToAir {
     vote_count:      number;
 }
 
-export interface Network {
+export type Network = {
     id:             number;
     name:           string;
     logo_path:      string;
     origin_country: string;
 }
 
-export interface Season {
+export type Season = {
     air_date:      string;
     episode_count: number;
     id:            number;
