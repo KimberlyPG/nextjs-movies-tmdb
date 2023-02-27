@@ -18,8 +18,9 @@ import { MoviesDetails, TvDetails, SimilarShowsData } from "../../types/tmdb-typ
  * page that shows all the movies or series details and also the similar shows
  */
 
-interface Options {
-    value: string;
+type Options = {
+	code: string;
+	label: string;
 } 
 
 const Details: NextPage = () => {
@@ -32,7 +33,6 @@ const Details: NextPage = () => {
     const [countrySelected, setCountrySelected] = useState<string>('');
     const [similar, setSimilar] = useState<SimilarShowsData[]>([]);
  
-    console.log("prov", providers)
     const getSavedContry = () => {
         const country = window.localStorage.getItem('country');
         return JSON.parse(country);
@@ -55,9 +55,13 @@ const Details: NextPage = () => {
         verifyCountry();
     }, [router])
     
+    const regionNames = new Intl.DisplayNames(
+        ['en'], {type: 'region'}
+    );
+
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
-            setOptions(options => [...options, {value: key}])
+            setOptions(options => [...options, {code: key, label: regionNames.of(key)}])
         })
     }, [providers])
  

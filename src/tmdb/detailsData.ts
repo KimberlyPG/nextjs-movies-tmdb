@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
-import { MoviesDetails, TvDetails } from "../types/tmdb-types";
+import { MoviesDetails, SimilarShowsData, TvDetails } from "../types/tmdb-types";
 
 export const detailsData = async(
   contentId: string, 
   type: string, 
-  setData: Dispatch<SetStateAction<MoviesDetails & TvDetails>> , 
+  setData: Dispatch<SetStateAction<MoviesDetails | TvDetails | SimilarShowsData[]>> , 
   slug: string
   ) => {
     await fetch(`https://api.themoviedb.org/3/${type}/${contentId}${slug}?api_key=${process.env.apiKey}&language=en-US`) 

@@ -14,17 +14,17 @@ import StreamingImg from './StreamingImg';
  * @param {array} providers[countrySelected.value].rent showing streaming services with rent
  */
 
-type Values = {
-    value: string;
-}
+type Options = {
+	code: string;
+	label: string;
+} 
 
 type StreamingServicesProps = {
-    options: Values[];
+    options: Options[];
     countrySelected: string;
-    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    handleChange: (arg0: string) => void;
     providers: {};
 }
-
 
 const StreamingServices: FC<StreamingServicesProps> = ({ options, countrySelected, handleChange, providers }) => {
     const [showMethod, setShowMethod] = useState('flatrate');

@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from 'react';
+import { ChangeEvent, FC, SyntheticEvent } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -22,17 +22,18 @@ const CssTextField = styled(TextField)({
  * details page countries dropdown
  * @param {array} options countries code array 
  * @param {object} countrySelected country code and name for the country selected 
- * @param {() => void} handleChange country code and name for the country selected   
+ * @param {(arg0: string) => void} handleChange country code and name for the country selected   
  */
 
-type Values = {
-    value: string;
-}
+type Options = {
+	code: string | undefined;
+	label: string;
+} 
 
 type DropdownProps = {
-	options: Values[];
+	options: Options[];
 	countrySelected: string;
-	handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	handleChange: (arg0: string) => void;
 }
 
 const Dropdown: FC<DropdownProps> = ({ options, countrySelected, handleChange }) => {
@@ -42,9 +43,9 @@ const Dropdown: FC<DropdownProps> = ({ options, countrySelected, handleChange })
     );
 
 	const defaultValues = () => {
-		const value = countrySelected;
+		const code = countrySelected;
 		const label = regionNames.of(countrySelected);
-		return {value, label}
+		return {code, label}
 	}
 
 	return (
@@ -53,21 +54,25 @@ const Dropdown: FC<DropdownProps> = ({ options, countrySelected, handleChange })
 			size={"small"}
 			color={"white"}
 			options={options}
-			autoHighlight
+			autoHighlight={true}
 			value={defaultValues()}
-			onChange={(event, value) => {handleChange(value.value)}} 
-			getOptionLabel={(option) => regionNames.of(option.value) || ""}
+			onChange={(event: SyntheticEvent<Element, Event>, option: NonNullable<Options>) => {
+				handleChange(option.code) 
+			}} 
+			getOptionLabel={(option: Options) => option.label || ""}
 			disableClearable
-			isOptionEqualToValue={(option, value) => option.value === value.value}
+			isOptionEqualToValue={(option, value) => 
+				option.code === value.code
+			}
 			renderOption={(props, option) => (
 				<Box component="li" sx={{ '& > img': { mr: 2 }}} {...props}>
 					<img
 						loading="lazy"
 						width="20"
-						src={`https://flagcdn.com/w20/${option.value.toLowerCase()}.png`}
+						src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
 						alt=""
 					/>
-					{regionNames.of(option.value)}
+					{regionNames.of(option.code)}
 				</Box>
 			)}
 			renderInput={(params) => (
@@ -77,7 +82,7 @@ const Dropdown: FC<DropdownProps> = ({ options, countrySelected, handleChange })
 					InputLabelProps={{style : {color : '#7DDBDE'} }}
 					inputProps={{
 						...params.inputProps,
-						style:{color: 'white', fontSize: 14, focusColor: 'pink'}
+						style:{color: 'white', fontSize: 14}
 					}}
 				/>
 			)}
