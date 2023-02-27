@@ -23,7 +23,7 @@ type StreamingServicesProps = {
     options: Options[];
     countrySelected: string;
     handleChange: (arg0: string) => void;
-    providers: {};
+    providers: [];
 }
 
 const StreamingServices: FC<StreamingServicesProps> = ({ options, countrySelected, handleChange, providers }) => {

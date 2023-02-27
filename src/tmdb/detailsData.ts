@@ -16,10 +16,10 @@ export const detailsData = async(
         }
     })
     .then((data) => {
-		if(!data.results) {
+		if(data?.results === undefined) {
 			setData(data);
 		} else {
-			setData(data.results);
+			setData(data?.results);
 		}
     });
 }

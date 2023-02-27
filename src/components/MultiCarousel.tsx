@@ -20,7 +20,7 @@ type MultiCarouselProps = {
 const MultiCarousel: FC<MultiCarouselProps> = ({ show, type }) => {
   return (
     <Carousel responsive={responsive} centerMode={true} >
-        {show && show.map((item) => (
+        {show && show.map((item: HomeMovies & HomeTv) => (
             <div key={item.id} className="h-full sm:p-3 xs:p-1">
               <ShowCard item={item} type={type} page="home" />
             </div>

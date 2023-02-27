@@ -28,7 +28,7 @@ const Details: NextPage = () => {
     const contentId = router.query.contentId as string;
     const type = router.query.type as string;
     const [details, setDetails] = useState<MoviesDetails & TvDetails>(null);
-    const [providers, setProviders] = useState<{}>({});
+    const [providers, setProviders] = useState<[]>([]);
     const [options, setOptions] = useState<Options[]>([]);
     const [countrySelected, setCountrySelected] = useState<string>('');
     const [similar, setSimilar] = useState<SimilarShowsData[]>([]);
@@ -59,13 +59,14 @@ const Details: NextPage = () => {
         ['en'], {type: 'region'}
     );
 
+    console.log("providers", providers);
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
             setOptions(options => [...options, {code: key, label: regionNames.of(key)}])
         })
     }, [providers])
  
-    const handleChange = (value) => {
+    const handleChange = (value: string) => {
         setCountrySelected(value);
         window.localStorage.setItem('country', JSON.stringify(value));
     }
