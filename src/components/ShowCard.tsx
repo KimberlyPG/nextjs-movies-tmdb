@@ -1,7 +1,8 @@
-import React from 'react'
+import { FC } from 'react';
 import Link from 'next/link';
 
 import { ratingFormat } from '../utils/ratingFormat';
+import { HomeMovies, HomeTv } from '../types/tmdb-types';
 
 /**
  * Creates the movie or serie card for all the pages
@@ -16,8 +17,14 @@ import { ratingFormat } from '../utils/ratingFormat';
  * @param {string} page	page name
  */
 
-const ShowCard = ({ item, type, page }) => {
-  
+type ShowCardProps = {
+	item: HomeMovies & HomeTv;
+	type: string;
+	page: string;
+}  
+
+const ShowCard: FC<ShowCardProps> = ({ item, type, page }) => {
+
 	if(item.poster_path === null) return null
 	return (
 		<Link href={{pathname: `/details/${item.title}`, query: {contentId: (item.id), type: (type) }}} >

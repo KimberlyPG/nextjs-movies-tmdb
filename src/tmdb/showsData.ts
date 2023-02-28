@@ -1,4 +1,11 @@
-export const showsData = async( state, slug, setData, setStatus) => {
+import { Dispatch, SetStateAction } from "react";
+import { HomeMovies, HomeTv } from "../types/tmdb-types";
+
+export const showsData = async(
+    state: string, slug: string, 
+    setData: Dispatch<SetStateAction<HomeMovies[] | HomeTv[]>>, 
+    setStatus: Dispatch<SetStateAction<string | boolean>>
+    ) => {
     setStatus("loading");
         await fetch(`https://api.themoviedb.org/3/${state}/${slug}?api_key=${process.env.apiKey}&language=en-US&page=1`) 
         .then((response) => {

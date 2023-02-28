@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { FC, useState, ChangeEvent } from 'react'
 
 import Dropdown from './Dropdown';
 
@@ -14,7 +14,19 @@ import StreamingImg from './StreamingImg';
  * @param {array} providers[countrySelected.value].rent showing streaming services with rent
  */
 
-const StreamingServices = ({ options, countrySelected, handleChange, providers }) => {
+type Options = {
+	code: string;
+	label: string;
+} 
+
+type StreamingServicesProps = {
+    options: Options[];
+    countrySelected: string;
+    handleChange: (arg0: string) => void;
+    providers: [];
+}
+
+const StreamingServices: FC<StreamingServicesProps> = ({ options, countrySelected, handleChange, providers }) => {
     const [showMethod, setShowMethod] = useState('flatrate');
 
     return (
@@ -34,17 +46,17 @@ const StreamingServices = ({ options, countrySelected, handleChange, providers }
                     </div>
                     <div className="flex space-x-5">
                         {showMethod === 'flatrate' &&
-                            providers[countrySelected.value]?.flatrate?.map((item) => (         
+                            providers[countrySelected]?.flatrate?.map((item) => (         
                                 <StreamingImg key={item.provider_id} item={item} /> 
                             ))
                         }
                         {showMethod === 'buy' &&
-                            providers[countrySelected.value]?.buy?.map((item) => (
+                            providers[countrySelected]?.buy?.map((item) => (
                                 <StreamingImg key={item.provider_id} item={item} />  
                             ))
                         }
                         {showMethod === 'rent' &&
-                            providers[countrySelected.value]?.rent?.map((item) => (
+                            providers[countrySelected]?.rent?.map((item) => (
                                 <StreamingImg key={item.provider_id} item={item} />  
                             ))
                         }

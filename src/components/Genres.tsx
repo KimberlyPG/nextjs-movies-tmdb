@@ -1,11 +1,17 @@
-import React from "react";
+import { FC } from "react";
+
+import { Genre } from "../types/tmdb-types";
 
 /**
  * movies and series genres list for details page
  * @param {array} data getting movies or series genres   
  */
 
-const Genres = ({ data }) => {
+type GenresProps = {
+    data: Genre[ ];
+}
+
+const Genres: FC<GenresProps> = ({ data }) => {
     return (
         <div className="lg:ml-5">
             <p className="font-bold text-white lg:text-base md:text-sm xs:text-xs lg:mb-2">

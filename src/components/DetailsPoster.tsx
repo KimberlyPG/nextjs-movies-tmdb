@@ -1,6 +1,7 @@
-import React from 'react'
+import { FC} from 'react';
 
 import { minutesToHours } from '../utils/minutesToHours'
+import { MoviesDetails, TvDetails } from '../types/tmdb-types';
 
 /**
  * Shows poster, release date and duration
@@ -12,7 +13,12 @@ import { minutesToHours } from '../utils/minutesToHours'
  * @param {object} details.seasons series number of seasons
  */
 
-const DetailsPoster = ({ type, details }) => {
+type DetailsPosterProps = {
+    type: string;
+    details: MoviesDetails & TvDetails;
+}
+
+const DetailsPoster: FC<DetailsPosterProps> = ({ type, details }) => {
   return (
     <div>
         <img 

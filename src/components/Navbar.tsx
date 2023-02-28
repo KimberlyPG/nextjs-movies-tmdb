@@ -1,4 +1,4 @@
-import React from 'react'
+import { Dispatch, FC } from "react";
 import { useState } from "react";
 
 /**
@@ -6,13 +6,17 @@ import { useState } from "react";
  * @param {boolean} setMoviesView verify if the user selected movies or series 
  */
 
-const Navbar = ({ setMoviesView }) => {
+type NavbarProps = {
+	setMoviesView: Dispatch<boolean>;
+}
+
+const Navbar: FC<NavbarProps> = ({ setMoviesView }) => {
     const [moviesButtonBg, setMoviesButtonBg] = useState('#1B5BA9');
     const [showsButtonBg, setShowsButtonBg] = useState('transparent');
     const [moviesButtonColor, setMoviesButtonColor] = useState('#FFFFFF');
     const [showsButtonColor, setShowsButtonColor] = useState('#C2C8CD');
 
-    const toggle = (value) => {
+    const toggle = (value: boolean) => {
         setMoviesView(value);
         if(value) {
 			setMoviesButtonBg('#1B5BA9');

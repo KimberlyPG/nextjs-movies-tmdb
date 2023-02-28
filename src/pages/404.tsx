@@ -1,4 +1,4 @@
-import * as React from "react"
+import { NextPage } from "next"
 import Link from "next/link"
 
 const pageStyles = {
@@ -23,7 +23,7 @@ const codeStyles = {
   borderRadius: 4,
 }
 
-const NotFoundPage = () => {
+const NotFoundPage: NextPage = () => {
   return (
     <main style={pageStyles}>
       <h1 style={headingStyles}>Page not found</h1>

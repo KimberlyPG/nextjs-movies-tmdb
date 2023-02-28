@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { NextPage } from "next";
 import { useRouter } from 'next/router';
 import { HiOutlineLink } from "react-icons/hi";
 
@@ -11,51 +12,64 @@ import DetailsPoster from "../../components/DetailsPoster";
 
 import 'react-dropdown/style.css';
 import { detailsData } from "../../tmdb/detailsData";
+import { MoviesDetails, TvDetails, SimilarShowsData } from "../../types/tmdb-types";
 
 /**
  * page that shows all the movies or series details and also the similar shows
  */
 
-const Details = () => {
-    const router = useRouter();
-    const contentId = router.query.contentId;
-    const type = router.query.type;
-    const [details, setDetails] = useState(null);
-    const [providers, setProviders] = useState([]);
-    const [options, setOptions] = useState([]);
-    const [countrySelected, setCountrySelected] = useState('');
-    const [similar, setSimilar] = useState([]);
+type Options = {
+	code: string;
+	label: string;
+} 
 
+const Details: NextPage = () => {
+    const router = useRouter();
+    const contentId = router.query.contentId as string;
+    const type = router.query.type as string;
+    const [details, setDetails] = useState<MoviesDetails & TvDetails>(null);
+    const [providers, setProviders] = useState<[]>([]);
+    const [options, setOptions] = useState<Options[]>([]);
+    const [countrySelected, setCountrySelected] = useState<string>('');
+    const [similar, setSimilar] = useState<SimilarShowsData[]>([]);
+ 
     const getSavedContry = () => {
         const country = window.localStorage.getItem('country');
         return JSON.parse(country);
     };
 
     useEffect(() => {
-        detailsData(contentId, type, setDetails, '')
-        detailsData(contentId, type, setProviders, '/watch/providers');
-        detailsData(contentId, type, setSimilar, '/similar');
-       
+        if(contentId && type !== undefined) {
+            detailsData(contentId, type, setDetails, '')
+            detailsData(contentId, type, setProviders, '/watch/providers');
+            detailsData(contentId, type, setSimilar, '/similar');
+        }
+
         const verifyCountry = () => {       
             if (window.localStorage.getItem('country') === null) {
                 window.localStorage.setItem('country', JSON.stringify('US'));    
-                setCountrySelected({ value: getSavedContry() });
+                setCountrySelected(getSavedContry());
             } 
             else {
-                setCountrySelected({ value: getSavedContry() });
+                setCountrySelected(getSavedContry());
             } 
         }
         verifyCountry();
-    }, [router])
+    }, [router, contentId, type])
+    
+    
+    const regionNames = new Intl.DisplayNames(
+        ['en'], {type: 'region'}
+    );
 
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
-            setOptions(options => [...options, {value: key}])
+            setOptions(options => [...options, {code: key, label: regionNames.of(key)}])
         })
     }, [providers])
-    
-    const handleChange = (value) => {
-        setCountrySelected({value});
+ 
+    const handleChange = (value: string) => {
+        setCountrySelected(value);
         window.localStorage.setItem('country', JSON.stringify(value));
     }
 

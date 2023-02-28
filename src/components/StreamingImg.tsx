@@ -1,4 +1,5 @@
-import React from "react";
+import { FC } from "react";
+import { StreamingCompany } from "../types/tmdb-types";
 
 /**
  * shows streaming service image 
@@ -6,7 +7,11 @@ import React from "react";
  * @param {string} item.provider_name streaming platform name
  */
 
-const StreamingImg = ({ item }) => {
+type StreamingImgProps = {
+	item: StreamingCompany;
+}
+
+const StreamingImg: FC<StreamingImgProps> = ({ item }) => {
 	return (
 		<img
 			className="lg:w-16 xs:w-10 rounded-sm mb-10"
