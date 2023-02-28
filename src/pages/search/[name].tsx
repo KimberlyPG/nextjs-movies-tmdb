@@ -26,8 +26,10 @@ const Search = () => {
 	}, [moviesData, tvData, moviesView]);
 
 	useEffect(() => {
-		searchContent(name, "movie", setmoviesData, setStatus);
-		searchContent(name, "tv", setTvData, setStatus);
+		if(name) {
+			searchContent(name, "movie", setmoviesData, setStatus);
+			searchContent(name, "tv", setTvData, setStatus);
+		}
 	}, [name]);
 
 	if (status === "loading") return <Skeletons />;
