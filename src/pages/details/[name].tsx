@@ -39,10 +39,12 @@ const Details: NextPage = () => {
     };
 
     useEffect(() => {
-        detailsData(contentId, type, setDetails, '')
-        detailsData(contentId, type, setProviders, '/watch/providers');
-        detailsData(contentId, type, setSimilar, '/similar');
-        
+        if(contentId && type !== undefined) {
+            detailsData(contentId, type, setDetails, '')
+            detailsData(contentId, type, setProviders, '/watch/providers');
+            detailsData(contentId, type, setSimilar, '/similar');
+        }
+
         const verifyCountry = () => {       
             if (window.localStorage.getItem('country') === null) {
                 window.localStorage.setItem('country', JSON.stringify('US'));    
@@ -53,13 +55,13 @@ const Details: NextPage = () => {
             } 
         }
         verifyCountry();
-    }, [router])
+    }, [router, contentId, type])
+    
     
     const regionNames = new Intl.DisplayNames(
         ['en'], {type: 'region'}
     );
 
-    console.log("providers", providers);
     useEffect(() => {
         Object.keys(providers).forEach((key) => {
             setOptions(options => [...options, {code: key, label: regionNames.of(key)}])
