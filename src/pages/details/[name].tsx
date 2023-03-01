@@ -39,7 +39,7 @@ const Details: NextPage = () => {
     };
 
     useEffect(() => {
-        if(contentId && type !== undefined) {
+        if(contentId && type) {
             detailsData(contentId, type, setDetails, '')
             detailsData(contentId, type, setProviders, '/watch/providers');
             detailsData(contentId, type, setSimilar, '/similar');
